@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { supabase } from '@/lib/supabaseClient'
+import { aiClient } from '@/lib/aiClient'
+import { KaTeXRenderer } from '@/components/renderer'
 import type { User } from '@supabase/supabase-js'
 
 export default function AIChatPage() {
@@ -18,6 +20,8 @@ export default function AIChatPage() {
 
   useEffect(() => {
     checkUser()
+    // 设置 AI 提供商为 DeepSeek
+    aiClient.setProvider('deepseek')
   }, [])
 
   const checkUser = async () => {
@@ -57,18 +61,36 @@ export default function AIChatPage() {
     setQuestion('')
 
     try {
-      // 模拟 AI 响应（实际项目中这里会调用 AI API）
-      setTimeout(() => {
-        const aiResponse = {
+      // 调用 DeepSeek API 客户端
+      const aiResponse = await aiClient.chat({
+        question: question.trim(),
+        imageUrl: uploadedImage || undefined,
+        audioUrl: audioUrl || undefined,
+        userId: user?.id || '',
+        provider: 'deepseek'
+      })
+      
+      if (aiResponse.success) {
+        const aiMessage = {
           type: 'ai' as const,
-          content: `我正在为您分析"${userMessage.content}"这个问题。根据我的理解，这是一个很有趣的题目，让我为您生成相应的动画模型和解释...`,
+          content: aiResponse.response,
           timestamp: new Date()
         }
-        setChatHistory(prev => [...prev, aiResponse])
-        setIsGenerating(false)
-      }, 2000)
+        setChatHistory(prev => [...prev, aiMessage])
+      } else {
+        throw new Error('AI response error')
+      }
     } catch (error) {
-      console.error('Error generating response:', error)
+      console.error('Error calling AI API:', error)
+      
+      // 显示错误消息
+      const errorResponse = {
+        type: 'ai' as const,
+        content: '抱歉，AI 服务暂时不可用，请稍后再试。如果问题持续存在，请联系客服。',
+        timestamp: new Date()
+      }
+      setChatHistory(prev => [...prev, errorResponse])
+    } finally {
       setIsGenerating(false)
     }
   }
@@ -223,19 +245,19 @@ export default function AIChatPage() {
             </p>
           </div>
 
-          {/* 聊天界面 */}
-          <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
-            {/* 聊天历史区域 */}
-            <div className="h-96 overflow-y-auto p-6 space-y-4">
+                      {/* 聊天界面 */}
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+              {/* 聊天历史区域 */}
+              <div className="h-[600px] overflow-y-auto p-6 space-y-4">
               {chatHistory.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex flex-col items-center justify-center h-full text-center py-16">
+                  <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg className="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">开始你的 AI 对话</h3>
-                  <p className="text-gray-500">描述你的问题，AI 将为你生成动画模型和解释</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-3 leading-tight">开始你的 AI 对话</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed max-w-md">描述你的问题，AI 将为你生成动画模型和解释</p>
                 </div>
               ) : (
                 chatHistory.map((message, index) => (
@@ -245,7 +267,12 @@ export default function AIChatPage() {
                         ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white' 
                         : 'bg-gray-100 text-gray-800'
                     }`}>
-                      <p className="text-sm">{message.content}</p>
+                      <div className="text-sm">
+                        {message.type === 'ai' 
+                          ? <KaTeXRenderer>{message.content}</KaTeXRenderer>
+                          : message.content
+                        }
+                      </div>
                       <p className={`text-xs mt-2 ${
                         message.type === 'user' ? 'text-indigo-100' : 'text-gray-500'
                       }`}>
@@ -368,38 +395,7 @@ export default function AIChatPage() {
             </div>
           </div>
 
-          {/* 功能说明 */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">智能理解</h3>
-              <p className="text-gray-600">AI 深度理解你的问题，提供精准的解答</p>
-            </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">动态生成</h3>
-              <p className="text-gray-600">自动生成相关的动画模型，让概念更直观</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">个性化学习</h3>
-              <p className="text-gray-600">根据你的需求定制学习内容，提升学习效果</p>
-            </div>
-          </div>
         </div>
       </main>
 
