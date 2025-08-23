@@ -64,7 +64,7 @@ export default function Home() {
 
             {/* 导航链接 */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/dashboard" className="text-gray-600 hover:text-indigo-600 transition-colors font-medium">
+              <Link href="/ai-chat" className="text-gray-600 hover:text-indigo-600 transition-colors font-medium">
                 我的动画模型
               </Link>
               <Link href="/dashboard" className="text-gray-600 hover:text-indigo-600 transition-colors font-medium">
