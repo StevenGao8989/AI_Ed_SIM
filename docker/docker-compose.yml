@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Redis 缓存服务
+  redis:
+    image: redis:7-alpine
+    container_name: chattutor-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+
+  # 前端服务 (Next.js)
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/frontend/Dockerfile
+    container_name: chattutor-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # 后端服务 (Python)
+  services:
+    build:
+      context: ../services
+      dockerfile: ../docker/services/Dockerfile
+    container_name: chattutor-services
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+    volumes:
+      - ../services:/app
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # Supabase 本地开发环境
+  supabase:
+    image: supabase/supabase-dev
+    container_name: chattutor-supabase
+    ports:
+      - "54321:54321"  # API
+      - "54322:54322"  # Database
+      - "54323:54323"  # Studio
+    environment:
+      - POSTGRES_PASSWORD=your-super-secret-and-long-postgres-password
+    volumes:
+      - supabase_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  supabase_data:
+
+networks:
+  default:
+    name: chattutor-network
