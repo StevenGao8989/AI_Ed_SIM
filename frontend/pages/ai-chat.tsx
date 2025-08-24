@@ -83,10 +83,24 @@ export default function AIChatPage() {
     } catch (error) {
       console.error('Error calling AI API:', error)
       
-      // 显示错误消息
+      // 显示详细的错误消息
+      let errorMessage = '抱歉，AI 服务暂时不可用，请稍后再试。如果问题持续存在，请联系客服。'
+      
+      if (error instanceof Error) {
+        if (error.message.includes('API key not configured')) {
+          errorMessage = 'AI 服务配置错误：API 密钥未配置，请联系管理员。'
+        } else if (error.message.includes('DeepSeek API error')) {
+          errorMessage = `DeepSeek API 调用失败：${error.message}`
+        } else if (error.message.includes('fetch')) {
+          errorMessage = '网络连接失败，请检查网络连接。'
+        } else {
+          errorMessage = `AI 服务错误：${error.message}`
+        }
+      }
+      
       const errorResponse = {
         type: 'ai' as const,
-        content: '抱歉，AI 服务暂时不可用，请稍后再试。如果问题持续存在，请联系客服。',
+        content: errorMessage,
         timestamp: new Date()
       }
       setChatHistory(prev => [...prev, errorResponse])

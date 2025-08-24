@@ -343,4 +343,154 @@ export interface DSLPerformanceMetrics {
   cpuUsage: number;
 }
 
+// ===== 新增：PhysicsIR 中间表示类型 =====
+
+export interface PhysicsIR {
+  metadata: IRMetadata;
+  system: IRSystem;
+  objects: IRObject[];
+  initialConditions: IRInitialCondition[];
+  constraints: IRConstraint[];
+  forces: IRForce[];
+  fields: IRField[];
+  constants: IRConstant[];
+  simulation: IRSimulation;
+  output: IROutput;
+  validation: IRValidation;
+}
+
+export interface IRMetadata {
+  title: string;
+  subject: string;
+  grade: string;
+  difficulty: string;
+  topics: string[];
+  description: string;
+  tags: string[];
+}
+
+export interface IRSystem {
+  type: string;
+  dimensions: number;
+  coordinateSystem: string;
+  gravity?: {
+    enabled: boolean;
+    value: PhysicalQuantity;
+    direction: { x: number; y: number; z: number };
+  };
+  friction?: {
+    enabled: boolean;
+    static?: PhysicalQuantity;
+    kinetic?: PhysicalQuantity;
+    rolling?: PhysicalQuantity;
+  };
+  airResistance?: {
+    enabled: boolean;
+    coefficient: PhysicalQuantity;
+    density?: PhysicalQuantity;
+  };
+  environment: Record<string, any>;
+}
+
+export interface IRObject {
+  id: string;
+  name: string;
+  type: string;
+  position: { x: number; y: number; z: number };
+  velocity: { x: number; y: number; z: number };
+  acceleration: { x: number; y: number; z: number };
+  mass: PhysicalQuantity;
+  dimensions: {
+    length: PhysicalQuantity;
+    width?: PhysicalQuantity;
+    height?: PhysicalQuantity;
+  };
+  material: Record<string, any>;
+  properties: Record<string, any>;
+}
+
+export interface IRInitialCondition {
+  objectId: string;
+  parameter: string;
+  value: PhysicalQuantity;
+  time: number;
+}
+
+export interface IRConstraint {
+  type: string;
+  objects: string[];
+  parameters: DSLParameter[];
+  expression: string;
+  tolerance: number;
+}
+
+export interface IRForce {
+  type: string;
+  source: string;
+  target: string;
+  magnitude: PhysicalQuantity;
+  direction: { x: number; y: number; z: number };
+  position?: { x: number; y: number; z: number };
+  timeFunction: string;
+}
+
+export interface IRField {
+  type: string;
+  source: string;
+  magnitude: PhysicalQuantity;
+  direction: { x: number; y: number; z: number };
+  range?: PhysicalQuantity;
+  decay: string;
+}
+
+export interface IRConstant {
+  name: string;
+  value: PhysicalQuantity;
+  description: string;
+  source: string;
+}
+
+export interface IRSimulation {
+  timeStep: PhysicalQuantity;
+  duration: PhysicalQuantity;
+  solver: string;
+  tolerance: number;
+  maxIterations: number;
+  events: any[];
+  output: Record<string, any>;
+}
+
+export interface IROutput {
+  format: string;
+  variables: string[];
+  sampling?: PhysicalQuantity;
+  visualization: Record<string, any>;
+  export: Record<string, any>;
+}
+
+export interface IRValidation {
+  timestamp: string;
+  version: string;
+  checks: {
+    structure: boolean;
+    units: boolean;
+    constraints: boolean;
+    initialValues: boolean;
+  };
+  warnings: string[];
+  errors: string[];
+}
+
+// ===== 新增：PhysicsSchema 类型定义 =====
+
+export interface PhysicsSchema {
+  $schema: string;
+  title: string;
+  description: string;
+  type: string;
+  required: string[];
+  properties: Record<string, any>;
+  additionalProperties?: boolean;
+}
+
 // 所有类型已通过 export interface 导出，无需重复导出

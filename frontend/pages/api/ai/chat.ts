@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { supabase } from '@/lib/supabaseClient'
+import { aiClient } from '@/lib/aiClient'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -7,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { question, imageUrl, audioUrl, userId } = req.body
+    const { question, imageUrl, audioUrl, userId, provider = 'deepseek' } = req.body
 
     // 验证用户身份
     if (!userId) {
@@ -23,12 +24,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await supabase.from('usage_log').insert({
       user_id: userId,
       endpoint: '/api/ai/chat',
-      payload: { question, imageUrl, audioUrl },
+      payload: { question, imageUrl, audioUrl, provider },
       result_status: 'processing'
     })
 
-    // 调用 AI 服务（这里使用模拟响应，实际项目中替换为真实的 AI API）
-    const aiResponse = await generateAIResponse(question, imageUrl, audioUrl)
+    // 设置 AI 提供商
+    aiClient.setProvider(provider as any)
+
+    // 调用真实的 AI 服务
+    const aiResponse = await aiClient.chat({
+      question: question || '',
+      imageUrl,
+      audioUrl,
+      userId,
+      provider: provider as any
+    })
+
+    if (!aiResponse.success) {
+      throw new Error('AI service returned error')
+    }
 
     // 更新使用日志
     await supabase.from('usage_log').update({
@@ -42,14 +56,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         question,
         imageUrl,
         audioUrl,
-        response: aiResponse,
+        response: aiResponse.response,
+        provider: aiResponse.provider,
+        model: aiResponse.model,
         timestamp: new Date().toISOString()
       }
     })
 
     return res.status(200).json({
       success: true,
-      response: aiResponse,
+      response: aiResponse.response,
+      provider: aiResponse.provider,
+      model: aiResponse.model,
       timestamp: new Date().toISOString()
     })
 
@@ -64,77 +82,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           user_id: userId,
           endpoint: '/api/ai/chat',
           payload: req.body,
-          result_status: 'fail'
+          result_status: 'fail',
+          error_message: error instanceof Error ? error.message : 'Unknown error'
         })
       }
     } catch (logError) {
       console.error('Error logging failure:', logError)
     }
 
-    return res.status(500).json({ 
-      error: 'Internal server error',
-      message: 'AI service temporarily unavailable'
-    })
-  }
-}
+    // 根据错误类型返回不同的错误信息
+    let errorMessage = '抱歉,AI 服务暂时不可用,请稍后再试。如果问题持续存在,请联系客服。'
+    let statusCode = 500
 
-// AI 响应生成函数（模拟实现）
-async function generateAIResponse(question: string, imageUrl?: string, audioUrl?: string): Promise<string> {
-  // 模拟 AI 处理延迟
-  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000))
-
-  let response = ''
-
-  if (imageUrl) {
-    response += `我看到了您上传的图片。`
-  }
-
-  if (audioUrl) {
-    response += `我听到了您的语音输入。`
-  }
-
-  if (question) {
-    response += `关于您的问题"${question}"，让我为您详细解答：\n\n`
-    
-    // 根据问题内容生成不同的回答
-    if (question.includes('物理') || question.includes('力学') || question.includes('运动')) {
-      response += `这是一个物理问题。我将为您生成相应的动画模型来演示相关概念。\n\n`
-      response += `根据物理定律，我可以帮您：\n`
-      response += `• 分析运动轨迹\n`
-      response += `• 计算相关参数\n`
-      response += `• 生成可视化动画\n`
-      response += `• 提供详细解释`
-    } else if (question.includes('数学') || question.includes('函数') || question.includes('几何')) {
-      response += `这是一个数学问题。我将为您创建相应的数学模型和可视化。\n\n`
-      response += `我可以帮您：\n`
-      response += `• 绘制函数图像\n`
-      response += `• 分析几何关系\n`
-      response += `• 计算数值结果\n`
-      response += `• 生成动态演示`
-    } else if (question.includes('化学') || question.includes('反应') || question.includes('分子')) {
-      response += `这是一个化学问题。我将为您生成分子结构和反应过程的动画。\n\n`
-      response += `我可以帮您：\n`
-      response += `• 展示分子结构\n`
-      response += `• 模拟化学反应\n`
-      response += `• 解释反应机理\n`
-      response += `• 生成动态模型`
-    } else if (question.includes('生物') || question.includes('细胞') || question.includes('器官')) {
-      response += `这是一个生物问题。我将为您创建生物过程的动画演示。\n\n`
-      response += `我可以帮您：\n`
-      response += `• 展示细胞结构\n`
-      response += `• 模拟生物过程\n`
-      response += `• 解释生理机制\n`
-      response += `• 生成动态图解`
-    } else {
-      response += `这是一个很有趣的问题！我将为您：\n`
-      response += `• 分析问题要点\n`
-      response += `• 生成相关模型\n`
-      response += `• 提供详细解释\n`
-      response += `• 创建可视化内容`
+    if (error instanceof Error) {
+      if (error.message.includes('API key not configured')) {
+        errorMessage = 'AI 服务配置错误，请联系管理员检查 API 密钥配置。'
+        statusCode = 500
+      } else if (error.message.includes('API error')) {
+        errorMessage = 'AI 服务调用失败，可能是网络问题或服务暂时不可用。'
+        statusCode = 503
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'AI 服务响应超时，请稍后重试。'
+        statusCode = 408
+      }
     }
 
-    response += `\n\n正在为您生成个性化的动画模型和解释，请稍候...`
+    return res.status(statusCode).json({ 
+      error: 'AI service error',
+      message: errorMessage,
+      details: error instanceof Error ? error.message : 'Unknown error'
+    })
   }
-
-  return response || '我理解您的问题，正在为您生成相应的动画模型和解释...'
 }
