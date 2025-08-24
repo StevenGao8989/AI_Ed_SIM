@@ -1,9 +1,17 @@
 import { PhysicsDSL, PhysicsIR, PhysicsSchema } from '../../frontend/types/dsl';
 import { PhysicalQuantity, PhysicsObject, PhysicsParameter } from '../../frontend/types/PhysicsTypes';
+// 导入 unitConverter 模块
+import { 
+  areUnitsCompatible, 
+  standardizeUnit, 
+  convertValue,
+  type ConversionResult 
+} from '../ai_parsing/unitConverter';
 
 /**
  * PhysicsParser - 将 PhysicsDSL (YAML) 解析为中间 IR (JSON)
  * 负责：DSL 解析、结构校验、类型转换、单位标准化
+ * 更新：集成 unitConverter 模块，提供更智能的单位处理
  */
 export class PhysicsParser {
   private schema: PhysicsSchema;
@@ -350,15 +358,15 @@ export class PhysicsParser {
   }
 
   /**
-   * 检查单位一致性
+   * 检查单位一致性 - 使用 unitConverter 进行智能检查
    */
   private checkUnitConsistency(dsl: PhysicsDSL): boolean {
-    // 实现单位一致性检查逻辑
     try {
       // 检查所有物理量的单位是否兼容
       const units = this.extractAllUnits(dsl);
       return this.validateUnitCompatibility(units);
     } catch (error) {
+      console.warn('单位一致性检查失败:', error);
       return false;
     }
   }
@@ -396,32 +404,82 @@ export class PhysicsParser {
   }
 
   /**
-   * 提取所有单位
+   * 提取所有单位 - 使用 unitConverter 进行标准化
    */
   private extractAllUnits(dsl: PhysicsDSL): string[] {
     const units: string[] = [];
     
-    // 从初始条件中提取单位
+    // 从初始条件中提取并标准化单位
     (dsl.system.initial_conditions || []).forEach(cond => {
-      if (cond.value?.unit) units.push(cond.value.unit);
+      if (cond.value?.unit) {
+        const stdUnit = standardizeUnit(cond.value.unit);
+        if (stdUnit.isValid) {
+          units.push(stdUnit.standard);
+        } else {
+          // 如果标准化失败，保留原单位并记录警告
+          console.warn(`单位标准化失败: ${cond.value.unit} -> ${stdUnit.error}`);
+          units.push(cond.value.unit);
+        }
+      }
+    });
+
+    // 从约束中提取单位
+    (dsl.system.constraints || []).forEach(constraint => {
+      if (constraint.value?.unit) {
+        const stdUnit = standardizeUnit(constraint.value.unit);
+        if (stdUnit.isValid) {
+          units.push(stdUnit.standard);
+        }
+      }
+    });
+
+    // 从常量中提取单位
+    (dsl.system.constants || []).forEach(constant => {
+      if (constant.value?.unit) {
+        const stdUnit = standardizeUnit(constant.value.unit);
+        if (stdUnit.isValid) {
+          units.push(stdUnit.standard);
+        }
+      }
     });
 
     return units;
   }
 
   /**
-   * 验证单位兼容性
+   * 验证单位兼容性 - 使用 unitConverter 进行智能检查
    */
   private validateUnitCompatibility(units: string[]): boolean {
-    // 简化的单位兼容性检查
+    if (units.length <= 1) return true;
+    
+    try {
+      // 使用 unitConverter 进行智能单位兼容性检查
+      for (let i = 1; i < units.length; i++) {
+        if (!areUnitsCompatible(units[0], units[i])) {
+          console.warn(`单位不兼容: ${units[0]} 与 ${units[i]}`);
+          return false;
+        }
+      }
+      return true;
+    } catch (error) {
+      console.warn('单位兼容性检查异常:', error);
+      // 回退到基础检查
+      return this.fallbackUnitCompatibilityCheck(units);
+    }
+  }
+
+  /**
+   * 回退的单位兼容性检查 - 当 unitConverter 失败时使用
+   */
+  private fallbackUnitCompatibilityCheck(units: string[]): boolean {
     const baseUnits = ['m', 'kg', 's', 'A', 'K', 'mol', 'cd'];
+    const derivedUnits = ['N', 'J', 'W', 'Pa', 'V', 'Ω', 'T', 'Hz'];
+    
     return units.every(unit => {
       // 检查是否为基本单位或导出单位
       return baseUnits.some(base => unit.includes(base)) || 
-             unit === 'SI' || 
-             unit === 'N' || 
-             unit === 'J' || 
-             unit === 'W';
+             derivedUnits.includes(unit) ||
+             unit === 'SI';
     });
   }
 
@@ -517,5 +575,157 @@ export function validatePhysicsDSL(dsl: any): boolean {
     return true;
   } catch {
     return false;
+  }
+}
+
+/**
+ * 新增：单位转换和验证功能
+ */
+export class UnitProcessor {
+  /**
+   * 批量转换单位
+   * @param values 需要转换的数值数组
+   * @param fromUnit 原单位
+   * @param toUnit 目标单位
+   * @returns 转换后的数值数组
+   */
+  static batchConvertUnits(values: number[], fromUnit: string, toUnit: string): number[] {
+    return values.map(value => {
+      const converted = convertValue(value, fromUnit, toUnit);
+      return converted !== null ? converted : value;
+    });
+  }
+
+  /**
+   * 验证单位字符串的有效性
+   * @param unit 单位字符串
+   * @returns 验证结果
+   */
+  static validateUnit(unit: string): ConversionResult {
+    return standardizeUnit(unit);
+  }
+
+  /**
+   * 检查多个单位的兼容性
+   * @param units 单位数组
+   * @returns 兼容性检查结果
+   */
+  static checkUnitsCompatibility(units: string[]): { compatible: boolean; incompatiblePairs: string[][] } {
+    const incompatiblePairs: string[][] = [];
+    
+    for (let i = 0; i < units.length; i++) {
+      for (let j = i + 1; j < units.length; j++) {
+        if (!areUnitsCompatible(units[i], units[j])) {
+          incompatiblePairs.push([units[i], units[j]]);
+        }
+      }
+    }
+    
+    return {
+      compatible: incompatiblePairs.length === 0,
+      incompatiblePairs
+    };
+  }
+
+  /**
+   * 生成单位转换报告
+   * @param dsl PhysicsDSL 对象
+   * @returns 单位转换报告
+   */
+  static generateUnitReport(dsl: PhysicsDSL): {
+    totalUnits: number;
+    standardizedUnits: number;
+    conversionFailures: string[];
+    compatibilityIssues: string[][];
+  } {
+    const allUnits: string[] = [];
+    const conversionFailures: string[] = [];
+    
+    // 收集所有单位
+    const extractUnitsFromValue = (value: any) => {
+      if (value?.unit) {
+        allUnits.push(value.unit);
+        const stdUnit = standardizeUnit(value.unit);
+        if (!stdUnit.isValid) {
+          conversionFailures.push(`${value.unit} -> ${stdUnit.error}`);
+        }
+      }
+    };
+    
+    // 从各个部分提取单位
+    (dsl.system.initial_conditions || []).forEach(cond => extractUnitsFromValue(cond.value));
+    (dsl.system.constraints || []).forEach(constraint => extractUnitsFromValue(constraint.value));
+    (dsl.system.constants || []).forEach(constant => extractUnitsFromValue(constant.value));
+    
+    // 检查兼容性
+    const compatibilityResult = this.checkUnitsCompatibility(allUnits);
+    
+    return {
+      totalUnits: allUnits.length,
+      standardizedUnits: allUnits.length - conversionFailures.length,
+      conversionFailures,
+      compatibilityIssues: compatibilityResult.incompatiblePairs
+    };
+  }
+}
+
+/**
+ * 新增：单位验证器
+ */
+export class UnitValidator {
+  /**
+   * 验证 DSL 中的单位一致性
+   * @param dsl PhysicsDSL 对象
+   * @returns 验证结果
+   */
+  static validateDSLUnits(dsl: PhysicsDSL): {
+    valid: boolean;
+    issues: string[];
+    recommendations: string[];
+  } {
+    const issues: string[] = [];
+    const recommendations: string[] = [];
+    
+    try {
+      // 生成单位报告
+      const report = UnitProcessor.generateUnitReport(dsl);
+      
+      // 检查转换失败
+      if (report.conversionFailures.length > 0) {
+        issues.push(`发现 ${report.conversionFailures.length} 个无法标准化的单位`);
+        report.conversionFailures.forEach(failure => {
+          issues.push(`  - ${failure}`);
+        });
+        recommendations.push('检查单位拼写，确保使用标准单位符号');
+      }
+      
+      // 检查兼容性问题
+      if (report.compatibilityIssues.length > 0) {
+        issues.push(`发现 ${report.compatibilityIssues.length} 组不兼容的单位`);
+        report.compatibilityIssues.forEach(pair => {
+          issues.push(`  - ${pair[0]} 与 ${pair[1]} 不兼容`);
+        });
+        recommendations.push('确保相关物理量使用兼容的单位');
+      }
+      
+      // 统计信息
+      if (report.totalUnits > 0) {
+        const successRate = ((report.standardizedUnits / report.totalUnits) * 100).toFixed(1);
+        recommendations.push(`单位标准化成功率: ${successRate}%`);
+      }
+      
+      return {
+        valid: issues.length === 0,
+        issues,
+        recommendations
+      };
+      
+    } catch (error) {
+      return {
+        valid: false,
+        issues: [`单位验证过程出错: ${error instanceof Error ? error.message : '未知错误'}`],
+        recommendations: ['检查 DSL 结构是否正确']
+      };
+    }
   }
 }

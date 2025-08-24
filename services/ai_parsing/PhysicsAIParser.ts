@@ -1,4 +1,13 @@
-// services/ai_parsing/parse.ts
+// services/ai_parsing/PhysicsAIParser.ts
+
+// 导入 unitConverter
+import { 
+  UnitConverter, 
+  standardizeUnit, 
+  areUnitsCompatible, 
+  convertValue,
+  type ConversionResult 
+} from './unitConverter';
 
 export interface ParsedQuestion {
   subject: 'physics' | 'chemistry' | 'math' | 'biology';
@@ -21,7 +30,7 @@ export interface Parameter {
   unit?: string | null;
   raw?: string;   // 原始片段
   role?: 'given' | 'unknown' | 'constant' | 'derived';
-  note?: string;  // 备注（如“题面给定”、“由‘取g=10’覆盖”等）
+  note?: string;  // 备注（如"题面给定"、"由'取g=10'覆盖"等）
 }
 
 /* ---------------------------------------
@@ -36,7 +45,7 @@ const TOPIC_RULES: TopicRule[] = [
     keywords: [/匀变速|匀加速|直线运动|位移-时间|速度-时间|s-t图|v-t图/i] },
   { id: 'projectile', zh: '抛体运动', en: 'Projectile Motion',
     keywords: [/斜抛|平抛|抛体|抛射|最高点|射程/i] },
-  { id: 'newton_dynamics', zh: '牛顿运动定律', en: 'Newton’s Laws',
+  { id: 'newton_dynamics', zh: '牛顿运动定律', en: 'Newton\'s Laws',
     keywords: [/受力|合力|牛顿(第[一二三]|一|二|三)定律|\(F=ma\)|静摩擦|动摩擦|摩擦系数|临界/i] },
   { id: 'energy_work_power', zh: '功、能、功率与机械能守恒',
     en: 'Work, Energy, Power & Mechanical Energy Conservation',
@@ -61,7 +70,7 @@ const TOPIC_RULES: TopicRule[] = [
     keywords: [/简谐|弹簧振子|单摆|角频率|相位|共振|k|T=\s*2π\sqrt|振幅/i] },
   { id: 'electrostatics', zh: '静电场与电势', en: 'Electrostatics & Potential',
     keywords: [/电荷|库仑定律|电场强度|电势能|电势差|等势面|E=\s*kq\/r\^2|V=\s*kq\/r/i] },
-  { id: 'dc_circuits', zh: '直流电路与欧姆定律', en: 'DC Circuits & Ohm’s Law',
+  { id: 'dc_circuits', zh: '直流电路与欧姆定律', en: 'DC Circuits & Ohm\'s Law',
     keywords: [/电阻|电流|电压|欧姆定律|串联|并联|功率|焦耳定律|I=\s*U\/R|P=\s*UI|R=\s*ρl\/S/i] },
   { id: 'magnetism', zh: '磁场与带电粒子运动', en: 'Magnetism & Charged Particle Motion',
     keywords: [/磁场|洛伦兹力|回旋半径|霍尔|右手定则|B=\s*μ0|qvB|r=\s*mv\/qB/i] },
@@ -73,92 +82,7 @@ const TOPIC_RULES: TopicRule[] = [
     keywords: [/光电效应|原子模型|核反应|半衰期|eV|普朗克常量|德布罗意|放射性/i] },
 ];
 
-/* ---------------------------
- * 单位：标准化映射与解析
- * ------------------------- */
-
-// 显式映射（复合或常见单位 → 标准 与 倍率）
-const UNIT_ALIASES: Record<string, { standard: string; k: number }> = {
-  // 长度
-  'm': { standard: 'm', k: 1 },
-  'meter': { standard: 'm', k: 1 },
-  '米': { standard: 'm', k: 1 },
-  'cm': { standard: 'm', k: 0.01 },
-  '厘米': { standard: 'm', k: 0.01 },
-  'mm': { standard: 'm', k: 0.001 },
-  '毫米': { standard: 'm', k: 0.001 },
-  'km': { standard: 'm', k: 1000 },
-  '千米': { standard: 'm', k: 1000 },
-  // 面积/体积
-  'cm2': { standard: 'm^2', k: 1e-4 }, 'cm^2': { standard: 'm^2', k: 1e-4 }, 'cm²': { standard: 'm^2', k: 1e-4 },
-  'm2': { standard: 'm^2', k: 1 }, 'm^2': { standard: 'm^2', k: 1 }, 'm²': { standard: 'm^2', k: 1 },
-  'cm3': { standard: 'm^3', k: 1e-6 }, 'cm^3': { standard: 'm^3', k: 1e-6 }, 'cm³': { standard: 'm^3', k: 1e-6 },
-  'm3': { standard: 'm^3', k: 1 }, 'm^3': { standard: 'm^3', k: 1 }, 'm³': { standard: 'm^3', k: 1 },
-  'l': { standard: 'm^3', k: 1e-3 }, 'L': { standard: 'm^3', k: 1e-3 }, '升': { standard: 'm^3', k: 1e-3 },
-  // 时间
-  's': { standard: 's', k: 1 }, 'sec': { standard: 's', k: 1 }, '秒': { standard: 's', k: 1 },
-  'min': { standard: 's', k: 60 }, '分钟': { standard: 's', k: 60 },
-  'h': { standard: 's', k: 3600 }, 'hr': { standard: 's', k: 3600 }, '小时': { standard: 's', k: 3600 },
-  // 质量
-  'kg': { standard: 'kg', k: 1 }, '千克': { standard: 'kg', k: 1 }, '公斤': { standard: 'kg', k: 1 },
-  'g': { standard: 'kg', k: 1e-3 }, '克': { standard: 'kg', k: 1e-3 },
-  'mg': { standard: 'kg', k: 1e-6 }, '毫克': { standard: 'kg', k: 1e-6 },
-  't': { standard: 'kg', k: 1000 }, '吨': { standard: 'kg', k: 1000 },
-  // 力
-  'n': { standard: 'N', k: 1 }, 'N': { standard: 'N', k: 1 }, '牛': { standard: 'N', k: 1 }, '牛顿': { standard: 'N', k: 1 },
-  'kN': { standard: 'N', k: 1e3 }, 'mN': { standard: 'N', k: 1e-3 },
-  // 能量/功
-  'j': { standard: 'J', k: 1 }, 'J': { standard: 'J', k: 1 }, '焦': { standard: 'J', k: 1 }, '焦耳': { standard: 'J', k: 1 },
-  'kj': { standard: 'J', k: 1e3 }, 'kJ': { standard: 'J', k: 1e3 },
-  'wh': { standard: 'J', k: 3600 }, 'kwh': { standard: 'J', k: 3.6e6 }, 'kWh': { standard: 'J', k: 3.6e6 },
-  'ev': { standard: 'J', k: 1.602176634e-19 }, 'eV': { standard: 'J', k: 1.602176634e-19 },
-  // 功率
-  'w': { standard: 'W', k: 1 }, 'W': { standard: 'W', k: 1 }, '瓦': { standard: 'W', k: 1 },
-  'kw': { standard: 'W', k: 1e3 }, 'kW': { standard: 'W', k: 1e3 },
-  // 压强/压强
-  'pa': { standard: 'Pa', k: 1 }, 'Pa': { standard: 'Pa', k: 1 }, '帕': { standard: 'Pa', k: 1 },
-  'kpa': { standard: 'Pa', k: 1e3 }, 'kPa': { standard: 'Pa', k: 1e3 }, 'mpa': { standard: 'Pa', k: 1e6 }, 'MPa': { standard: 'Pa', k: 1e6 },
-  // 电学
-  'a': { standard: 'A', k: 1 }, 'A': { standard: 'A', k: 1 }, '安培': { standard: 'A', k: 1 },
-  'v': { standard: 'V', k: 1 }, 'V': { standard: 'V', k: 1 }, '伏': { standard: 'V', k: 1 },
-  'coulomb': { standard: 'C', k: 1 }, 'c': { standard: 'C', k: 1 }, 'C': { standard: 'C', k: 1 }, '库仑': { standard: 'C', k: 1 },
-  'ohm': { standard: 'Ω', k: 1 }, 'Ω': { standard: 'Ω', k: 1 }, '欧': { standard: 'Ω', k: 1 }, '欧姆': { standard: 'Ω', k: 1 },
-  // 频率/周期
-  'hz': { standard: 'Hz', k: 1 }, 'Hz': { standard: 'Hz', k: 1 }, '次/秒': { standard: 'Hz', k: 1 },
-  // 磁学
-  'T': { standard: 'T', k: 1 }, '特斯拉': { standard: 'T', k: 1 },
-  'wb': { standard: 'Wb', k: 1 }, 'Wb': { standard: 'Wb', k: 1 }, '韦伯': { standard: 'Wb', k: 1 },
-  // 角度/温度（°C 不能单靠倍率安全转换为 K，这里保留 °C）
-  '°': { standard: '°', k: 1 }, 'deg': { standard: '°', k: 1 },
-  '℃': { standard: '°C', k: 1 }, '°C': { standard: '°C', k: 1 },
-  'K': { standard: 'K', k: 1 },
-  // 复合速度/加速度等（常见写法）
-  'm/s': { standard: 'm/s', k: 1 }, '米/秒': { standard: 'm/s', k: 1 },
-  'km/h': { standard: 'm/s', k: 1000 / 3600 },
-  'm/s2': { standard: 'm/s^2', k: 1 }, 'm/s^2': { standard: 'm/s^2', k: 1 }, 'm/s²': { standard: 'm/s^2', k: 1 },
-  'n·m': { standard: 'N·m', k: 1 }, 'N·m': { standard: 'N·m', k: 1 }, '牛·米': { standard: 'N·m', k: 1 },
-};
-
-// 变量中文别名 → 标准符号
-const VAR_SYNONYMS: Record<string, string> = {
-  '质量': 'm', '重物质量': 'm',
-  '速度': 'v', '初速度': 'v0', '末速度': 'v',
-  '加速度': 'a', '向心加速度': 'a',
-  '时间': 't', '时长': 't',
-  '位移': 's', '路程': 's', '高度': 'h', '半径': 'r',
-  '力': 'F', '拉力': 'F', '支持力': 'N' /*注意: 符号冲突时仍统一F*/,
-  '功': 'W', '能量': 'E', '动能': 'Ek', '势能': 'Ep', '功率': 'P',
-  '电荷量': 'q', '电量': 'Q', '电流': 'I', '电压': 'U', '电势差': 'U', '电阻': 'R',
-  '磁感应强度': 'B', '磁通量': 'Φ',
-  '频率': 'f', '周期': 'T', '波长': 'λ', '角速度': 'ω', '角频率': 'ω',
-  '密度': 'ρ', '压强': 'p', '粘滞系数': 'μ',
-  '弹性系数': 'k', '弹簧劲度系数': 'k',
-  '焦距': 'f_lens', '像距': 'v_lens', '物距': 'u_lens',
-  '比热容': 'c', '热量': 'Q', '温度': 'θ',
-  '普适气体常量': 'R_gas', '摩尔数': 'n',
-};
-
-// 常见常量默认值（若题目给出“取 g=10”则覆盖此处）
+// 常见常量默认值（若题目给出"取 g=10"则覆盖此处）
 const DEFAULT_CONSTANTS: Parameter[] = [
   { symbol: 'g', value: 9.8, unit: 'm/s^2', role: 'constant', note: '重力加速度，未指定时默认 9.8' },
 ];
@@ -176,14 +100,14 @@ export function parseQuestion(question: string): ParsedQuestion {
   // 2) 单位扫描（收集原始→标准的映射）
   const unitMappings = collectUnits(text);
 
-  // 3) 参数抽取（形如“v0=10m/s”“质量为2千克”“电阻5Ω”“取 g=10 m/s²”“求最大高度h”等）
+  // 3) 参数抽取（形如"v0=10m/s""质量为2千克""电阻5Ω""取 g=10 m/s²""求最大高度h"等）
   let parameters = extractParameters(text, unitMappings);
 
   // 4) 注入默认常量（若题面未覆盖）
   const hasG = parameters.some(p => p.symbol === 'g');
   if (!hasG) parameters = [...parameters, ...DEFAULT_CONSTANTS];
 
-  // 5) 未知量识别（“求…X…” 或 “X为多少？”）
+  // 5) 未知量识别（"求 X / X 为多少 / 最大速度/最大高度/射程"等）
   parameters = markUnknowns(text, parameters);
 
   // 去重与合并（按 symbol 合并，题面值优先）
@@ -223,7 +147,7 @@ function detectTopic(text: string): string {
 }
 
 /* ---------------------------
- * 单位收集与标准化
+ * 单位收集与标准化 - 重构为使用 unitConverter
  * ------------------------- */
 function collectUnits(text: string): UnitMapping[] {
   const found = new Map<string, UnitMapping>();
@@ -236,24 +160,23 @@ function collectUnits(text: string): UnitMapping[] {
 
   for (const u of unitTokens) {
     const raw = u.toString();
-    const key = normalizeUnitKey(raw);
-    const mapped = UNIT_ALIASES[key];
-    if (mapped) {
-      found.set(raw, { original: raw, standard: mapped.standard, conversion: mapped.k });
+    
+    // 使用 unitConverter 进行单位标准化
+    const conversionResult = standardizeUnit(raw);
+    
+    if (conversionResult.isValid) {
+      found.set(raw, { 
+        original: raw, 
+        standard: conversionResult.standard, 
+        conversion: conversionResult.conversion 
+      });
     } else {
-      // 未收录的单位：保留原样，倍率记 1（避免错误换算）
+      // 未识别的单位：保留原样，倍率记 1（避免错误换算）
       found.set(raw, { original: raw, standard: raw, conversion: 1 });
     }
   }
-  // 特例：km/h 独立处理（正则已覆盖，这里确保大小写）
-  if (/km\/h/i.test(text)) {
-    found.set('km/h', { original: 'km/h', standard: 'm/s', conversion: 1000 / 3600 });
-  }
+  
   return Array.from(found.values());
-}
-
-function normalizeUnitKey(u: string): string {
-  return u.replace(/\s+/g, '').replace(/（|）/g, '').replace(/[度]/g, '°').toLowerCase();
 }
 
 function dedupUnitMappings(arr: UnitMapping[]): UnitMapping[] {
@@ -319,7 +242,7 @@ function extractParameters(text: string, unitMappings: UnitMapping[]): Parameter
     }
   }
 
-  // 3) “X 为 多少/未知”的形式（不含数值）
+  // 3) "X 为 多少/未知"的形式（不含数值）
   for (const [cn, sym] of Object.entries(VAR_SYNONYMS)) {
     if (new RegExp(`求.*${escapeReg(cn)}|${escapeReg(cn)}(的)?大小|${escapeReg(cn)}为多少`).test(text)) {
       if (!params.some(p => p.symbol === sym)) {
@@ -328,7 +251,7 @@ function extractParameters(text: string, unitMappings: UnitMapping[]): Parameter
     }
   }
 
-  // 4) g 的覆盖（“取 g=10”）
+  // 4) g 的覆盖（"取 g=10"）
   // 已在中文描述式覆盖；若写作 g=10，不带单位也接受
   if (/取\s*g\s*=\s*([-+]?(\d+(\.\d+)?|\.\d+)(e[-+]?\d+)?)/i.test(text)) {
     const gv = parseFloat(RegExp.$1);
@@ -337,6 +260,22 @@ function extractParameters(text: string, unitMappings: UnitMapping[]): Parameter
 
   return params;
 }
+
+// 变量同义词映射（中文 → 标准符号）
+const VAR_SYNONYMS: Record<string, string> = {
+  '质量': 'm', '重量': 'm', '位移': 's', '路程': 's', '高度': 'h', '深度': 'h',
+  '速度': 'v', '初速度': 'v0', '末速度': 'v', '加速度': 'a', '时间': 't',
+  '力': 'F', '合力': 'F', '压力': 'F', '支持力': 'N', '摩擦力': 'f',
+  '功': 'W', '能量': 'E', '动能': 'Ek', '势能': 'Ep', '功率': 'P',
+  '电荷量': 'q', '电量': 'Q', '电流': 'I', '电压': 'U', '电势差': 'U', '电阻': 'R',
+  '磁感应强度': 'B', '磁通量': 'Φ',
+  '频率': 'f', '周期': 'T', '波长': 'λ', '角速度': 'ω', '角频率': 'ω',
+  '密度': 'ρ', '压强': 'p', '粘滞系数': 'μ',
+  '弹性系数': 'k', '弹簧劲度系数': 'k',
+  '焦距': 'f_lens', '像距': 'v_lens', '物距': 'u_lens',
+  '比热容': 'c', '热量': 'Q', '温度': 'θ',
+  '普适气体常量': 'R_gas', '摩尔数': 'n',
+};
 
 function normalizeVar(s: string): string {
   const k = s.trim();
@@ -356,25 +295,31 @@ function sniffImmediateUnit(tail: string, unitMappings: UnitMapping[]): string |
 
 function pickStandardUnit(raw: string, unitMappings: UnitMapping[]): string | undefined {
   if (!raw) return undefined;
-  const key = normalizeUnitKey(raw);
-  const alias = UNIT_ALIASES[key];
-  if (alias) return alias.standard;
-  // 若不在别名表里，看看已收集映射
-  const found = unitMappings.find(u => normalizeUnitKey(u.original) === key);
+  
+  // 使用 unitConverter 进行单位标准化
+  const conversionResult = standardizeUnit(raw);
+  if (conversionResult.isValid) {
+    return conversionResult.standard;
+  }
+  
+  // 若 unitConverter 无法识别，查看已收集的映射
+  const found = unitMappings.find(u => u.original === raw);
   return found ? found.standard : raw;
 }
 
 function unitScale(raw: string): number {
   if (!raw) return 1;
-  const alias = UNIT_ALIASES[normalizeUnitKey(raw)];
-  return alias ? alias.k : 1;
+  
+  // 使用 unitConverter 获取单位转换系数
+  const conversionResult = standardizeUnit(raw);
+  return conversionResult.isValid ? conversionResult.conversion : 1;
 }
 
 /* ---------------------------
  * 未知量标记
  * ------------------------- */
 function markUnknowns(text: string, params: Parameter[]): Parameter[] {
-  // 语义：出现“求 X / X 为多少 / 最大速度/最大高度/射程”等
+  // 语义：出现"求 X / X 为多少 / 最大速度/最大高度/射程"等
   // 典型：求最大高度h、求末速度v、求加速度a、求电流I
   const candidates: Array<{ sym: string; re: RegExp }> = [
     { sym: 'h', re: /求.*最大高度|最高点|h(的)?大小/i },
