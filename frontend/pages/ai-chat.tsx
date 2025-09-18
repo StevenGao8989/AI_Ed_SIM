@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { supabase } from '@/lib/supabaseClient'
 import { aiClient } from '@/lib/aiClient'
+import { physicsClient } from '@/lib/physicsClient'
 import { KaTeXRenderer } from '@/components/renderer'
 import type { User } from '@supabase/supabase-js'
 
@@ -16,6 +17,8 @@ export default function AIChatPage() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
   const [isRecording, setIsRecording] = useState(false)
   const [audioUrl, setAudioUrl] = useState<string | null>(null)
+  const [parseMode, setParseMode] = useState<'chat' | 'physics'>('chat')
+  const [physicsParseResult, setPhysicsParseResult] = useState<any>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -61,40 +64,71 @@ export default function AIChatPage() {
     setQuestion('')
 
     try {
-      // 调用 DeepSeek API 客户端
-      const aiResponse = await aiClient.chat({
-        question: question.trim(),
-        imageUrl: uploadedImage || undefined,
-        audioUrl: audioUrl || undefined,
-        userId: user?.id || '',
-        provider: 'deepseek'
-      })
-      
-      if (aiResponse.success) {
-        const aiMessage = {
-          type: 'ai' as const,
-          content: aiResponse.response,
-          timestamp: new Date()
+      if (parseMode === 'physics') {
+        // 物理题目解析模式
+        const physicsResponse = await physicsClient.parsePhysicsQuestion(
+          question.trim(),
+          user?.id || '',
+          {
+            enableModuleDecomposition: true,
+            enableModuleComposition: true,
+            enableAdvancedAnalysis: true,
+            enableFormulaExtraction: true,
+            enableUnitOptimization: true
+          }
+        )
+        
+        if (physicsResponse.success && physicsResponse.data) {
+          setPhysicsParseResult(physicsResponse.data)
+          
+          // 格式化解析结果
+          const formattedResult = physicsClient.formatParsedResult(physicsResponse.data)
+          
+          const aiMessage = {
+            type: 'ai' as const,
+            content: formattedResult,
+            timestamp: new Date()
+          }
+          setChatHistory(prev => [...prev, aiMessage])
+        } else {
+          throw new Error(physicsResponse.error || 'Physics parse error')
         }
-        setChatHistory(prev => [...prev, aiMessage])
       } else {
-        throw new Error('AI response error')
+        // 普通聊天模式
+        const aiResponse = await aiClient.chat({
+          question: question.trim(),
+          imageUrl: uploadedImage || undefined,
+          audioUrl: audioUrl || undefined,
+          userId: user?.id || '',
+          provider: 'deepseek'
+        })
+        
+        if (aiResponse.success) {
+          const aiMessage = {
+            type: 'ai' as const,
+            content: aiResponse.response,
+            timestamp: new Date()
+          }
+          setChatHistory(prev => [...prev, aiMessage])
+        } else {
+          throw new Error('AI response error')
+        }
       }
     } catch (error) {
-      console.error('Error calling AI API:', error)
+      console.error('Error calling API:', error)
       
       // 显示详细的错误消息
-      let errorMessage = '抱歉，AI 服务暂时不可用，请稍后再试。如果问题持续存在，请联系客服。'
+      let errorMessage = '抱歉，服务暂时不可用，请稍后再试。如果问题持续存在，请联系客服。'
       
       if (error instanceof Error) {
         if (error.message.includes('API key not configured')) {
-          errorMessage = 'AI 服务配置错误：API 密钥未配置，请联系管理员。'
+          errorMessage = '服务配置错误：API 密钥未配置，请联系管理员。'
         } else if (error.message.includes('DeepSeek API error')) {
           errorMessage = `DeepSeek API 调用失败：${error.message}`
         } else if (error.message.includes('fetch')) {
           errorMessage = '网络连接失败，请检查网络连接。'
         } else {
-          errorMessage = `AI 服务错误：${error.message}`
+          errorMessage = `服务错误：${error.message}`
         }
       }
       
@@ -192,6 +226,32 @@ export default function AIChatPage() {
               <Link href="/dashboard" className="text-gray-600 hover:text-indigo-600 transition-colors font-medium">
                 问题反馈
               </Link>
+            </div>
+
+            {/* 模式切换 */}
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setParseMode('chat')}
+                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                    parseMode === 'chat'
+                      ? 'bg-white text-indigo-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  💬 智能对话
+                </button>
+                <button
+                  onClick={() => setParseMode('physics')}
+                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                    parseMode === 'physics'
+                      ? 'bg-white text-indigo-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  ⚡ 物理解析
+                </button>
+              </div>
             </div>
 
             {/* 认证按钮 */}
@@ -314,6 +374,24 @@ export default function AIChatPage() {
 
             {/* 输入区域 */}
             <div className="border-t border-gray-200 p-6">
+              {/* 模式提示 */}
+              <div className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
+                <div className={`px-2 py-1 rounded-md ${
+                  parseMode === 'chat' 
+                    ? 'bg-blue-100 text-blue-700' 
+                    : 'bg-green-100 text-green-700'
+                }`}>
+                  {parseMode === 'chat' ? '💬 智能对话模式' : '⚡ 物理题目解析模式'}
+                </div>
+                <span className="text-gray-400">|</span>
+                <span>
+                  {parseMode === 'chat' 
+                    ? '与AI进行智能对话，获取个性化解答' 
+                    : '输入物理题目，获得结构化解析结果'
+                  }
+                </span>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* 主要输入栏 - 按照参考图设计 */}
                 <div className="relative">
@@ -339,7 +417,7 @@ export default function AIChatPage() {
                       type="text"
                       value={question}
                       onChange={(e) => setQuestion(e.target.value)}
-                      placeholder="Ask anything..."
+                      placeholder={parseMode === 'chat' ? "Ask anything..." : "例如：一个物体以初速度10m/s匀加速运动，加速度2m/s²，求5秒后的位移和速度"}
                       className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-400 text-base"
                       disabled={isGenerating}
                     />

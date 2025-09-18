@@ -224,21 +224,23 @@ function extractParameters(text: string, unitMappings: UnitMapping[]): Parameter
   const params: Parameter[] = [];
 
   // 1) 形式：v=10m/s, a=2 m/s^2
-  for (const m of text.matchAll(VAR_RE)) {
-    const sym = normalizeVar(m[1]);
-    const val = parseFloat(m[2]);
-    const tail = text.slice(m.index! + m[0].length);
+  let match;
+  while ((match = VAR_RE.exec(text)) !== null) {
+    const sym = normalizeVar(match[1]);
+    const val = parseFloat(match[2]);
+    const tail = text.slice(match.index + match[0].length);
     const unit = sniffImmediateUnit(tail, unitMappings);
-    params.push({ symbol: sym, value: val, unit, raw: m[0], role: 'given', note: '等式赋值' });
+    params.push({ symbol: sym, value: val, unit, raw: match[0], role: 'given', note: '等式赋值' });
   }
 
   // 2) 中文描述式
   for (const pat of CN_PATTERN) {
-    for (const m of text.matchAll(pat.re)) {
-      const val = parseFloat(m[1]);
-      const uraw = m[2] ?? '';
+    let match;
+    while ((match = pat.re.exec(text)) !== null) {
+      const val = parseFloat(match[1]);
+      const uraw = match[2] ?? '';
       const unit = pickStandardUnit(uraw, unitMappings);
-      params.push({ symbol: pat.symbol, value: val * unitScale(uraw), unit, raw: m[0], role: 'given', note: '中文叙述' });
+      params.push({ symbol: pat.symbol, value: val * unitScale(uraw), unit, raw: match[0], role: 'given', note: '中文叙述' });
     }
   }
 

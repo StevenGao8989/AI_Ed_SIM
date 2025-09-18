@@ -1,7 +1,17 @@
 // services/dsl/PhysicsDslGenerator.ts
-// DSL 生成器：将 PhysicsAIParser 输出转换为 PhysicsDSL (YAML 格式)
+// DSL 生成器：将 PhysicsAIParserAICaller 输出转换为 PhysicsDSL (YAML 格式)
 
-import type { ParsedQuestion, Parameter, UnitMapping } from '../ai_parsing/PhysicsAIParser';
+import type { 
+  ParsedQuestion, 
+  Parameter,
+  SolutionStep,
+  ModuleDependency,
+  Formula,
+  Constraint as ParserConstraint,
+  Target,
+  SolutionPath
+} from '../ai_parsing/PhysicsAIParserAICaller';
+import type { UnitMapping } from '../ai_parsing/PhysicsAIParser';
 import type {
   PhysicsDSL,
   DSLMetadata,
@@ -42,13 +52,26 @@ export class PhysicsDslGenerator {
     const topicId = this.mapTopicToId(parsedQuestion.topic);
     const systemType = this.mapTopicToSystemType(topicId);
 
-    return {
+    const baseDSL = {
       metadata: this.generateMetadata(parsedQuestion, topicId),
       system: this.generateSystem(parsedQuestion, systemType),
-      simulation: this.generateSimulation(systemType),
-      output: this.generateOutput(systemType),
+      simulation: this.generateSimulation(systemType, parsedQuestion),
+      output: this.generateOutput(systemType, parsedQuestion),
       syllabus: this.generateSyllabus(parsedQuestion.topic)
     };
+
+    // 添加DSL增强字段（作为扩展）
+    const enhancedDSL = {
+      ...baseDSL,
+      // 新增DSL增强字段
+      solution_path: this.generateSolutionPath(parsedQuestion),
+      target: this.generateTarget(parsedQuestion),
+      formulas: this.generateFormulas(parsedQuestion),
+      constraints: this.generateConstraints(parsedQuestion),
+      dsl_metadata: this.generateDSLMetadata(parsedQuestion)
+    };
+
+    return enhancedDSL as any;
   }
 
   /**
@@ -83,7 +106,7 @@ export class PhysicsDslGenerator {
       type: systemType,
       parameters: this.convertParameters(parsedQuestion.parameters),
       initial_conditions: this.generateInitialConditions(systemType, parsedQuestion.parameters),
-      constraints: this.generateConstraints(systemType),
+      constraints: this.generateSystemConstraints(systemType),
       constants: this.generateConstants(systemType, parsedQuestion.parameters),
       objects: this.generatePhysicsObjects(systemType, parsedQuestion.parameters),
       materials: this.detectMaterials(parsedQuestion.question)
@@ -93,29 +116,32 @@ export class PhysicsDslGenerator {
   /**
    * 生成仿真配置
    */
-  private generateSimulation(systemType: ExtendedPhysicsSystemType): SimulationConfig {
+  private generateSimulation(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): SimulationConfig {
+    const duration = this.calculateDuration(systemType, parsedQuestion);
+    const timeStep = this.calculateTimeStep(systemType, parsedQuestion);
+    
     return {
-      duration: { value: this.calculateDuration(systemType), unit: 's' },
-      time_step: { value: this.DEFAULT_TIME_STEP, unit: 's' },
-      events: this.generateEvents(systemType),
-      solver: this.selectSolver(systemType),
-      precision: 'medium',
-      max_iterations: 10000,
-      tolerance: 1e-6
+      duration: { value: duration, unit: 's' },
+      time_step: { value: timeStep, unit: 's' },
+      events: this.generateEvents(systemType, parsedQuestion),
+      solver: this.selectSolver(systemType, parsedQuestion),
+      precision: this.selectPrecision(parsedQuestion),
+      max_iterations: this.calculateMaxIterations(parsedQuestion),
+      tolerance: this.calculateTolerance(parsedQuestion)
     };
   }
 
   /**
    * 生成输出配置
    */
-  private generateOutput(systemType: ExtendedPhysicsSystemType): OutputConfig {
+  private generateOutput(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): OutputConfig {
     return {
-      variables: this.getOutputVariables(systemType),
-      plots: this.generatePlots(systemType),
-      animations: this.generateAnimations(systemType),
+      variables: this.getOutputVariables(systemType, parsedQuestion),
+      plots: this.generatePlots(systemType, parsedQuestion),
+      animations: this.generateAnimations(systemType, parsedQuestion),
       export_formats: ['json', 'yaml', 'csv'],
-      resolution: 'high',
-      frame_rate: 60
+      resolution: this.selectResolution(parsedQuestion),
+      frame_rate: this.selectFrameRate(parsedQuestion)
     };
   }
 
@@ -138,7 +164,13 @@ export class PhysicsDslGenerator {
         description: '标准化值'
       } : null,
       constraints: this.generateParameterConstraints(param),
-      uncertainty: 0.01 // 默认不确定性
+      uncertainty: 0.01, // 默认不确定性
+      // 新增DSL相关字段
+      dsl_type: param.dslType || 'scalar',
+      domain: param.domain || 'kinematics',
+      priority: param.priority || 1,
+      dependencies: param.dependencies || [],
+      formula: param.formula || ''
     }));
   }
 
@@ -200,9 +232,9 @@ export class PhysicsDslGenerator {
   }
 
   /**
-   * 生成约束条件
+   * 生成系统约束条件
    */
-  private generateConstraints(systemType: ExtendedPhysicsSystemType): Constraint[] {
+  private generateSystemConstraints(systemType: ExtendedPhysicsSystemType): Constraint[] {
     const constraints: Constraint[] = [];
 
     // 重力约束（适用于大多数力学系统）
@@ -336,12 +368,8 @@ export class PhysicsDslGenerator {
    * 评估难度
    */
   private assessDifficulty(parsedQuestion: ParsedQuestion): 'easy' | 'medium' | 'hard' {
-    const questionLength = parsedQuestion.question.length;
-    const parameterCount = parsedQuestion.parameters.length;
-    
-    if (questionLength < 100 && parameterCount <= 3) return 'easy';
-    if (questionLength < 200 && parameterCount <= 5) return 'medium';
-    return 'hard';
+    const complexity = this.assessComplexity(parsedQuestion);
+    return complexity === 'simple' ? 'easy' : complexity === 'complex' ? 'hard' : 'medium';
   }
 
   /**
@@ -409,7 +437,19 @@ export class PhysicsDslGenerator {
   /**
    * 计算仿真持续时间
    */
-  private calculateDuration(systemType: ExtendedPhysicsSystemType): number {
+  private calculateDuration(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): number {
+    // 基于DSL元数据调整持续时间
+    const baseDuration = this.getBaseDuration(systemType);
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    
+    const multiplier = complexity === 'simple' ? 0.8 : complexity === 'complex' ? 1.5 : 1.0;
+    return baseDuration * multiplier;
+  }
+
+  /**
+   * 获取基础持续时间
+   */
+  private getBaseDuration(systemType: ExtendedPhysicsSystemType): number {
     const durationMap: Record<string, number> = {
       'projectile': 3.0,
       'free_fall': 2.0,
@@ -423,9 +463,60 @@ export class PhysicsDslGenerator {
   }
 
   /**
+   * 计算时间步长
+   */
+  private calculateTimeStep(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): number {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    
+    // 复杂系统需要更小的时间步长
+    const multiplier = complexity === 'simple' ? 1.5 : complexity === 'complex' ? 0.5 : 1.0;
+    return this.DEFAULT_TIME_STEP * multiplier;
+  }
+
+  /**
+   * 选择精度
+   */
+  private selectPrecision(parsedQuestion: ParsedQuestion): 'low' | 'medium' | 'high' {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    return complexity === 'complex' ? 'high' : complexity === 'simple' ? 'low' : 'medium';
+  }
+
+  /**
+   * 计算最大迭代次数
+   */
+  private calculateMaxIterations(parsedQuestion: ParsedQuestion): number {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    return complexity === 'complex' ? 20000 : complexity === 'simple' ? 5000 : 10000;
+  }
+
+  /**
+   * 计算容差
+   */
+  private calculateTolerance(parsedQuestion: ParsedQuestion): number {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    return complexity === 'complex' ? 1e-8 : complexity === 'simple' ? 1e-4 : 1e-6;
+  }
+
+  /**
+   * 选择分辨率
+   */
+  private selectResolution(parsedQuestion: ParsedQuestion): 'low' | 'medium' | 'high' {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    return complexity === 'complex' ? 'high' : complexity === 'simple' ? 'low' : 'medium';
+  }
+
+  /**
+   * 选择帧率
+   */
+  private selectFrameRate(parsedQuestion: ParsedQuestion): number {
+    const complexity = parsedQuestion.dslMetadata?.complexity || 'medium';
+    return complexity === 'complex' ? 120 : complexity === 'simple' ? 30 : 60;
+  }
+
+  /**
    * 生成仿真事件
    */
-  private generateEvents(systemType: ExtendedPhysicsSystemType): SimulationEvent[] {
+  private generateEvents(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): SimulationEvent[] {
     const events: SimulationEvent[] = [];
 
     switch (systemType) {
@@ -455,7 +546,7 @@ export class PhysicsDslGenerator {
   /**
    * 选择求解器
    */
-  private selectSolver(systemType: ExtendedPhysicsSystemType): 'euler' | 'rk4' | 'verlet' | 'adaptive' {
+  private selectSolver(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): 'euler' | 'rk4' | 'verlet' | 'adaptive' {
     const solverMap: Record<string, 'euler' | 'rk4' | 'verlet' | 'adaptive'> = {
       'projectile': 'rk4',
       'oscillation': 'rk4',
@@ -470,7 +561,7 @@ export class PhysicsDslGenerator {
   /**
    * 获取输出变量
    */
-  private getOutputVariables(systemType: ExtendedPhysicsSystemType): string[] {
+  private getOutputVariables(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): string[] {
     const variableMap: Record<string, string[]> = {
       'projectile': ['x', 'y', 'vx', 'vy', 't'],
       'free_fall': ['y', 'vy', 't'],
@@ -499,7 +590,7 @@ export class PhysicsDslGenerator {
   /**
    * 生成图表配置
    */
-  private generatePlots(systemType: ExtendedPhysicsSystemType): PlotConfig[] {
+  private generatePlots(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): PlotConfig[] {
     const plots: PlotConfig[] = [];
 
     switch (systemType) {
@@ -530,7 +621,7 @@ export class PhysicsDslGenerator {
   /**
    * 生成动画配置
    */
-  private generateAnimations(systemType: ExtendedPhysicsSystemType): AnimationConfig[] {
+  private generateAnimations(systemType: ExtendedPhysicsSystemType, parsedQuestion: ParsedQuestion): AnimationConfig[] {
     const animations: AnimationConfig[] = [];
 
     switch (systemType) {
@@ -567,6 +658,162 @@ export class PhysicsDslGenerator {
     }
 
     return animations;
+  }
+
+  /**
+   * 生成解题路径
+   */
+  private generateSolutionPath(parsedQuestion: ParsedQuestion): any {
+    if (!parsedQuestion.solutionPath) {
+      return null;
+    }
+
+    return {
+      steps: parsedQuestion.solutionPath.steps.map(step => ({
+        id: step.id,
+        type: step.type,
+        module: step.module,
+        action: step.action,
+        inputs: step.inputs,
+        outputs: step.outputs,
+        formula: step.formula,
+        order: step.order,
+        description: step.description
+      })),
+      modules: parsedQuestion.solutionPath.modules,
+      dependencies: parsedQuestion.solutionPath.dependencies.map(dep => ({
+        from: dep.from,
+        to: dep.to,
+        parameter: dep.parameter,
+        type: dep.type,
+        reason: dep.reason
+      })),
+      execution_order: parsedQuestion.solutionPath.executionOrder,
+      checkpoints: parsedQuestion.solutionPath.checkpoints
+    };
+  }
+
+  /**
+   * 生成求解目标
+   */
+  private generateTarget(parsedQuestion: ParsedQuestion): any {
+    if (!parsedQuestion.target) {
+      return null;
+    }
+
+    return {
+      primary: parsedQuestion.target.primary,
+      secondary: parsedQuestion.target.secondary,
+      method: parsedQuestion.target.method,
+      priority: parsedQuestion.target.priority
+    };
+  }
+
+  /**
+   * 生成公式体系
+   */
+  private generateFormulas(parsedQuestion: ParsedQuestion): any {
+    if (!parsedQuestion.formulas) {
+      return null;
+    }
+
+    return {
+      primary: parsedQuestion.formulas.primary.map(formula => ({
+        name: formula.name,
+        expression: formula.expression,
+        description: formula.description,
+        type: formula.type,
+        module: formula.module,
+        variables: formula.variables
+      })),
+      intermediate: parsedQuestion.formulas.intermediate.map(formula => ({
+        name: formula.name,
+        expression: formula.expression,
+        description: formula.description,
+        type: formula.type,
+        module: formula.module,
+        variables: formula.variables
+      })),
+      verification: parsedQuestion.formulas.verification.map(formula => ({
+        name: formula.name,
+        expression: formula.expression,
+        description: formula.description,
+        type: formula.type,
+        module: formula.module,
+        variables: formula.variables
+      }))
+    };
+  }
+
+  /**
+   * 生成约束条件
+   */
+  private generateConstraints(parsedQuestion: ParsedQuestion): any {
+    if (!parsedQuestion.constraints) {
+      return null;
+    }
+
+    return {
+      initial: parsedQuestion.constraints.initial.map(constraint => ({
+        type: constraint.type,
+        description: constraint.description,
+        expression: constraint.expression,
+        parameters: constraint.parameters
+      })),
+      boundary: parsedQuestion.constraints.boundary.map(constraint => ({
+        type: constraint.type,
+        description: constraint.description,
+        expression: constraint.expression,
+        parameters: constraint.parameters
+      })),
+      physical: parsedQuestion.constraints.physical.map(constraint => ({
+        type: constraint.type,
+        description: constraint.description,
+        expression: constraint.expression,
+        parameters: constraint.parameters
+      })),
+      mathematical: parsedQuestion.constraints.mathematical.map(constraint => ({
+        type: constraint.type,
+        description: constraint.description,
+        expression: constraint.expression,
+        parameters: constraint.parameters
+      }))
+    };
+  }
+
+  /**
+   * 生成DSL元数据
+   */
+  private generateDSLMetadata(parsedQuestion: ParsedQuestion): any {
+    if (!parsedQuestion.dslMetadata) {
+      return {
+        complexity: this.assessComplexity(parsedQuestion),
+        moduleCount: 0,
+        parameterCount: parsedQuestion.parameters.length,
+        estimatedSteps: 0,
+        confidence: 0.8
+      };
+    }
+
+    return {
+      complexity: parsedQuestion.dslMetadata.complexity,
+      moduleCount: parsedQuestion.dslMetadata.moduleCount,
+      parameterCount: parsedQuestion.dslMetadata.parameterCount,
+      estimatedSteps: parsedQuestion.dslMetadata.estimatedSteps,
+      confidence: parsedQuestion.dslMetadata.confidence
+    };
+  }
+
+  /**
+   * 评估复杂度
+   */
+  private assessComplexity(parsedQuestion: ParsedQuestion): 'simple' | 'medium' | 'complex' {
+    const parameterCount = parsedQuestion.parameters.length;
+    const questionLength = parsedQuestion.question.length;
+    
+    if (parameterCount <= 5 && questionLength <= 100) return 'simple';
+    if (parameterCount <= 10 && questionLength <= 200) return 'medium';
+    return 'complex';
   }
 
   /**
