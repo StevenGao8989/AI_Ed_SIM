@@ -21,8 +21,11 @@ exports.DEFAULT_AI_CONFIG = {
 // 增强版 AI 解析器
 class PhysicsAIParserAICaller {
     constructor(config = {}) {
-        this.config = Object.assign(Object.assign(Object.assign({}, exports.DEFAULT_AI_CONFIG), config), { provider: 'deepseek' // 确保始终使用 deepseek
-         });
+        this.config = {
+            ...exports.DEFAULT_AI_CONFIG,
+            ...config,
+            provider: 'deepseek' // 确保始终使用 deepseek
+        };
         this.unitConverter = new unitConverter_1.UnitConverter();
         // 验证配置
         const validation = this.validateConfig();
@@ -66,7 +69,14 @@ class PhysicsAIParserAICaller {
                         moduleComposition = await this.buildModuleComposition(moduleAnalysis.modules, question, language);
                     }
                     // 4. 使用模块化思维增强 AI 解析
-                    const aiEnhanced = await this.enhanceWithAI(question, basicResult, Object.assign(Object.assign({}, options), { enableAdvancedAnalysis: true, enableFormulaExtraction: true, enableUnitOptimization: true, moduleAnalysis: moduleAnalysis, moduleComposition: moduleComposition }));
+                    const aiEnhanced = await this.enhanceWithAI(question, basicResult, {
+                        ...options,
+                        enableAdvancedAnalysis: true,
+                        enableFormulaExtraction: true,
+                        enableUnitOptimization: true,
+                        moduleAnalysis: moduleAnalysis,
+                        moduleComposition: moduleComposition
+                    });
                     if (aiEnhanced.success && aiEnhanced.data) {
                         const enhanced = this.optimizeParsedQuestion(basicResult, aiEnhanced.data);
                         // 生成解题路径规划
@@ -78,7 +88,12 @@ class PhysicsAIParserAICaller {
                 }
             }
             // 5. 标准 AI 增强解析
-            const aiEnhanced = await this.enhanceWithAI(question, basicResult, Object.assign(Object.assign({}, options), { enableAdvancedAnalysis: true, enableFormulaExtraction: true, enableUnitOptimization: true }));
+            const aiEnhanced = await this.enhanceWithAI(question, basicResult, {
+                ...options,
+                enableAdvancedAnalysis: true,
+                enableFormulaExtraction: true,
+                enableUnitOptimization: true
+            });
             if (aiEnhanced.success && aiEnhanced.data) {
                 return this.optimizeParsedQuestion(basicResult, aiEnhanced.data);
             }
@@ -151,7 +166,14 @@ class PhysicsAIParserAICaller {
                         moduleComposition = await this.buildModuleComposition(moduleAnalysis.modules, question, language);
                     }
                     // 4. 使用模块化思维增强 AI 解析
-                    const aiEnhanced = await this.enhanceWithAI(question, basicResult, Object.assign(Object.assign({}, options), { enableAdvancedAnalysis: true, enableFormulaExtraction: true, enableUnitOptimization: true, moduleAnalysis: moduleAnalysis, moduleComposition: moduleComposition }));
+                    const aiEnhanced = await this.enhanceWithAI(question, basicResult, {
+                        ...options,
+                        enableAdvancedAnalysis: true,
+                        enableFormulaExtraction: true,
+                        enableUnitOptimization: true,
+                        moduleAnalysis: moduleAnalysis,
+                        moduleComposition: moduleComposition
+                    });
                     if (aiEnhanced.success && aiEnhanced.data) {
                         const enhanced = this.optimizeParsedQuestion(basicResult, aiEnhanced.data);
                         // 生成解题路径规划
@@ -163,7 +185,12 @@ class PhysicsAIParserAICaller {
                 }
             }
             // 5. 回退到标准 AI 增强解析
-            const aiEnhanced = await this.enhanceWithAI(question, basicResult, Object.assign(Object.assign({}, options), { enableAdvancedAnalysis: true, enableFormulaExtraction: true, enableUnitOptimization: true }));
+            const aiEnhanced = await this.enhanceWithAI(question, basicResult, {
+                ...options,
+                enableAdvancedAnalysis: true,
+                enableFormulaExtraction: true,
+                enableUnitOptimization: true
+            });
             if (aiEnhanced.success && aiEnhanced.data) {
                 return this.optimizeParsedQuestion(basicResult, aiEnhanced.data);
             }
@@ -214,7 +241,7 @@ class PhysicsAIParserAICaller {
      * 增强基础解析结果
      */
     enhanceBasicResult(basicResult) {
-        const enhanced = Object.assign({}, basicResult);
+        const enhanced = { ...basicResult };
         // 尝试从参数中推断模块
         const inferredModules = this.inferModulesFromParameters(enhanced.parameters);
         if (inferredModules.length > 0) {
@@ -512,18 +539,17 @@ ${JSON.stringify(basicData, null, 2)}
      * 验证DSL转换兼容性
      */
     validateDSLCompatibility(parsedQuestion) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
         const issues = [];
         const suggestions = [];
         let score = 100;
         // 检查是否有明确的求解目标
-        if (!((_a = parsedQuestion.target) === null || _a === void 0 ? void 0 : _a.primary)) {
+        if (!parsedQuestion.target?.primary) {
             issues.push('缺少明确的求解目标');
             suggestions.push('请明确标识主要求解参数');
             score -= 20;
         }
         // 检查解题步骤是否完整
-        if (!((_c = (_b = parsedQuestion.solutionPath) === null || _b === void 0 ? void 0 : _b.steps) === null || _c === void 0 ? void 0 : _c.length)) {
+        if (!parsedQuestion.solutionPath?.steps?.length) {
             issues.push('缺少解题步骤规划');
             suggestions.push('请提供详细的解题步骤和模块执行顺序');
             score -= 25;
@@ -538,20 +564,20 @@ ${JSON.stringify(basicData, null, 2)}
         }
         // 检查公式完整性
         const formulas = parsedQuestion.formulas;
-        if (!((_d = formulas === null || formulas === void 0 ? void 0 : formulas.primary) === null || _d === void 0 ? void 0 : _d.length)) {
+        if (!formulas?.primary?.length) {
             issues.push('缺少主要物理公式');
             suggestions.push('请提供解题所需的主要物理公式');
             score -= 20;
         }
         // 检查模块信息
-        if (!((_f = (_e = parsedQuestion.solutionPath) === null || _e === void 0 ? void 0 : _e.modules) === null || _f === void 0 ? void 0 : _f.length)) {
+        if (!parsedQuestion.solutionPath?.modules?.length) {
             issues.push('缺少模块信息');
             suggestions.push('请标识涉及的物理模块');
             score -= 10;
         }
         // 检查约束条件
         const constraints = parsedQuestion.constraints;
-        if (!((_g = constraints === null || constraints === void 0 ? void 0 : constraints.physical) === null || _g === void 0 ? void 0 : _g.length) && !((_h = constraints === null || constraints === void 0 ? void 0 : constraints.initial) === null || _h === void 0 ? void 0 : _h.length)) {
+        if (!constraints?.physical?.length && !constraints?.initial?.length) {
             issues.push('缺少物理约束条件');
             suggestions.push('请提供物理约束和边界条件');
             score -= 10;
@@ -567,19 +593,25 @@ ${JSON.stringify(basicData, null, 2)}
      * 增强解析结果，添加DSL转换所需信息
      */
     enhanceForDSL(parsedQuestion) {
-        var _a, _b, _c, _d, _e;
-        const enhanced = Object.assign({}, parsedQuestion);
+        const enhanced = { ...parsedQuestion };
         // 添加DSL元数据
         enhanced.dslMetadata = {
             complexity: this.assessComplexity(enhanced),
-            moduleCount: ((_b = (_a = enhanced.solutionPath) === null || _a === void 0 ? void 0 : _a.modules) === null || _b === void 0 ? void 0 : _b.length) || 0,
-            parameterCount: ((_c = enhanced.parameters) === null || _c === void 0 ? void 0 : _c.length) || 0,
-            estimatedSteps: ((_e = (_d = enhanced.solutionPath) === null || _d === void 0 ? void 0 : _d.steps) === null || _e === void 0 ? void 0 : _e.length) || 0,
+            moduleCount: enhanced.solutionPath?.modules?.length || 0,
+            parameterCount: enhanced.parameters?.length || 0,
+            estimatedSteps: enhanced.solutionPath?.steps?.length || 0,
             confidence: this.calculateConfidence(enhanced)
         };
         // 增强参数信息
         if (enhanced.parameters) {
-            enhanced.parameters = enhanced.parameters.map(param => (Object.assign(Object.assign({}, param), { dslType: this.inferDSLType(param), domain: this.inferDomain(param), priority: this.calculatePriority(param, enhanced), dependencies: this.findDependencies(param, enhanced.parameters || []), formula: this.findFormula(param, enhanced) })));
+            enhanced.parameters = enhanced.parameters.map(param => ({
+                ...param,
+                dslType: this.inferDSLType(param),
+                domain: this.inferDomain(param),
+                priority: this.calculatePriority(param, enhanced),
+                dependencies: this.findDependencies(param, enhanced.parameters || []),
+                formula: this.findFormula(param, enhanced)
+            }));
         }
         return enhanced;
     }
@@ -587,10 +619,9 @@ ${JSON.stringify(basicData, null, 2)}
      * 评估题目复杂度
      */
     assessComplexity(parsedQuestion) {
-        var _a, _b, _c, _d, _e;
-        const moduleCount = ((_b = (_a = parsedQuestion.solutionPath) === null || _a === void 0 ? void 0 : _a.modules) === null || _b === void 0 ? void 0 : _b.length) || 0;
-        const parameterCount = ((_c = parsedQuestion.parameters) === null || _c === void 0 ? void 0 : _c.length) || 0;
-        const stepCount = ((_e = (_d = parsedQuestion.solutionPath) === null || _d === void 0 ? void 0 : _d.steps) === null || _e === void 0 ? void 0 : _e.length) || 0;
+        const moduleCount = parsedQuestion.solutionPath?.modules?.length || 0;
+        const parameterCount = parsedQuestion.parameters?.length || 0;
+        const stepCount = parsedQuestion.solutionPath?.steps?.length || 0;
         if (moduleCount <= 1 && parameterCount <= 5 && stepCount <= 3) {
             return 'simple';
         }
@@ -605,16 +636,15 @@ ${JSON.stringify(basicData, null, 2)}
      * 计算解析置信度
      */
     calculateConfidence(parsedQuestion) {
-        var _a, _b, _c, _d, _e;
         let confidence = 0.8; // 基础置信度
         // 有明确求解目标
-        if ((_a = parsedQuestion.target) === null || _a === void 0 ? void 0 : _a.primary)
+        if (parsedQuestion.target?.primary)
             confidence += 0.1;
         // 有解题步骤
-        if ((_c = (_b = parsedQuestion.solutionPath) === null || _b === void 0 ? void 0 : _b.steps) === null || _c === void 0 ? void 0 : _c.length)
+        if (parsedQuestion.solutionPath?.steps?.length)
             confidence += 0.05;
         // 有公式信息
-        if ((_e = (_d = parsedQuestion.formulas) === null || _d === void 0 ? void 0 : _d.primary) === null || _e === void 0 ? void 0 : _e.length)
+        if (parsedQuestion.formulas?.primary?.length)
             confidence += 0.05;
         return Math.min(1.0, confidence);
     }
@@ -707,7 +737,6 @@ ${JSON.stringify(basicData, null, 2)}
      * 计算参数优先级
      */
     calculatePriority(param, parsedQuestion) {
-        var _a;
         let priority = 1;
         // 已知参数优先级较低
         if (param.role === 'given')
@@ -722,7 +751,7 @@ ${JSON.stringify(basicData, null, 2)}
         else if (param.role === 'derived')
             priority = 5;
         // 如果是主要求解目标，优先级最高
-        if (((_a = parsedQuestion.target) === null || _a === void 0 ? void 0 : _a.primary) === param.symbol) {
+        if (parsedQuestion.target?.primary === param.symbol) {
             priority = 20;
         }
         return priority;
@@ -914,7 +943,10 @@ ${JSON.stringify(basicData, null, 2)}
                 for (const moduleData of data.modules) {
                     if (moduleData.confidence > 0.5 && AtomicModules_1.atomicModuleLibrary.getModule(moduleData.id)) {
                         const baseModule = AtomicModules_1.atomicModuleLibrary.getModule(moduleData.id);
-                        modules.push(Object.assign(Object.assign({}, baseModule), { parameters: baseModule.parameters.filter(param => moduleData.parameters && moduleData.parameters.includes(param.symbol)) }));
+                        modules.push({
+                            ...baseModule,
+                            parameters: baseModule.parameters.filter(param => moduleData.parameters && moduleData.parameters.includes(param.symbol))
+                        });
                     }
                 }
             }
@@ -1232,8 +1264,7 @@ ${JSON.stringify(basicData, null, 2)}
      * 生成操作描述
      */
     generateActionDescription(module, parsedQuestion) {
-        var _a;
-        const target = (_a = parsedQuestion.target) === null || _a === void 0 ? void 0 : _a.primary;
+        const target = parsedQuestion.target?.primary;
         const moduleName = module.name;
         if (target && module.parameters.some(p => p.symbol === target)) {
             return `使用${moduleName}计算${target}`;

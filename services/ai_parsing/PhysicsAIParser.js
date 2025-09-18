@@ -86,7 +86,7 @@ function detectTopic(text) {
         const score = rule.keywords.reduce((acc, re) => acc + (re.test(text) ? 1 : 0), 0);
         if (score > 0) {
             if (!best || score > best.score)
-                best = Object.assign(Object.assign({}, rule), { score });
+                best = { ...rule, score };
         }
     }
     if (best) {
@@ -168,7 +168,6 @@ const CN_PATTERN = [
     { re: /取\s*g\s*=\s*([-\d\.eE]+)\s*(米\/秒\^?2|m\/s\^?2|m\/s²)?/g, symbol: 'g' },
 ];
 function extractParameters(text, unitMappings) {
-    var _a;
     const params = [];
     // 1) 形式：v=10m/s, a=2 m/s^2
     let match;
@@ -184,7 +183,7 @@ function extractParameters(text, unitMappings) {
         let match;
         while ((match = pat.re.exec(text)) !== null) {
             const val = parseFloat(match[1]);
-            const uraw = (_a = match[2]) !== null && _a !== void 0 ? _a : '';
+            const uraw = match[2] ?? '';
             const unit = pickStandardUnit(uraw, unitMappings);
             params.push({ symbol: pat.symbol, value: val * unitScale(uraw), unit, raw: match[0], role: 'given', note: '中文叙述' });
         }
