@@ -1,0 +1,257 @@
+{
+  "subject": "physics",
+  "topic": "牛顿运动定律/Newton's Laws",
+  "question": "一个质量为2kg的物体，从高度h=5m处自由下落，落地后与地面发生完全弹性碰撞，然后沿斜面θ=30°向上滑动，斜面摩擦系数μ=0.2。已知重力加速度g=9.8m/s²，求：1. 物体落地时的速度v1 2. 物体沿斜面滑行的最大距离s 3. 整个过程中机械能损失了多少？",
+  "parameters": [
+    {
+      "symbol": "m",
+      "value": 2,
+      "unit": "kg",
+      "role": "given",
+      "note": "物体质量",
+      "dslType": "scalar",
+      "domain": "dynamics",
+      "priority": 1,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "h",
+      "value": 5,
+      "unit": "m",
+      "role": "given",
+      "note": "初始高度",
+      "dslType": "scalar",
+      "domain": "fluid",
+      "priority": 1,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "θ",
+      "value": 30,
+      "unit": "°",
+      "role": "given",
+      "note": "斜面角度",
+      "dslType": "scalar",
+      "domain": "kinematics",
+      "priority": 1,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "μ",
+      "value": 0.2,
+      "unit": "",
+      "role": "given",
+      "note": "摩擦系数",
+      "dslType": "scalar",
+      "domain": "dynamics",
+      "priority": 1,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "g",
+      "value": 9.8,
+      "unit": "m/s²",
+      "role": "given",
+      "note": "重力加速度",
+      "dslType": "scalar",
+      "domain": "dynamics",
+      "priority": 1,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "v1",
+      "value": null,
+      "unit": "m/s",
+      "role": "unknown",
+      "note": "落地速度",
+      "dslType": "vector",
+      "domain": "kinematics",
+      "priority": 20,
+      "dependencies": [],
+      "formula": ""
+    },
+    {
+      "symbol": "s",
+      "value": null,
+      "unit": "m",
+      "role": "unknown",
+      "note": "滑行距离",
+      "dslType": "scalar",
+      "domain": "kinematics",
+      "priority": 10,
+      "dependencies": [],
+      "formula": "s = v0t + ½at²"
+    },
+    {
+      "symbol": "ΔE",
+      "value": null,
+      "unit": "J",
+      "role": "unknown",
+      "note": "机械能损失",
+      "dslType": "vector",
+      "domain": "energy",
+      "priority": 10,
+      "dependencies": [],
+      "formula": ""
+    }
+  ],
+  "units": [
+    {
+      "original": "kg",
+      "standard": "kg",
+      "conversion": 1
+    },
+    {
+      "original": "m",
+      "standard": "m",
+      "conversion": 1
+    },
+    {
+      "original": "°",
+      "standard": "rad",
+      "conversion": 0.0174533
+    },
+    {
+      "original": "m/s²",
+      "standard": "m/s²",
+      "conversion": 1
+    },
+    {
+      "original": "m/s",
+      "standard": "m/s",
+      "conversion": 1
+    },
+    {
+      "original": "J",
+      "standard": "J",
+      "conversion": 1
+    }
+  ],
+  "target": {
+    "primary": "v1",
+    "secondary": [
+      "s",
+      "ΔE"
+    ],
+    "method": "mixed",
+    "priority": 1
+  },
+  "solutionPath": {
+    "steps": [
+      {
+        "id": "step_1",
+        "type": "verify",
+        "module": "mechanical_energy_conservation",
+        "action": "执行机械能守恒相关计算",
+        "inputs": [],
+        "outputs": [],
+        "formula": "E1 = E2",
+        "order": 1,
+        "description": "使用机械能守恒，输入参数：，输出参数："
+      },
+      {
+        "id": "step_2",
+        "type": "solve",
+        "module": "newton_dynamics",
+        "action": "执行牛顿动力学相关计算",
+        "inputs": [
+          "g",
+          "μ"
+        ],
+        "outputs": [],
+        "formula": "F = ma",
+        "order": 2,
+        "description": "使用牛顿动力学，输入参数：g, μ，输出参数："
+      },
+      {
+        "id": "step_3",
+        "type": "verify",
+        "module": "work_energy",
+        "action": "执行功和能相关计算",
+        "inputs": [
+          "s"
+        ],
+        "outputs": [],
+        "formula": "W = Fs",
+        "order": 3,
+        "description": "使用功和能，输入参数：s，输出参数："
+      }
+    ],
+    "modules": [
+      "mechanical_energy_conservation",
+      "newton_dynamics",
+      "work_energy"
+    ],
+    "dependencies": [],
+    "executionOrder": [
+      "mechanical_energy_conservation",
+      "newton_dynamics",
+      "work_energy"
+    ],
+    "checkpoints": [
+      "newton_dynamics_dynamics",
+      "mechanical_energy_conservation_energy",
+      "work_energy_energy"
+    ]
+  },
+  "formulas": {
+    "primary": [
+      {
+        "name": "自由落体速度公式",
+        "expression": "v = sqrt(2 * g * h)",
+        "description": "计算自由落体落地速度",
+        "type": "primary",
+        "module": "kinematics_linear",
+        "variables": [
+          "v",
+          "g",
+          "h"
+        ]
+      },
+      {
+        "name": "斜面滑行距离公式",
+        "expression": "s = v² / (2 * a)",
+        "description": "计算沿斜面滑行距离",
+        "type": "primary",
+        "module": "newton_dynamics",
+        "variables": [
+          "s",
+          "v",
+          "a"
+        ]
+      },
+      {
+        "name": "摩擦力做功公式",
+        "expression": "W = F * s",
+        "description": "计算机械能损失",
+        "type": "primary",
+        "module": "work_energy",
+        "variables": [
+          "W",
+          "F",
+          "s"
+        ]
+      }
+    ],
+    "intermediate": [],
+    "verification": []
+  },
+  "constraints": {
+    "initial": [],
+    "boundary": [],
+    "physical": [],
+    "mathematical": []
+  },
+  "dslMetadata": {
+    "complexity": "medium",
+    "moduleCount": 3,
+    "parameterCount": 8,
+    "estimatedSteps": 3,
+    "confidence": 1
+  }
+}

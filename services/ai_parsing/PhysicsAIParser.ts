@@ -402,3 +402,19 @@ function upsert(arr: Parameter[], item: Parameter) {
 
 // 用法：parseQuestion("一物体以初速度 v0=10 m/s 斜抛，取 g=10 m/s²，求最大高度h。")
 // 返回：topic≈抛体运动；parameters 含 {v0=10}, {g=10}, {h=null}
+
+/**
+ * 增强解析输出（支持Contract）
+ */
+export interface EnhancedParseOutput {
+  dsl: any; // PhysicsDSL
+  contract: any; // PhysicsContract from types/physics.ts
+  confidence: number; // 0..1
+  abstain?: boolean;
+  metadata?: {
+    source: string;
+    timestamp: number;
+    processingTime: number;
+    warnings: string[];
+  };
+}

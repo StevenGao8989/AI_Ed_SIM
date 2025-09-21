@@ -4,6 +4,29 @@ import { type ParsedQuestion as BaseParsedQuestion, type Parameter as BaseParame
 import { UnitConverter } from './unitConverter';
 import { atomicModuleLibrary, type AtomicModule } from './AtomicModules';
 
+// ==== NEW: 通用合约生成选项 ====
+export interface ContractGenerationOptions {
+  defaultWorld?: {
+    coord?: "xy_y_up" | "xy_y_down";
+    gravity?: [number, number];                // 仅当业务需要默认重力时显式注入
+    constants?: Record<string, number>;
+  };
+  requireAtLeastOneSurface?: boolean;
+  requireAtLeastOneBody?: boolean;
+  defaultTolerances?: {
+    r2_min?: number;
+    rel_err?: number;
+    event_time_sec?: number;
+    energy_drift_rel?: number;
+    v_eps?: number;
+  };
+}
+
+// ==== NEW: 小工具 ====
+function hasVec2(v?: number[] | [number, number]): v is [number, number] {
+  return Array.isArray(v) && v.length === 2 && v.every(Number.isFinite);
+}
+
 // 扩展的Parameter接口，增加DSL相关字段
 export interface Parameter extends BaseParameter {
   dslType?: 'scalar' | 'vector' | 'tensor';
@@ -879,7 +902,7 @@ ${JSON.stringify(basicData, null, 2)}
       moduleCount: enhanced.solutionPath?.modules?.length || 0,
       parameterCount: enhanced.parameters?.length || 0,
       estimatedSteps: enhanced.solutionPath?.steps?.length || 0,
-      confidence: this.calculateConfidence(enhanced)
+      confidence: this.calculateGenericConfidence(enhanced, {})
     };
 
     // 增强参数信息
@@ -912,24 +935,6 @@ ${JSON.stringify(basicData, null, 2)}
     } else {
       return 'complex';
     }
-  }
-
-  /**
-   * 计算解析置信度
-   */
-  private calculateConfidence(parsedQuestion: ParsedQuestion): number {
-    let confidence = 0.8; // 基础置信度
-
-    // 有明确求解目标
-    if (parsedQuestion.target?.primary) confidence += 0.1;
-    
-    // 有解题步骤
-    if (parsedQuestion.solutionPath?.steps?.length) confidence += 0.05;
-    
-    // 有公式信息
-    if (parsedQuestion.formulas?.primary?.length) confidence += 0.05;
-
-    return Math.min(1.0, confidence);
   }
 
   /**
@@ -1691,5 +1696,186 @@ ${JSON.stringify(basicData, null, 2)}
     });
     
     return checkpoints;
+  }
+
+  /**
+   * 解析物理题目并生成Contract（通用版）
+   */
+  async parseQuestionWithContract(
+    question: string,
+    options: ContractGenerationOptions = {}
+  ): Promise<any> {
+    if (this.config.enableLogging) {
+      console.log('🤖 开始AI解析并生成 Physics Contract...');
+    }
+
+    // 1) 解析（保留你现有 AI-only 逻辑）
+    const parsedQuestion = await this.parseQuestionWithAIOnly(question);
+
+    // 2) 生成 Contract（仅使用"已知事实 + 显式默认"；不做题目特例推断）
+    const contract = await this.generatePhysicsContract(parsedQuestion, question, options);
+
+    // 3) 结构型置信度
+    const confidence = this.calculateGenericConfidence(parsedQuestion, contract);
+
+    // 4) 是否 Abstain
+    const shouldAbstain = this.shouldAbstainGeneric(confidence, parsedQuestion, contract, options);
+
+    const result = {
+      dsl: parsedQuestion,
+      contract,
+      confidence,
+      abstain: shouldAbstain,
+      metadata: {
+        source: 'PhysicsAIParserAICaller',
+        timestamp: Date.now(),
+        processingTime: 0,
+        warnings: []
+      }
+    };
+
+    if (this.config.enableLogging) {
+      console.log(`✅ Contract生成完成，置信度: ${confidence.toFixed(2)}, Abstain: ${shouldAbstain}`);
+    }
+    return result;
+  }
+
+  /**
+   * 通用：从"解析产物 + 显式默认 + 空值"构造 Contract
+   */
+  private async generatePhysicsContract(
+    parsedQuestion: ParsedQuestion,
+    originalQuestion: string,
+    options: ContractGenerationOptions = {}
+  ): Promise<any> {
+
+    const world = {
+      coord: options.defaultWorld?.coord ?? "xy_y_up" as const,
+      gravity: hasVec2(options.defaultWorld?.gravity) ? options.defaultWorld!.gravity : undefined,
+      constants: options.defaultWorld?.constants ?? {}
+    };
+
+    const surfaces = this.extractSurfacesGeneric(parsedQuestion);
+    const bodies = this.extractBodiesGeneric(parsedQuestion);
+    const phases = this.extractPhasesGeneric(parsedQuestion);
+    const expected_events = this.extractExpectedEventsGeneric(parsedQuestion);
+    const acceptance_tests = this.generateAcceptanceTestsGeneric(parsedQuestion);
+
+    const tolerances = {
+      r2_min: options.defaultTolerances?.r2_min,
+      rel_err: options.defaultTolerances?.rel_err,
+      event_time_sec: options.defaultTolerances?.event_time_sec,
+      energy_drift_rel: options.defaultTolerances?.energy_drift_rel,
+      v_eps: options.defaultTolerances?.v_eps
+    };
+
+    // 若业务要求至少存在一个 surface/body，缺失则保持为空 → Pre-Sim Gate 或 abstain 会处理
+    return { world, surfaces, bodies, phases, expected_events, acceptance_tests, tolerances };
+  }
+
+  // 仅依据解析产物抽取已知表面；不再关键词/默认θ/μ/e
+  private extractSurfacesGeneric(parsed: ParsedQuestion): any[] {
+    const out: any[] = [];
+    const maybeSurfaces = (parsed as any)?.surfaces ?? [];
+
+    for (const s of (maybeSurfaces as any[])) {
+      if (s?.type === "plane" && hasVec2(s.normal)) {
+        out.push({
+          id: String(s.id ?? `surface_${out.length+1}`),
+          type: "plane",
+          point: hasVec2(s.point) ? s.point : [0, 0],
+          normal: s.normal,
+          mu_s: typeof s.mu_s === 'number' ? s.mu_s : undefined,
+          mu_k: typeof s.mu_k === 'number' ? s.mu_k : undefined,
+          restitution: typeof s.restitution === 'number' ? s.restitution : undefined
+        });
+      }
+    }
+    return out;
+  }
+
+  // 仅依据解析产物抽取已知刚体；不再默认 1kg/尺寸/数量
+  private extractBodiesGeneric(parsed: ParsedQuestion): any[] {
+    const out: any[] = [];
+    const maybeBodies = (parsed as any)?.bodies ?? [];
+
+    for (const b of (maybeBodies as any[])) {
+      if (!b?.id) continue;
+      out.push({
+        id: String(b.id),
+        shape: b.shape ?? "point",
+        size: Array.isArray(b.size) ? b.size : undefined,
+        mass: Number.isFinite(b.mass) ? b.mass : undefined,
+        init: {
+          x: Number.isFinite(b?.init?.x) ? b.init.x : 0,
+          y: Number.isFinite(b?.init?.y) ? b.init.y : 0,
+          vx: Number.isFinite(b?.init?.vx) ? b.init.vx : 0,
+          vy: Number.isFinite(b?.init?.vy) ? b.init.vy : 0
+        },
+        contacts: Array.isArray(b.contacts) ? b.contacts : undefined
+      });
+    }
+    return out;
+  }
+
+  // phases：优先用解析器显式结果，否则给一个最小占位
+  private extractPhasesGeneric(parsed: ParsedQuestion): any[] {
+    const phases = (parsed as any)?.phases;
+    if (Array.isArray(phases) && phases.length) return phases;
+    return [{ id: "phase_1", name: "generic_phase", description: "auto-generated", dominantForces: [] }];
+  }
+
+  // expected_events：不造场景，不估时间窗；解析器不给就留空
+  private extractExpectedEventsGeneric(parsed: ParsedQuestion): any[] {
+    const events = (parsed as any)?.expected_events;
+    if (Array.isArray(events) && events.length) return events;
+    return [];
+  }
+
+  // 通用断言模板：存在性/守恒/单调等（无题目数值）
+  private generateAcceptanceTestsGeneric(parsed: ParsedQuestion): any[] {
+    const tests: any[] = [];
+    tests.push({ kind: "shape", name: "phases_exist", of: "phases_count", pattern: "monotonic" });
+    tests.push({ kind: "ratio", name: "has_any_contact", expr: "contact_events_count > 0", tol: 0 });
+    tests.push({ kind: "conservation", name: "energy_bounded", quantity: "energy" });
+    return tests;
+  }
+
+  // 结构化置信度（不看题目数值）
+  private calculateGenericConfidence(parsed: ParsedQuestion, contract: any): number {
+    let c = 0.5;
+    if (parsed?.parameters?.length) c += 0.1;
+    if (parsed?.solutionPath?.modules?.length) c += 0.1;
+    if (Array.isArray(contract?.bodies) && contract.bodies.length) c += 0.1;
+    if (Array.isArray(contract?.surfaces) && contract.surfaces.length) c += 0.1;
+    if (Array.isArray(contract?.acceptance_tests) && contract.acceptance_tests.length) c += 0.1;
+    if (contract?.world?.coord) c += 0.05;
+    if (hasVec2(contract?.world?.gravity)) c += 0.05;
+    return Math.min(1, c);
+  }
+
+  // Abstain 决策：关键块缺失且无显式默认 → abstain
+  private shouldAbstainGeneric(
+    confidence: number,
+    parsed: ParsedQuestion,
+    contract: any,
+    options: ContractGenerationOptions
+  ): boolean {
+    const gravityMissing = !hasVec2(contract?.world?.gravity);
+    if (gravityMissing && !hasVec2(options.defaultWorld?.gravity)) return true;
+    if (options.requireAtLeastOneBody && (!contract?.bodies?.length)) return true;
+    if (options.requireAtLeastOneSurface && (!contract?.surfaces?.length)) return true;
+    if (!contract?.world?.coord) return true;
+    return confidence < 0.6;
+  }
+
+  // ==================== 保留的辅助方法 ====================
+
+  /**
+   * 检查文本是否包含关键词（保留用于其他功能）
+   */
+  private containsKeywords(text: string, keywords: string[]): boolean {
+    const lowerText = text.toLowerCase();
+    return keywords.some(keyword => lowerText.includes(keyword.toLowerCase()));
   }
 }

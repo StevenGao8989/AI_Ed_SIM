@@ -7,7 +7,12 @@
  * 3. 智能相机控制
  * 4. 自适应光照
  * 5. 动态特效
+ * 6. 统一坐标系统（v2.1.0新增）
+ * 7. 几何一致性保证（v2.1.0新增）
  */
+
+import { UnifiedCoordinateSystem, InclineDefinition } from './CoordinateSystem';
+import { PhysicsRenderFactory } from './PhysicsRenderFactory';
 
 import { SimulationResult, TimeSeriesData } from '/Users/gaobingsong/Documents/AI_Ed_SIM/services/simulation/DynamicPhysicsSimulator';
 import { PhysicsIR } from '/Users/gaobingsong/Documents/AI_Ed_SIM/services/ir/PhysicsIR';
@@ -85,9 +90,48 @@ export class DynamicPhysicsRenderer {
   private objects: Map<string, any> = new Map();
   private lights: any[] = [];
   private effects: any[] = [];
+  private coordinateSystem: UnifiedCoordinateSystem; // 统一坐标系统
 
   constructor() {
     this.initializeRenderer();
+    this.coordinateSystem = new UnifiedCoordinateSystem();
+  }
+
+  /**
+   * 设置坐标系统（确保几何一致性）
+   */
+  setCoordinateSystem(config: any): void {
+    this.coordinateSystem.updateConfig(config);
+    console.log('📐 坐标系统已更新:', this.coordinateSystem.getConfig());
+  }
+
+  /**
+   * 统一的坐标转换函数（单一转换源）
+   */
+  worldToScreen(physicsPoint: { x: number; y: number }): { x: number; y: number } {
+    return this.coordinateSystem.worldToScreen(physicsPoint);
+  }
+
+  /**
+   * 计算斜面上的精确位置（确保小球贴合）
+   */
+  calculateInclinePosition(
+    distanceAlongIncline: number,
+    inclineAngle: number,
+    objectRadius: number = 0.1,
+    startPoint: { x: number; y: number } = { x: 0, y: 0 }
+  ): { x: number; y: number } {
+    const incline: InclineDefinition = {
+      angle: inclineAngle,
+      length: distanceAlongIncline * 2,
+      startPoint: startPoint
+    };
+    
+    return this.coordinateSystem.calculateInclinePoint(
+      distanceAlongIncline,
+      incline,
+      objectRadius
+    );
   }
 
   /**

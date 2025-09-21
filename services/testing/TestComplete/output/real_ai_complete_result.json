@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "testQuestion": "一个质量为2kg的物体，从高度h=5m处自由下落，落地后与地面发生完全弹性碰撞，然后沿斜面θ=30°向上滑动，斜面摩擦系数μ=0.2。已知重力加速度g=9.8m/s²，求：1. 物体落地时的速度v1 2. 物体沿斜面滑行的最大距离s 3. 整个过程中机械能损失了多少？",
+  "aiAnalysis": {
+    "provider": "DeepSeek-v3",
+    "parametersDetected": 8,
+    "solutionSteps": 0,
+    "confidence": 0.95
+  },
+  "physicsCalculation": {
+    "v1": "9.899",
+    "sMax": "7.427",
+    "energyLoss": "25.214",
+    "fallTime": "1.010",
+    "inclineTime": "1.501"
+  },
+  "animation": {
+    "videoPath": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestComplete/output/real_ai_physics_animation.mp4",
+    "frameCount": 93,
+    "duration": "3.1",
+    "fileSize": "0.10 MB"
+  },
+  "validation": {
+    "valid": true,
+    "issues": []
+  },
+  "performance": {
+    "totalTime": "41.12s",
+    "aiCallTime": "< 5s",
+    "physicsCalcTime": "< 0.1s",
+    "videoGenTime": "< 10s"
+  }
+}

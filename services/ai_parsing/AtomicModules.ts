@@ -1009,6 +1009,160 @@ export class AtomicModuleLibrary {
       output: ['E', 'K', 'α', 'ρ', 'μ']
     });
 
+    // 静电场模块
+    this.atomicModules.set('electrostatic_field', {
+      id: 'electrostatic_field',
+      type: 'electromagnetism',
+      name: '静电场',
+      description: '处理静电场强度、电势、电势能等问题',
+      parameters: [
+        { symbol: 'E', value: null, unit: 'N/C', role: 'unknown', note: '电场强度' },
+        { symbol: 'F', value: null, unit: 'N', role: 'unknown', note: '电场力' },
+        { symbol: 'q', value: null, unit: 'C', role: 'given', note: '电荷量' },
+        { symbol: 'r', value: null, unit: 'm', role: 'given', note: '距离' },
+        { symbol: 'φ', value: null, unit: 'V', role: 'unknown', note: '电势' },
+        { symbol: 'U', value: null, unit: 'J', role: 'unknown', note: '电势能' },
+        { symbol: 'k', value: 8.99e9, unit: 'N·m²/C²', role: 'constant', note: '库仑常数' }
+      ],
+      formulas: ['E = kq/r²', 'F = qE', 'φ = kq/r', 'U = qφ', 'E = -dφ/dr'],
+      dependencies: [],
+      output: ['E', 'F', 'φ', 'U']
+    });
+
+    // 直流电路模块
+    this.atomicModules.set('dc_circuit', {
+      id: 'dc_circuit',
+      type: 'electromagnetism',
+      name: '直流电路',
+      description: '处理直流电路分析、欧姆定律、电功率计算',
+      parameters: [
+        { symbol: 'I', value: null, unit: 'A', role: 'unknown', note: '电流' },
+        { symbol: 'U', value: null, unit: 'V', role: 'given', note: '电压' },
+        { symbol: 'R', value: null, unit: 'Ω', role: 'given', note: '电阻' },
+        { symbol: 'P', value: null, unit: 'W', role: 'unknown', note: '功率' },
+        { symbol: 'W', value: null, unit: 'J', role: 'unknown', note: '电功' },
+        { symbol: 't', value: null, unit: 's', role: 'given', note: '时间' }
+      ],
+      formulas: ['U = IR', 'P = UI', 'P = I²R', 'P = U²/R', 'W = Pt', 'W = UIt'],
+      dependencies: [],
+      output: ['I', 'P', 'W']
+    });
+
+    // 理想气体模块
+    this.atomicModules.set('ideal_gas', {
+      id: 'ideal_gas',
+      type: 'thermodynamics',
+      name: '理想气体',
+      description: '处理理想气体状态方程、等温等压等容过程',
+      parameters: [
+        { symbol: 'P', value: null, unit: 'Pa', role: 'unknown', note: '压强' },
+        { symbol: 'V', value: null, unit: 'm³', role: 'unknown', note: '体积' },
+        { symbol: 'T', value: null, unit: 'K', role: 'given', note: '温度' },
+        { symbol: 'n', value: null, unit: 'mol', role: 'given', note: '物质的量' },
+        { symbol: 'R', value: 8.314, unit: 'J/(mol·K)', role: 'constant', note: '气体常数' }
+      ],
+      formulas: ['PV = nRT', 'P1V1/T1 = P2V2/T2'],
+      dependencies: [],
+      output: ['P', 'V']
+    });
+
+    // 热力学第一定律模块
+    this.atomicModules.set('first_law_thermodynamics', {
+      id: 'first_law_thermodynamics',
+      type: 'thermodynamics',
+      name: '热力学第一定律',
+      description: '处理内能变化、热量传递、功的计算',
+      parameters: [
+        { symbol: 'ΔU', value: null, unit: 'J', role: 'unknown', note: '内能变化' },
+        { symbol: 'Q', value: null, unit: 'J', role: 'given', note: '热量' },
+        { symbol: 'W', value: null, unit: 'J', role: 'unknown', note: '功' },
+        { symbol: 'P', value: null, unit: 'Pa', role: 'given', note: '压强' },
+        { symbol: 'ΔV', value: null, unit: 'm³', role: 'given', note: '体积变化' },
+        { symbol: 'nCv', value: null, unit: 'J/K', role: 'given', note: '定容热容' },
+        { symbol: 'ΔT', value: null, unit: 'K', role: 'given', note: '温度变化' }
+      ],
+      formulas: ['ΔU = Q - W', 'W = PΔV', 'ΔU = nCvΔT', 'Q = nCpΔT'],
+      dependencies: ['ideal_gas'],
+      output: ['ΔU', 'W']
+    });
+
+    // 光的折射反射模块
+    this.atomicModules.set('light_refraction', {
+      id: 'light_refraction',
+      type: 'optics',
+      name: '光的折射反射',
+      description: '处理光的反射定律、折射定律、全反射',
+      parameters: [
+        { symbol: 'n1', value: null, unit: '', role: 'given', note: '入射介质折射率' },
+        { symbol: 'n2', value: null, unit: '', role: 'given', note: '折射介质折射率' },
+        { symbol: 'θ1', value: null, unit: '°', role: 'given', note: '入射角' },
+        { symbol: 'θ2', value: null, unit: '°', role: 'unknown', note: '折射角' },
+        { symbol: 'θc', value: null, unit: '°', role: 'unknown', note: '临界角' }
+      ],
+      formulas: ['n1sinθ1 = n2sinθ2', 'sinθc = n2/n1'],
+      dependencies: [],
+      output: ['θ2', 'θc']
+    });
+
+    // 透镜成像模块
+    this.atomicModules.set('lens_imaging', {
+      id: 'lens_imaging',
+      type: 'optics',
+      name: '透镜成像',
+      description: '处理凸透镜、凹透镜成像规律',
+      parameters: [
+        { symbol: 'f', value: null, unit: 'm', role: 'given', note: '焦距' },
+        { symbol: 'u', value: null, unit: 'm', role: 'given', note: '物距' },
+        { symbol: 'v', value: null, unit: 'm', role: 'unknown', note: '像距' },
+        { symbol: 'A', value: null, unit: '', role: 'unknown', note: '放大率' },
+        { symbol: 'h', value: null, unit: 'm', role: 'given', note: '物高' },
+        { symbol: 'h\'', value: null, unit: 'm', role: 'unknown', note: '像高' }
+      ],
+      formulas: ['1/f = 1/u + 1/v', 'A = v/u', 'A = h\'/h'],
+      dependencies: ['light_refraction'],
+      output: ['v', 'A', 'h\'']
+    });
+
+    // 流体静力学模块
+    this.atomicModules.set('fluid_statics', {
+      id: 'fluid_statics',
+      type: 'fluid_mechanics',
+      name: '流体静力学',
+      description: '处理液体压强、浮力、帕斯卡定律等问题',
+      parameters: [
+        { symbol: 'P', value: null, unit: 'Pa', role: 'unknown', note: '压强' },
+        { symbol: 'ρ', value: null, unit: 'kg/m³', role: 'given', note: '密度' },
+        { symbol: 'h', value: null, unit: 'm', role: 'given', note: '深度' },
+        { symbol: 'g', value: 9.8, unit: 'm/s²', role: 'constant', note: '重力加速度' },
+        { symbol: 'F浮', value: null, unit: 'N', role: 'unknown', note: '浮力' },
+        { symbol: 'V排', value: null, unit: 'm³', role: 'given', note: '排开液体体积' },
+        { symbol: 'P0', value: 101325, unit: 'Pa', role: 'constant', note: '大气压强' }
+      ],
+      formulas: ['P = P0 + ρgh', 'F浮 = ρ液gV排', 'P1/P2 = F1/F2'],
+      dependencies: [],
+      output: ['P', 'F浮']
+    });
+
+    // 原子物理模块
+    this.atomicModules.set('atomic_physics', {
+      id: 'atomic_physics',
+      type: 'modern_physics',
+      name: '原子物理',
+      description: '处理氢原子能级、光电效应、康普顿散射等现象',
+      parameters: [
+        { symbol: 'E', value: null, unit: 'J', role: 'unknown', note: '光子能量' },
+        { symbol: 'f', value: null, unit: 'Hz', role: 'given', note: '光子频率' },
+        { symbol: 'λ', value: null, unit: 'm', role: 'given', note: '波长' },
+        { symbol: 'h', value: 6.626e-34, unit: 'J·s', role: 'constant', note: '普朗克常数' },
+        { symbol: 'c', value: 3e8, unit: 'm/s', role: 'constant', note: '光速' },
+        { symbol: 'W', value: null, unit: 'J', role: 'given', note: '逸出功' },
+        { symbol: 'Ek', value: null, unit: 'J', role: 'unknown', note: '动能' }
+      ],
+      formulas: ['E = hf', 'E = hc/λ', 'Ek = hf - W', 'En = -13.6/n² eV'],
+      dependencies: [],
+      output: ['E', 'Ek']
+    });
+
     // 等离子体物理模块
     this.atomicModules.set('plasma_physics', {
       id: 'plasma_physics',
