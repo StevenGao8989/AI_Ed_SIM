@@ -1,0 +1,33 @@
+{
+  "test_name": "PhysicsSchema 验证测试",
+  "timestamp": "2025-09-18T09:49:14.047Z",
+  "schema": {
+    "title": "PhysicsIR Schema",
+    "description": "JSON Schema for Physics Intermediate Representation (IR)",
+    "id": "https://chat-tutor.ai/schemas/physics-ir/v1.0.0",
+    "required_properties": [
+      "metadata",
+      "system",
+      "simulation",
+      "output",
+      "optimization",
+      "validation"
+    ],
+    "definitions_count": 11
+  },
+  "input": {
+    "ir_file": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_physics_1758187216354_g95x0grlx.json",
+    "ir_id": "physics_1758187216354_g95x0grlx",
+    "ir_system_type": "wave_system"
+  },
+  "validation": {
+    "success": true,
+    "duration": 1,
+    "quality_score": 100,
+    "errors": [],
+    "warnings": []
+  },
+  "recommendations": [
+    "Schema 质量优秀，可以用于生产环境的 IR 验证"
+  ]
+}

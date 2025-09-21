@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-09-18T11:40:44.986Z",
+  "summary": {
+    "total_tests": 3,
+    "successful_tests": 0,
+    "failed_tests": 3,
+    "average_quality_score": 0
+  },
+  "results": [
+    {
+      "problem": {
+        "id": "spring_oscillator",
+        "title": "弹簧振子",
+        "topic": "简谐运动",
+        "system_type": "oscillatory_system",
+        "difficulty": "medium"
+      },
+      "conversion": {
+        "success": true,
+        "modules_count": 5,
+        "parameters_count": 14,
+        "equations_count": 6
+      },
+      "validation": {
+        "is_valid": false,
+        "errors_count": 3,
+        "warnings_count": 2,
+        "quality_score": 67
+      },
+      "files": {
+        "ir": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_spring_oscillator_1758195644979.json",
+        "validation": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/validation_spring_oscillator_1758195644979.json"
+      }
+    },
+    {
+      "problem": {
+        "id": "projectile_motion",
+        "title": "抛体运动",
+        "topic": "抛体运动",
+        "system_type": "kinematics_2d",
+        "difficulty": "medium"
+      },
+      "conversion": {
+        "success": true,
+        "modules_count": 2,
+        "parameters_count": 10,
+        "equations_count": 2
+      },
+      "validation": {
+        "is_valid": false,
+        "errors_count": 4,
+        "warnings_count": 1,
+        "quality_score": 83
+      },
+      "files": {
+        "ir": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_projectile_motion_1758195644981.json",
+        "validation": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/validation_projectile_motion_1758195644981.json"
+      }
+    },
+    {
+      "problem": {
+        "id": "electromagnetic_field",
+        "title": "电磁场",
+        "topic": "电磁场",
+        "system_type": "electromagnetic_field",
+        "difficulty": "hard"
+      },
+      "conversion": {
+        "success": true,
+        "modules_count": 3,
+        "parameters_count": 14,
+        "equations_count": 5
+      },
+      "validation": {
+        "is_valid": false,
+        "errors_count": 4,
+        "warnings_count": 1,
+        "quality_score": 83
+      },
+      "files": {
+        "ir": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_electromagnetic_field_1758195644983.json",
+        "validation": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/validation_electromagnetic_field_1758195644983.json"
+      }
+    }
+  ]
+}

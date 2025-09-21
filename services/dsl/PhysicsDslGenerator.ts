@@ -764,6 +764,43 @@ export class PhysicsDslGenerator {
   }
 
   /**
+   * 推断系统类型
+   */
+  private inferSystemType(parsedQuestion: ParsedQuestion): string {
+    const topic = parsedQuestion.topic?.toLowerCase() || '';
+    const question = (parsedQuestion as any).originalText?.toLowerCase() || '';
+    
+    // 基于关键词推断系统类型
+    if (topic.includes('振动') || topic.includes('oscillation') || question.includes('简谐') || question.includes('harmonic')) {
+      return 'oscillatory_system';
+    }
+    if (topic.includes('波') || topic.includes('wave') || question.includes('波') || question.includes('wave')) {
+      return 'wave_system';
+    }
+    if (topic.includes('电磁') || topic.includes('electromagnetic') || question.includes('电场') || question.includes('磁场')) {
+      return 'electromagnetic_field';
+    }
+    if (question.includes('碰撞') || question.includes('collision') || question.includes('弹性') || question.includes('elastic')) {
+      return 'collision_system';
+    }
+    if (question.includes('斜面') || question.includes('incline') || question.includes('摩擦') || question.includes('friction')) {
+      return 'inclined_plane_system';
+    }
+    if (question.includes('自由落体') || question.includes('free fall') || question.includes('重力') || question.includes('gravity')) {
+      return 'gravity_system';
+    }
+    if (question.includes('圆周') || question.includes('circular') || question.includes('旋转') || question.includes('rotation')) {
+      return 'rotational_system';
+    }
+    if (question.includes('平抛') || question.includes('projectile') || question.includes('抛物线') || question.includes('parabolic')) {
+      return 'projectile_system';
+    }
+    
+    // 默认返回运动学系统
+    return 'kinematics_linear';
+  }
+
+  /**
    * 推断章节
    */
   private inferChapter(topic: string): string {

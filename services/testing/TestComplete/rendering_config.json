@@ -1,0 +1,184 @@
+{
+  "rendering": {
+    "id": "complex_physics_rendering_001",
+    "name": "复杂物理问题渲染配置",
+    "description": "自由下落、弹性碰撞、斜面滑动的3D动画渲染",
+    "created_at": "2025-09-21T10:24:58.197Z",
+    "version": "1.0.0",
+    "physics_domain": [
+      "general_physics"
+    ],
+    "complexity": "high",
+    "config": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 10,
+      "backgroundColor": "#FFFFFF",
+      "enableLighting": true,
+      "enableShadows": true,
+      "cameraType": "perspective",
+      "showGrid": true,
+      "showAxes": true
+    },
+    "stages": [
+      {
+        "id": "free_fall",
+        "name": "自由下落",
+        "description": "物体从高度5m处自由下落",
+        "startTime": 0,
+        "duration": 1,
+        "physicsType": "kinematics",
+        "visualConfig": {
+          "color": "#FF6B6B",
+          "highlight": true,
+          "showTrajectory": true,
+          "showForces": false,
+          "showEnergy": true
+        },
+        "explanation": {
+          "title": "自由下落阶段",
+          "description": "物体在重力作用下从静止开始下落",
+          "formulas": [
+            "v1 = √(2gh)"
+          ],
+          "keyPoints": [
+            "重力势能转化为动能",
+            "落地速度v1 = 9.9 m/s"
+          ]
+        }
+      },
+      {
+        "id": "elastic_collision",
+        "name": "弹性碰撞",
+        "description": "物体与地面发生完全弹性碰撞",
+        "startTime": 1,
+        "duration": 0.1,
+        "physicsType": "dynamics",
+        "visualConfig": {
+          "color": "#4ECDC4",
+          "highlight": true,
+          "showTrajectory": false,
+          "showForces": true,
+          "showEnergy": true
+        },
+        "explanation": {
+          "title": "弹性碰撞阶段",
+          "description": "物体与地面发生完全弹性碰撞，速度反向",
+          "formulas": [
+            "v2 = -e × v1",
+            "e = 1 (完全弹性)"
+          ],
+          "keyPoints": [
+            "动量守恒",
+            "动能守恒",
+            "速度反向"
+          ]
+        }
+      },
+      {
+        "id": "inclined_plane",
+        "name": "斜面滑动",
+        "description": "物体沿30°斜面向上滑动",
+        "startTime": 1.1,
+        "duration": 2,
+        "physicsType": "kinematics",
+        "visualConfig": {
+          "color": "#45B7D1",
+          "highlight": true,
+          "showTrajectory": true,
+          "showForces": true,
+          "showEnergy": true
+        },
+        "explanation": {
+          "title": "斜面滑动阶段",
+          "description": "物体沿斜面向上滑动，受重力和摩擦力作用",
+          "formulas": [
+            "s = v2²/(2g(sinθ + μcosθ))",
+            "ΔE = μmgscosθ"
+          ],
+          "keyPoints": [
+            "重力分量和摩擦力",
+            "最大距离s = 2.5m",
+            "机械能损失"
+          ]
+        }
+      }
+    ],
+    "objects": [],
+    "environment": {
+      "background": {
+        "type": "gradient",
+        "topColor": "#87CEEB",
+        "bottomColor": "#FFFFFF"
+      },
+      "fog": {
+        "enabled": false,
+        "color": "#FFFFFF",
+        "near": 10,
+        "far": 100
+      },
+      "grid": {
+        "enabled": true,
+        "size": 20,
+        "divisions": 20,
+        "color": "#CCCCCC"
+      },
+      "axes": {
+        "enabled": true,
+        "size": 5,
+        "colors": {
+          "x": "#FF0000",
+          "y": "#00FF00",
+          "z": "#0000FF"
+        }
+      }
+    },
+    "lighting": {
+      "ambient": {
+        "color": "#404040",
+        "intensity": 0.3
+      },
+      "directional": [
+        {
+          "color": "#FFFFFF",
+          "intensity": 0.8,
+          "position": {
+            "x": 10,
+            "y": 10,
+            "z": 5
+          },
+          "castShadow": true
+        }
+      ],
+      "point": [],
+      "spot": []
+    },
+    "effects": {
+      "particles": {
+        "collision_sparks": true,
+        "trajectory_trail": true,
+        "energy_particles": true
+      },
+      "postProcessing": {
+        "bloom": false,
+        "ssao": false,
+        "fxaa": true
+      }
+    },
+    "output": {
+      "format": "mp4",
+      "quality": "high",
+      "bitrate": "2000k",
+      "codec": "h264",
+      "audio": false,
+      "subtitles": true,
+      "metadata": {
+        "title": "复杂物理问题动画",
+        "description": "自由下落、弹性碰撞、斜面滑动的物理仿真动画",
+        "author": "AI Physics Simulation Platform",
+        "created": "2025-09-21T10:24:58.197Z"
+      }
+    }
+  }
+}

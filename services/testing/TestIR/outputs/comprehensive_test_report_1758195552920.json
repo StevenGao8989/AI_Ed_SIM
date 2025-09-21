@@ -1,0 +1,62 @@
+{
+  "timestamp": "2025-09-18T11:39:12.920Z",
+  "summary": {
+    "total_tests": 3,
+    "successful_tests": 0,
+    "failed_tests": 3,
+    "average_quality_score": 0
+  },
+  "results": [
+    {
+      "problem": {
+        "id": "spring_oscillator",
+        "title": "弹簧振子",
+        "topic": "简谐运动",
+        "system_type": "oscillatory_system",
+        "difficulty": "medium"
+      },
+      "conversion": {
+        "success": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      },
+      "validation": {
+        "is_valid": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      }
+    },
+    {
+      "problem": {
+        "id": "projectile_motion",
+        "title": "抛体运动",
+        "topic": "抛体运动",
+        "system_type": "kinematics_2d",
+        "difficulty": "medium"
+      },
+      "conversion": {
+        "success": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      },
+      "validation": {
+        "is_valid": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      }
+    },
+    {
+      "problem": {
+        "id": "electromagnetic_field",
+        "title": "电磁场",
+        "topic": "电磁场",
+        "system_type": "electromagnetic_field",
+        "difficulty": "hard"
+      },
+      "conversion": {
+        "success": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      },
+      "validation": {
+        "is_valid": false,
+        "error": "irConverter.convertDslToIr is not a function"
+      }
+    }
+  ]
+}

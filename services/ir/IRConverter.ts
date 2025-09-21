@@ -43,10 +43,553 @@ export class IRConverter {
   };
   private atomicModuleLibrary: AtomicModuleLibrary;
   private dimensionCalculator: DimensionCalculator;
+  
+  // 性能监控
+  private performanceMetrics: {
+    totalConversions: number;
+    averageConversionTime: number;
+    cacheHits: number;
+    cacheMisses: number;
+    errorCount: number;
+  } = {
+    totalConversions: 0,
+    averageConversionTime: 0,
+    cacheHits: 0,
+    cacheMisses: 0,
+    errorCount: 0
+  };
+  
+  // 缓存机制
+  private conversionCache: Map<string, IRConversionResult> = new Map();
+  private moduleDetectionCache: Map<string, string[]> = new Map();
+  private validationCache: Map<string, any> = new Map();
 
   constructor() {
     this.dimensionCalculator = new DimensionCalculator();
     this.atomicModuleLibrary = new AtomicModuleLibrary();
+  }
+
+  /**
+   * 增强的参数处理方法
+   */
+  private enhancedParameterProcessing(parameters: any[]): IRParameter[] {
+    const processedParams: IRParameter[] = [];
+    const parameterMap = new Map<string, IRParameter>();
+    
+    // 第一遍：创建基础参数
+    for (const param of parameters) {
+      const irParam = this.createEnhancedParameter(param);
+      processedParams.push(irParam);
+      parameterMap.set(param.symbol, irParam);
+    }
+    
+    // 第二遍：分析依赖关系
+    for (const param of parameters) {
+      if (param.dependencies && Array.isArray(param.dependencies)) {
+        const irParam = parameterMap.get(param.symbol);
+        if (irParam) {
+          irParam.dependencies = param.dependencies.map((dep: string) => 
+            parameterMap.get(dep) || { symbol: dep, dimension: 'dimensionless', role: 'unknown' }
+          );
+        }
+      }
+    }
+    
+    // 第三遍：验证参数完整性
+    this.validateParameterCompleteness(processedParams);
+    
+    return processedParams;
+  }
+
+  /**
+   * 创建增强的参数对象
+   */
+  private createEnhancedParameter(param: any): IRParameter {
+    const dimension = DimensionCalculator.parseDimension(param.unit || 'dimensionless');
+    
+    return {
+      symbol: param.symbol,
+      role: param.role || 'unknown',
+      description: param.description || param.note || '',
+      value: param.value?.value || 0,
+      dependencies: [],
+      constraints: []
+    };
+  }
+
+  /**
+   * 验证参数完整性
+   */
+  private validateParameterCompleteness(parameters: IRParameter[]): void {
+    const errors: string[] = [];
+    
+    for (const param of parameters) {
+      // 检查依赖关系
+      for (const dep of param.dependencies || []) {
+        const depParam = parameters.find(p => p.symbol === dep);
+        if (!depParam) {
+          errors.push(`参数 ${param.symbol} 依赖的参数 ${dep} 不存在`);
+        }
+      }
+    }
+    
+    if (errors.length > 0) {
+      console.warn('参数完整性验证警告:', errors);
+    }
+  }
+
+
+  /**
+   * 增强的依赖关系分析
+   */
+  private analyzeDependencyGraph(parameters: IRParameter[]): {
+    dependencyGraph: Map<string, string[]>;
+    executionOrder: string[];
+    circularDependencies: string[][];
+  } {
+    const dependencyGraph = new Map<string, string[]>();
+    const executionOrder: string[] = [];
+    const circularDependencies: string[][] = [];
+    
+    // 构建依赖图
+    for (const param of parameters) {
+      const deps = param.dependencies || [];
+      dependencyGraph.set(param.symbol, deps);
+    }
+    
+    // 拓扑排序
+    const visited = new Set<string>();
+    const visiting = new Set<string>();
+    
+    const visit = (param: string, path: string[]): void => {
+      if (visiting.has(param)) {
+        // 发现循环依赖
+        const cycleStart = path.indexOf(param);
+        circularDependencies.push(path.slice(cycleStart));
+        return;
+      }
+      
+      if (visited.has(param)) return;
+      
+      visiting.add(param);
+      const deps = dependencyGraph.get(param) || [];
+      
+      for (const dep of deps) {
+        visit(dep, [...path, param]);
+      }
+      
+      visiting.delete(param);
+      visited.add(param);
+      executionOrder.push(param);
+    };
+    
+    for (const param of parameters) {
+      if (!visited.has(param.symbol)) {
+        visit(param.symbol, []);
+      }
+    }
+    
+    return {
+      dependencyGraph,
+      executionOrder: executionOrder.reverse(), // 反转得到正确的执行顺序
+      circularDependencies
+    };
+  }
+
+  /**
+   * 增强的系统转换方法
+   */
+  private async convertSystemEnhanced(system: any, options: IRConversionOptions): Promise<any> {
+    if (!system) {
+      return this.createFallbackSystem(system);
+    }
+
+    // 使用增强的参数处理
+    const enhancedParameters = this.enhancedParameterProcessing(system.parameters || []);
+    
+    // 分析依赖关系
+    const dependencyAnalysis = this.analyzeDependencyGraph(enhancedParameters);
+    
+    // 生成模块（使用增强的参数）
+    const modules = await this.generateModulesEnhanced(enhancedParameters, system, options);
+    
+    // 转换对象
+    const objects = this.convertObjects(system.objects || []);
+    
+    // 转换约束条件
+    const constraints = this.convertConstraintsEnhanced(system.constraints || [], enhancedParameters);
+    
+    // 转换环境
+    const environment = this.convertEnvironment(system.environment);
+    
+    // 生成守恒定律
+    const conservationLaws = this.extractConservationLaws(modules);
+    
+    // 生成对称性
+    const symmetries = this.extractSymmetries(enhancedParameters);
+    
+    // 生成边界条件
+    const boundaryConditions = this.extractBoundaryConditions(enhancedParameters);
+    
+    // 生成初始条件
+    const initialConditions = this.extractInitialConditions(enhancedParameters);
+
+    return {
+      type: system.type || 'generic',
+      dimensions: system.dimensions || '2d',
+      environment: environment,
+      parameters: enhancedParameters,
+      objects: objects,
+      constraints: constraints,
+      modules: modules,
+      conservation_laws: conservationLaws,
+      symmetries: symmetries,
+      boundary_conditions: boundaryConditions,
+      initial_conditions: initialConditions,
+      dependency_analysis: dependencyAnalysis
+    };
+  }
+
+  /**
+   * 增强的模块生成方法
+   */
+  private async generateModulesEnhanced(parameters: IRParameter[], system: any, options: IRConversionOptions): Promise<IRModule[]> {
+    const modules: IRModule[] = [];
+    
+    // 智能模块检测
+    const detectedModules = this.detectModulesIntelligently(parameters, system);
+    
+    for (const moduleType of detectedModules) {
+      const module = this.createModuleByType(moduleType, parameters, system);
+      if (module) {
+        modules.push(module);
+      }
+    }
+    
+    // 验证模块完整性
+    this.validateModuleCompleteness(modules, parameters);
+    
+    return modules;
+  }
+
+  /**
+   * 智能模块检测
+   */
+  private detectModulesIntelligently(parameters: IRParameter[], system: any): string[] {
+    const detectedModules: string[] = [];
+    const paramSymbols = parameters.map(p => p.symbol.toLowerCase());
+    
+    // 运动学模块检测
+    if (paramSymbols.some(s => ['v', 'u', 'a', 't', 's', 'x', 'y'].includes(s))) {
+      detectedModules.push('kinematics');
+    }
+    
+    // 动力学模块检测
+    if (paramSymbols.some(s => ['f', 'm', 'a', 'p', 'w'].includes(s))) {
+      detectedModules.push('dynamics');
+    }
+    
+    // 能量模块检测
+    if (paramSymbols.some(s => ['e', 'ke', 'pe', 'w', 'p'].includes(s))) {
+      detectedModules.push('energy');
+    }
+    
+    // 振动模块检测
+    if (paramSymbols.some(s => ['k', 'm', 'ω', 'f', 't', 'a'].includes(s)) || 
+        system.type?.includes('oscillation')) {
+      detectedModules.push('oscillation');
+    }
+    
+    // 波动模块检测
+    if (paramSymbols.some(s => ['λ', 'f', 'v', 't', 'a'].includes(s)) || 
+        system.type?.includes('wave')) {
+      detectedModules.push('wave');
+    }
+    
+    // 电学模块检测
+    if (paramSymbols.some(s => ['i', 'u', 'r', 'p', 'q'].includes(s))) {
+      detectedModules.push('electricity');
+    }
+    
+    return detectedModules;
+  }
+
+  /**
+   * 根据类型创建模块
+   */
+  private createModuleByType(moduleType: string, parameters: IRParameter[], system: any): IRModule | null {
+    switch (moduleType) {
+      case 'kinematics':
+        return this.createKinematicsModule(parameters);
+      case 'dynamics':
+        return this.createDynamicsModule(parameters);
+      case 'energy':
+        return this.createBasicElectricityModule(parameters);
+      case 'oscillation':
+        return this.createOscillationModule(parameters);
+      case 'wave':
+        return this.createWaveModule(parameters);
+      case 'electricity':
+        return this.createBasicElectricityModule(parameters);
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * 验证模块完整性
+   */
+  private validateModuleCompleteness(modules: IRModule[], parameters: IRParameter[]): void {
+    const errors: string[] = [];
+    
+    for (const module of modules) {
+      // 检查模块方程中的变量是否都有定义
+      for (const equation of module.equations) {
+        for (const variable of equation.variables) {
+          const paramExists = parameters.some(p => p.symbol === variable) ||
+                            module.parameters.some(p => p.symbol === variable);
+          if (!paramExists) {
+            errors.push(`模块 ${module.id} 的方程 ${equation.id} 中的变量 ${variable} 未定义`);
+          }
+        }
+      }
+      
+      // 检查模块输出是否都有定义
+      for (const output of module.output) {
+        const paramExists = parameters.some(p => p.symbol === output) ||
+                          module.parameters.some(p => p.symbol === output);
+        if (!paramExists) {
+          errors.push(`模块 ${module.id} 的输出 ${output} 未定义`);
+        }
+      }
+    }
+    
+    if (errors.length > 0) {
+      console.warn('模块完整性验证警告:', errors);
+    }
+  }
+
+  /**
+   * 增强的约束条件转换
+   */
+  private convertConstraintsEnhanced(constraints: any[], parameters: IRParameter[]): IRConstraint[] {
+    return constraints.map((constraint, index) => ({
+      id: `constraint_${index}`,
+      type: constraint.type || 'custom',
+      expression: constraint.expression || '',
+      parameters: constraint.parameters || [],
+      priority: constraint.priority || 1,
+      tolerance: constraint.tolerance || 1e-6,
+      domain: constraint.domain || 'global',
+      physics_law: constraint.physics_law || '',
+      description: constraint.description || '',
+      value: constraint.value || { value: 0, unit: 'dimensionless' }
+    }));
+  }
+
+  /**
+   * 生成缓存键
+   */
+  private generateCacheKey(dsl: PhysicsDSL, options: Partial<IRConversionOptions>): string {
+    const keyData = {
+      metadata: dsl.metadata,
+      system: dsl.system,
+      options: options
+    };
+    return JSON.stringify(keyData);
+  }
+
+  /**
+   * 检查缓存
+   */
+  private getCachedResult(cacheKey: string): IRConversionResult | null {
+    const cached = this.conversionCache.get(cacheKey);
+    if (cached) {
+      this.performanceMetrics.cacheHits++;
+      return cached;
+    }
+    this.performanceMetrics.cacheMisses++;
+    return null;
+  }
+
+  /**
+   * 存储到缓存
+   */
+  private setCachedResult(cacheKey: string, result: IRConversionResult): void {
+    // 限制缓存大小
+    if (this.conversionCache.size >= 100) {
+      const firstKey = this.conversionCache.keys().next().value;
+      this.conversionCache.delete(firstKey);
+    }
+    this.conversionCache.set(cacheKey, result);
+  }
+
+  /**
+   * 更新性能指标
+   */
+  private updatePerformanceMetrics(conversionTime: number, success: boolean): void {
+    this.performanceMetrics.totalConversions++;
+    this.performanceMetrics.averageConversionTime = 
+      (this.performanceMetrics.averageConversionTime * (this.performanceMetrics.totalConversions - 1) + conversionTime) / 
+      this.performanceMetrics.totalConversions;
+    
+    if (!success) {
+      this.performanceMetrics.errorCount++;
+    }
+  }
+
+  /**
+   * 获取性能指标
+   */
+  public getPerformanceMetrics() {
+    return {
+      ...this.performanceMetrics,
+      cacheHitRate: this.performanceMetrics.cacheHits / (this.performanceMetrics.cacheHits + this.performanceMetrics.cacheMisses),
+      errorRate: this.performanceMetrics.errorCount / this.performanceMetrics.totalConversions,
+      cacheSize: this.conversionCache.size
+    };
+  }
+
+  /**
+   * 清理缓存
+   */
+  public clearCache(): void {
+    this.conversionCache.clear();
+    this.moduleDetectionCache.clear();
+    this.validationCache.clear();
+  }
+
+  /**
+   * 验证输入 DSL
+   */
+  private validateInputDSL(dsl: PhysicsDSL): { isValid: boolean; errors: string[]; warnings: string[] } {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    if (!dsl) {
+      errors.push('DSL 对象为空');
+      return { isValid: false, errors, warnings };
+    }
+
+    if (!dsl.metadata) {
+      errors.push('缺少元数据');
+    }
+
+    if (!dsl.system) {
+      errors.push('缺少系统配置');
+    }
+
+    if (!dsl.simulation) {
+      warnings.push('缺少仿真配置，将使用默认配置');
+    }
+
+    if (!dsl.output) {
+      warnings.push('缺少输出配置，将使用默认配置');
+    }
+
+    return { isValid: errors.length === 0, errors, warnings };
+  }
+
+  /**
+   * 创建回退元数据
+   */
+  private createFallbackMetadata(metadata: any): any {
+    return {
+      id: metadata?.id || this.generateId(),
+      created_at: new Date().toISOString(),
+      system_type: metadata?.system_type || 'generic',
+      difficulty: metadata?.difficulty || 'medium',
+      timestamp: Date.now(),
+      source_question: metadata?.source_question || '',
+      physics_domain: metadata?.physics_domain || ['general'],
+      complexity_score: metadata?.complexity_score || 0.5,
+      estimated_solve_time: metadata?.estimated_solve_time || 60
+    };
+  }
+
+  /**
+   * 创建回退系统配置
+   */
+  private createFallbackSystem(system: any): any {
+    return {
+      type: system?.type || 'generic',
+      dimensions: system?.dimensions || '2d',
+      environment: system?.environment || { gravity: { value: 9.8, unit: 'm/s²' } },
+      parameters: system?.parameters || [],
+      objects: system?.objects || [],
+      constraints: system?.constraints || [],
+      modules: [],
+      conservation_laws: [],
+      symmetries: [],
+      boundary_conditions: [],
+      initial_conditions: []
+    };
+  }
+
+  /**
+   * 创建回退仿真配置
+   */
+  private createFallbackSimulation(): any {
+    return {
+      duration: { value: 10, unit: 's' },
+      time_step: { value: 0.01, unit: 's' },
+      solver: 'rk4',
+      precision: 'medium',
+      max_iterations: 1000,
+      tolerance: 1e-6
+    };
+  }
+
+  /**
+   * 创建回退输出配置
+   */
+  private createFallbackOutput(): any {
+    return {
+      variables: [],
+      export_formats: ['json'],
+      visualization: {
+        plots: [],
+        animations: []
+      }
+    };
+  }
+
+  /**
+   * 创建回退优化配置
+   */
+  private createFallbackOptimization(): any {
+    return {
+      precompute_constants: true,
+      optimize_equations: true,
+      cache_results: false,
+      parallel_processing: false,
+      numerical_stability: {
+        time_step_control: true,
+        adaptive_precision: false,
+        stability_monitoring: true
+      },
+      performance_metrics: {
+        estimated_computation_time: 1.0,
+        memory_usage: 'low',
+        cpu_intensity: 'medium'
+      }
+    };
+  }
+
+  /**
+   * 创建回退物理分析
+   */
+  private createFallbackPhysicsAnalysis(): any {
+    return {
+      dominant_effects: ['basic_physics'],
+      approximation_level: 'phenomenological',
+      physical_interpretation: '基础物理现象分析',
+      educational_value: {
+        concepts: ['基础物理概念'],
+        prerequisites: ['基础数学'],
+        applications: []
+      }
+    };
   }
 
   /**
@@ -65,8 +608,8 @@ export class IRConverter {
       // 1. 转换元数据
       const metadata = this.convertMetadata(dsl.metadata);
       
-      // 2. 转换系统配置
-      const system = await this.convertSystem(dsl.system, opts);
+      // 2. 转换系统配置（使用增强的参数处理）
+      const system = await this.convertSystemEnhanced(dsl.system, opts);
       
       // 3. 转换仿真配置
       const simulation = this.convertSimulation(dsl.simulation);
@@ -392,34 +935,142 @@ export class IRConverter {
   }
 
   /**
-   * 检查原子模块是否与当前系统相关
+   * 检查原子模块是否与当前系统相关 - 增强版智能检测
    */
   private isModuleRelevant(atomicModule: AtomicModule, paramSymbols: string[], systemType: string, question: string): boolean {
-    // 1. 检查参数符号匹配
+    const questionLower = question.toLowerCase();
+    const systemTypeLower = systemType.toLowerCase();
+    const moduleTypeLower = atomicModule.type.toLowerCase();
+    const moduleNameLower = atomicModule.name.toLowerCase();
+    const moduleDescLower = atomicModule.description.toLowerCase();
+    
+    // 1. 参数符号匹配 (权重: 30%)
     const moduleParamSymbols = atomicModule.parameters.map(p => p.symbol.toLowerCase());
-    const hasMatchingParams = moduleParamSymbols.some(symbol => paramSymbols.includes(symbol));
+    const paramMatchScore = this.calculateParamMatchScore(moduleParamSymbols, paramSymbols);
     
-    // 2. 检查系统类型匹配
-    const hasMatchingSystemType = systemType.includes(atomicModule.type.toLowerCase()) || 
-                                 atomicModule.type.toLowerCase().includes(systemType);
+    // 2. 系统类型匹配 (权重: 25%)
+    const systemTypeScore = this.calculateSystemTypeScore(systemTypeLower, moduleTypeLower);
     
-    // 3. 检查问题描述匹配
-    const hasMatchingDescription = question.includes(atomicModule.name.toLowerCase()) ||
-                                  atomicModule.description.toLowerCase().split(' ').some(word => 
-                                    question.includes(word) && word.length > 2
-                                  );
+    // 3. 语义关键词匹配 (权重: 25%)
+    const semanticScore = this.calculateSemanticScore(questionLower, moduleNameLower, moduleDescLower);
     
-    // 4. 检查模块名称中的关键词
-    const moduleKeywords = atomicModule.name.toLowerCase().split(/[\s，,、]/);
-    const hasMatchingKeywords = moduleKeywords.some(keyword => 
-      question.includes(keyword) && keyword.length > 1
+    // 4. 物理概念匹配 (权重: 20%)
+    const conceptScore = this.calculateConceptScore(questionLower, atomicModule);
+    
+    // 计算综合匹配分数
+    const totalScore = paramMatchScore * 0.3 + systemTypeScore * 0.25 + semanticScore * 0.25 + conceptScore * 0.2;
+    
+    // 动态阈值：根据模块类型调整
+    const threshold = this.getDynamicThreshold(atomicModule.type);
+    
+    return totalScore >= threshold;
+  }
+
+  /**
+   * 计算参数匹配分数
+   */
+  private calculateParamMatchScore(moduleParams: string[], systemParams: string[]): number {
+    if (moduleParams.length === 0) return 0;
+    
+    const matches = moduleParams.filter(param => systemParams.includes(param)).length;
+    const exactMatches = moduleParams.filter(param => systemParams.includes(param)).length;
+    const partialMatches = systemParams.filter(param => 
+      moduleParams.some(mp => mp.includes(param) || param.includes(mp))
+    ).length;
+    
+    return (exactMatches * 1.0 + partialMatches * 0.5) / moduleParams.length;
+  }
+
+  /**
+   * 计算系统类型匹配分数
+   */
+  private calculateSystemTypeScore(systemType: string, moduleType: string): number {
+    if (systemType === moduleType) return 1.0;
+    if (systemType.includes(moduleType) || moduleType.includes(systemType)) return 0.8;
+    
+    // 检查类型映射关系
+    const typeMappings: { [key: string]: string[] } = {
+      'acoustics': ['wave', 'oscillation'],
+      'phase_change': ['thermal'],
+      'simple_machines': ['dynamics', 'kinematics'],
+      'pressure': ['fluid', 'dynamics'],
+      'basic_electricity': ['electricity', 'electromagnetic']
+    };
+    
+    const mappedTypes = typeMappings[moduleType] || [];
+    if (mappedTypes.includes(systemType)) return 0.7;
+    
+    return 0;
+  }
+
+  /**
+   * 计算语义匹配分数
+   */
+  private calculateSemanticScore(question: string, moduleName: string, moduleDesc: string): number {
+    // 1. 直接名称匹配
+    if (question.includes(moduleName)) return 1.0;
+    
+    // 2. 描述关键词匹配
+    const descWords = moduleDesc.split(/[\s，,、]/).filter(word => word.length > 2);
+    const matchingWords = descWords.filter(word => question.includes(word));
+    
+    if (descWords.length > 0) {
+      return matchingWords.length / descWords.length;
+    }
+    
+    // 3. 同义词匹配
+    const synonyms: { [key: string]: string[] } = {
+      '声学': ['声音', '声波', '频率', '波长', '声速'],
+      '物态变化': ['熔化', '凝固', '汽化', '液化', '升华', '凝华', '热量'],
+      '简单机械': ['杠杆', '滑轮', '斜面', '机械', '效率'],
+      '压强': ['压力', '浮力', '液体压强', '大气压强', '阿基米德'],
+      '电学基础': ['电流', '电压', '电阻', '欧姆定律', '电功率', '电路']
+    };
+    
+    for (const [key, words] of Object.entries(synonyms)) {
+      if (moduleName.includes(key)) {
+        const matchingSynonyms = words.filter(word => question.includes(word));
+        return matchingSynonyms.length / words.length;
+      }
+    }
+    
+    return 0;
+  }
+
+  /**
+   * 计算物理概念匹配分数
+   */
+  private calculateConceptScore(question: string, atomicModule: AtomicModule): number {
+    // 检查公式中的物理概念
+    const formulaConcepts = atomicModule.formulas.join(' ').toLowerCase();
+    const questionWords = question.split(/[\s，,、]/);
+    
+    const matchingConcepts = questionWords.filter(word => 
+      formulaConcepts.includes(word) && word.length > 1
     );
     
-    // 至少满足两个条件才认为相关
-    const matchCount = [hasMatchingParams, hasMatchingSystemType, hasMatchingDescription, hasMatchingKeywords]
-      .filter(Boolean).length;
+    return Math.min(matchingConcepts.length / 5, 1.0); // 最多匹配5个概念
+  }
+
+  /**
+   * 获取动态阈值
+   */
+  private getDynamicThreshold(moduleType: string): number {
+    const thresholds: { [key: string]: number } = {
+      'acoustics': 0.6,
+      'phase_change': 0.6,
+      'simple_machines': 0.6,
+      'pressure': 0.6,
+      'basic_electricity': 0.6,
+      'kinematics': 0.7,
+      'dynamics': 0.7,
+      'thermal': 0.7,
+      'electricity': 0.7,
+      'optics': 0.7,
+      'default': 0.8
+    };
     
-    return matchCount >= 2;
+    return thresholds[moduleType] || thresholds.default;
   }
 
   /**
@@ -1358,6 +2009,14 @@ export class IRConverter {
   }
 
   private convertEnvironment(env: any) {
+    if (!env) {
+      return {
+        gravity: this.convertPhysicalQuantity({ value: 9.8, unit: 'm/s²' }),
+        air_resistance: false,
+        temperature: this.convertPhysicalQuantity({ value: 20, unit: '°C' })
+      };
+    }
+    
     return {
       gravity: this.convertPhysicalQuantity(env.gravity || { value: 9.8, unit: 'm/s²' }),
       air_resistance: env.air_resistance || false,
@@ -1498,15 +2157,6 @@ export class IRConverter {
     return baseTime * (complexity / 50);
   }
 
-  private extractConservationLaws(modules: IRModule[]): IRConservationLaw[] {
-    const laws: IRConservationLaw[] = [];
-    
-    modules.forEach(module => {
-      laws.push(...module.conservation_laws);
-    });
-    
-    return laws;
-  }
 
   private identifySymmetries(dslSystem: any): string[] {
     const symmetries: string[] = [];
@@ -2154,5 +2804,76 @@ export class IRConverter {
         scale: 'macroscopic'
       }
     };
+  }
+
+  /**
+   * 提取守恒定律
+   */
+  private extractConservationLaws(modules: IRModule[]): IRConservationLaw[] {
+    const laws: IRConservationLaw[] = [];
+    
+    // 基于模块类型推断守恒定律
+    for (const module of modules) {
+      switch (module.type) {
+        case 'kinematics':
+          laws.push({
+            type: 'momentum',
+            description: '动量守恒定律',
+            expression: 'Σp = constant',
+            variables: ['p'],
+            tolerance: 1e-6
+          });
+          break;
+        case 'dynamics':
+          laws.push({
+            type: 'energy',
+            description: '能量守恒定律',
+            expression: 'E = T + V = constant',
+            variables: ['E', 'T', 'V'],
+            tolerance: 1e-6
+          });
+          break;
+        case 'oscillation':
+          laws.push({
+            type: 'energy',
+            description: '简谐振动能量守恒',
+            expression: 'E = ½kA² = constant',
+            variables: ['E', 'k', 'A'],
+            tolerance: 1e-6
+          });
+          break;
+      }
+    }
+    
+    return laws;
+  }
+
+  /**
+   * 提取对称性
+   */
+  private extractSymmetries(parameters: IRParameter[]): any[] {
+    const symmetries: any[] = [];
+    
+    // 基于参数推断对称性
+    const hasTimeParam = parameters.some(p => p.symbol.includes('t') || p.symbol.includes('time'));
+    const hasSpaceParam = parameters.some(p => p.symbol.includes('x') || p.symbol.includes('y') || p.symbol.includes('z'));
+    
+    if (hasTimeParam) {
+      symmetries.push({
+        type: 'time_translation',
+        description: '时间平移对称性',
+        parameters: parameters.filter(p => p.symbol.includes('t')).map(p => p.symbol)
+      });
+    }
+    
+    if (hasSpaceParam) {
+      symmetries.push({
+        type: 'space_translation',
+        description: '空间平移对称性',
+        parameters: parameters.filter(p => p.symbol.includes('x') || p.symbol.includes('y') || p.symbol.includes('z')).map(p => p.symbol)
+      });
+    }
+    
+    return symmetries;
   }
 }

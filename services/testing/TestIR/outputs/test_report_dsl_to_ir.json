@@ -1,0 +1,44 @@
+{
+  "test_name": "DSL 到 IR 转换测试",
+  "timestamp": "2025-09-18T11:37:16.186Z",
+  "input": {
+    "dsl_file": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestDSL/outputs/dsl_spring_oscillation_wave.json",
+    "dsl_id": "physics_1758187216354_g95x0grlx",
+    "dsl_topic": "波与声音/Waves & Sound",
+    "dsl_system_type": "wave_system"
+  },
+  "conversion": {
+    "success": true,
+    "duration": 2,
+    "optimizations": [
+      "simulation_optimization",
+      "derivative_caching",
+      "constant_precomputation"
+    ],
+    "warnings": [],
+    "errors": []
+  },
+  "output": {
+    "ir_id": "physics_1758187216354_g95x0grlx",
+    "ir_system_type": "wave_system",
+    "modules_count": 2,
+    "parameters_count": 13,
+    "objects_count": 0,
+    "equations_count": 3
+  },
+  "validation": {
+    "structure_valid": true,
+    "physics_valid": true,
+    "units_consistent": true,
+    "constraints_satisfied": true,
+    "conservation_laws_satisfied": false,
+    "numerical_stability": false,
+    "warnings": [],
+    "errors": [],
+    "physics_consistency_score": 0,
+    "validation_timestamp": "2025-09-18T11:37:16.185Z"
+  },
+  "files": {
+    "ir_output": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_physics_1758187216354_g95x0grlx.json"
+  }
+}

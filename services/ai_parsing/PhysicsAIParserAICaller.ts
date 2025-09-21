@@ -605,7 +605,20 @@ ${JSON.stringify(basicData, null, 2)}
       "value": 数值或null,
       "unit": "单位",
       "role": "given|unknown|constant|derived",
-      "note": "参数说明"
+      "note": "参数说明",
+      "dslType": "scalar|vector|tensor",
+      "domain": "物理域",
+      "priority": 优先级数字,
+      "dependencies": ["依赖的参数符号"],
+      "formula": "计算该参数的公式"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "initial|boundary|physical|mathematical",
+      "description": "约束条件描述",
+      "parameters": ["涉及的参数"],
+      "expression": "约束表达式"
     }
   ],
   "units": [
@@ -635,7 +648,15 @@ ${JSON.stringify(basicData, null, 2)}
       }
     ],
     "modules": ["模块ID列表"],
-    "dependencies": [],
+    "dependencies": [
+      {
+        "from": "模块A",
+        "to": "模块B", 
+        "parameter": "共享参数",
+        "type": "input|output|shared|derived",
+        "reason": "依赖原因说明"
+      }
+    ],
     "executionOrder": ["模块执行顺序"],
     "checkpoints": []
   },

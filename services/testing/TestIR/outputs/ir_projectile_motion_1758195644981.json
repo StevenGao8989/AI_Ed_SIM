@@ -1,0 +1,456 @@
+{
+  "metadata": {
+    "id": "projectile_test",
+    "version": "1.0.0",
+    "created_at": "2025-09-18T11:40:44.981Z",
+    "source_dsl_id": "projectile_test",
+    "system_type": "kinematics_2d",
+    "difficulty": "medium",
+    "grade": "高一",
+    "physics_domain": [
+      "general_physics"
+    ],
+    "complexity_score": 70,
+    "estimated_solve_time": 1.4
+  },
+  "system": {
+    "type": "kinematics_2d",
+    "dimensions": 2,
+    "modules": [
+      {
+        "id": "kinematics_module",
+        "type": "kinematics",
+        "name": "运动学",
+        "description": "基本运动学方程",
+        "parameters": [
+          {
+            "symbol": "x",
+            "value": {
+              "value": 0,
+              "unit": "m",
+              "dimension": "L"
+            },
+            "role": "unknown",
+            "description": "位移",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "v",
+            "value": {
+              "value": 0,
+              "unit": "m/s",
+              "dimension": "LT^-1"
+            },
+            "role": "unknown",
+            "description": "速度",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "a",
+            "value": {
+              "value": 0,
+              "unit": "m/s²",
+              "dimension": "LT^-2"
+            },
+            "role": "given",
+            "description": "加速度",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "t",
+            "value": {
+              "value": 0,
+              "unit": "s",
+              "dimension": "T"
+            },
+            "role": "given",
+            "description": "时间变量",
+            "dependencies": [],
+            "constraints": []
+          }
+        ],
+        "equations": [
+          {
+            "id": "kinematics_equation",
+            "type": "differential",
+            "expression": "dx/dt = v, dv/dt = a",
+            "variables": [
+              "x",
+              "v",
+              "a",
+              "t"
+            ],
+            "parameters": [],
+            "description": "运动学基本方程",
+            "order": 1,
+            "linearity": "linear",
+            "physics_meaning": "速度是位移对时间的导数，加速度是速度对时间的导数"
+          }
+        ],
+        "dependencies": [],
+        "output": [
+          "x",
+          "v",
+          "a"
+        ],
+        "conservation_laws": [],
+        "assumptions": [
+          "质点模型",
+          "经典力学适用"
+        ],
+        "limitations": [
+          "不适用于相对论情况",
+          "忽略量子效应"
+        ],
+        "complexity": "basic",
+        "domain": {
+          "spatial": "1d",
+          "temporal": "dynamic",
+          "scale": "macroscopic"
+        }
+      },
+      {
+        "id": "optical_module",
+        "type": "optical",
+        "name": "光学",
+        "description": "几何光学和波动光学",
+        "parameters": [
+          {
+            "symbol": "θ",
+            "value": {
+              "value": 45,
+              "unit": "°",
+              "dimension": "unknown"
+            },
+            "role": "given",
+            "description": "抛射角",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "n",
+            "value": {
+              "value": 1.5,
+              "unit": "1",
+              "dimension": "1"
+            },
+            "role": "given",
+            "description": "折射率",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "f",
+            "value": {
+              "value": 0.1,
+              "unit": "m",
+              "dimension": "L"
+            },
+            "role": "given",
+            "description": "焦距",
+            "dependencies": [],
+            "constraints": []
+          },
+          {
+            "symbol": "λ",
+            "value": {
+              "value": 5e-7,
+              "unit": "m",
+              "dimension": "L"
+            },
+            "role": "given",
+            "description": "波长",
+            "dependencies": [],
+            "constraints": []
+          }
+        ],
+        "equations": [
+          {
+            "id": "snells_law",
+            "type": "algebraic",
+            "expression": "n1*sin(θ1) = n2*sin(θ2)",
+            "variables": [
+              "n1",
+              "θ1",
+              "n2",
+              "θ2"
+            ],
+            "parameters": [],
+            "description": "斯涅尔定律",
+            "linearity": "nonlinear",
+            "physics_meaning": "折射定律"
+          }
+        ],
+        "dependencies": [],
+        "output": [
+          "θ",
+          "f"
+        ],
+        "conservation_laws": [],
+        "assumptions": [
+          "几何光学近似",
+          "单色光"
+        ],
+        "limitations": [
+          "不适用于强非线性",
+          "忽略衍射效应"
+        ],
+        "complexity": "intermediate",
+        "domain": {
+          "spatial": "3d",
+          "temporal": "static",
+          "scale": "macroscopic"
+        }
+      }
+    ],
+    "objects": [],
+    "parameters": [
+      {
+        "symbol": "v0",
+        "value": {
+          "value": 20,
+          "unit": "m/s",
+          "dimension": "unknown"
+        },
+        "role": "given",
+        "description": "初速度",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "θ",
+        "value": {
+          "value": 45,
+          "unit": "°",
+          "dimension": "unknown"
+        },
+        "role": "given",
+        "description": "抛射角",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "g",
+        "value": {
+          "value": 9.8,
+          "unit": "m/s²",
+          "dimension": "unknown"
+        },
+        "role": "constant",
+        "description": "重力加速度",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "x",
+        "value": {
+          "value": 0,
+          "unit": "m",
+          "dimension": "L"
+        },
+        "role": "unknown",
+        "description": "位移",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "v",
+        "value": {
+          "value": 0,
+          "unit": "m/s",
+          "dimension": "LT^-1"
+        },
+        "role": "unknown",
+        "description": "速度",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "a",
+        "value": {
+          "value": 0,
+          "unit": "m/s²",
+          "dimension": "LT^-2"
+        },
+        "role": "given",
+        "description": "加速度",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "t",
+        "value": {
+          "value": 0,
+          "unit": "s",
+          "dimension": "T"
+        },
+        "role": "given",
+        "description": "时间变量",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "n",
+        "value": {
+          "value": 1.5,
+          "unit": "1",
+          "dimension": "1"
+        },
+        "role": "given",
+        "description": "折射率",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "f",
+        "value": {
+          "value": 0.1,
+          "unit": "m",
+          "dimension": "L"
+        },
+        "role": "given",
+        "description": "焦距",
+        "dependencies": [],
+        "constraints": []
+      },
+      {
+        "symbol": "λ",
+        "value": {
+          "value": 5e-7,
+          "unit": "m",
+          "dimension": "L"
+        },
+        "role": "given",
+        "description": "波长",
+        "dependencies": [],
+        "constraints": []
+      }
+    ],
+    "constraints": [],
+    "conservation_laws": [],
+    "symmetries": [],
+    "environment": {
+      "gravity": {
+        "value": 9.8,
+        "unit": "m/s²",
+        "dimension": "unknown"
+      },
+      "air_resistance": false,
+      "temperature": {
+        "value": 20,
+        "unit": "°C",
+        "dimension": "unknown"
+      }
+    },
+    "boundary_conditions": [],
+    "initial_conditions": []
+  },
+  "simulation": {
+    "duration": {
+      "value": 5,
+      "unit": "s",
+      "dimension": "T"
+    },
+    "time_step": {
+      "value": 0.01,
+      "unit": "s",
+      "dimension": "T"
+    },
+    "solver": "rk4",
+    "precision": "high",
+    "tolerance": 0.000001,
+    "max_iterations": 1000,
+    "events": []
+  },
+  "output": {
+    "variables": [
+      "x",
+      "y",
+      "vx",
+      "vy",
+      "v",
+      "θ"
+    ],
+    "export_formats": [
+      "csv",
+      "json"
+    ],
+    "plots": [
+      {
+        "id": "ir_1758195644981_si0d7ek0q",
+        "type": "trajectory",
+        "title": "抛体轨迹",
+        "x_axis": "t",
+        "y_axis": "x",
+        "variables": [],
+        "style": {}
+      }
+    ],
+    "animations": [
+      {
+        "id": "ir_1758195644981_penuyjsba",
+        "type": "2d",
+        "camera": "fixed",
+        "speed": 1,
+        "loop": true,
+        "duration": 5,
+        "easing": "ease_in_out",
+        "objects": [],
+        "style": {}
+      }
+    ],
+    "checkpoints": []
+  },
+  "optimization": {
+    "precomputed_values": {
+      "g": 9.8
+    },
+    "cached_derivatives": {
+      "kinematics_equation": "dx/dt = v, dv/dt = a"
+    },
+    "parallel_modules": [],
+    "dependency_graph": {
+      "kinematics_module": [],
+      "optical_module": []
+    }
+  },
+  "validation": {
+    "structure_valid": true,
+    "physics_valid": true,
+    "units_consistent": true,
+    "constraints_satisfied": true,
+    "conservation_laws_satisfied": false,
+    "numerical_stability": false,
+    "warnings": [],
+    "errors": [],
+    "physics_consistency_score": 0,
+    "validation_timestamp": "2025-09-18T11:40:44.981Z"
+  },
+  "physics_analysis": {
+    "dominant_effects": [
+      "经典物理",
+      "光学"
+    ],
+    "approximation_level": "phenomenological",
+    "physical_interpretation": "这是一个kinematics_2d物理系统，涉及多个物理现象的相互作用。",
+    "educational_value": {
+      "concepts": [
+        "折射",
+        "反射",
+        "干涉",
+        "衍射",
+        "偏振"
+      ],
+      "difficulty_level": 70,
+      "prerequisites": [
+        "基础数学",
+        "微积分",
+        "线性代数",
+        "微分方程"
+      ]
+    }
+  }
+}

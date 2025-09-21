@@ -1,0 +1,62 @@
+{
+  "subject": "physics",
+  "topic": "波与声音/Waves & Sound",
+  "question": "一根劲度系数为 100 N/m 的轻弹簧竖直固定在天花板上，下端挂一质量 0.5 kg 的小球，处于平衡状态。小球被轻轻拉下 0.1 m 后释放。此时有一列简谐横波沿水平方向传播，波动方程为：\n\ny = 0.02sin(20πt - 0.5πx) (m)\n\n问题：\n1. 小球的振动周期是多少？\n2. 小球在释放后的最大加速度是多少？\n3. 写出该波的频率、波长和传播速度。\n\n涉及模块：力学（弹簧振子）、波动（简谐波）。",
+  "units": [
+    {
+      "original": "度",
+      "standard": "°",
+      "conversion": 0.017453292519943295
+    },
+    {
+      "original": "N",
+      "standard": "N",
+      "conversion": 1
+    },
+    {
+      "original": "m",
+      "standard": "m",
+      "conversion": 1
+    },
+    {
+      "original": "kg",
+      "standard": "kg",
+      "conversion": 1
+    },
+    {
+      "original": "n",
+      "standard": "n",
+      "conversion": 1
+    },
+    {
+      "original": "t",
+      "standard": "t",
+      "conversion": 1000
+    }
+  ],
+  "parameters": [
+    {
+      "symbol": "y",
+      "value": 0.02,
+      "unit": "sin",
+      "raw": "y = 0.02",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "m",
+      "value": 0.5,
+      "unit": "kg",
+      "raw": "质量 0.5 kg",
+      "role": "given",
+      "note": "中文叙述"
+    },
+    {
+      "symbol": "g",
+      "value": 9.8,
+      "unit": "m/s^2",
+      "role": "constant",
+      "note": "重力加速度，未指定时默认 9.8"
+    }
+  ]
+}

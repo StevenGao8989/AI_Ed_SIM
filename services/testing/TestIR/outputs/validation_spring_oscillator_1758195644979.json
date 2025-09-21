@@ -1,0 +1,27 @@
+{
+  "is_valid": false,
+  "errors": [
+    "参数 k 的量纲不匹配: 期望 MT^-2, 实际 unknown",
+    "参数 T 的量纲不匹配: 期望 T, 实际 Θ",
+    "方程 wave_equation 中的变量 y 未在模块参数或系统参数中定义。建议添加参数: y (unknown)"
+  ],
+  "warnings": [
+    "未知参数 T 有非零值",
+    "参数 k 使用了非标准单位: N/m"
+  ],
+  "checks": {
+    "structure": true,
+    "logic": true,
+    "dependencies": true,
+    "physics": false,
+    "units": true,
+    "equations": false
+  },
+  "statistics": {
+    "total_checks": 6,
+    "passed_checks": 4,
+    "failed_checks": 2,
+    "warning_count": 2
+  },
+  "last_validated": "2025-09-18T11:40:44.979Z"
+}

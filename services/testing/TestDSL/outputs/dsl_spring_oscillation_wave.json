@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "id": "physics_1758187216354_g95x0grlx",
+    "version": "2.0.0",
+    "created_at": "2025-09-18T09:20:16.353Z",
+    "subject": "physics",
+    "topic": "波与声音/Waves & Sound",
+    "topic_id": "wave_motion",
+    "system_type": "wave_system",
+    "grade": "高一",
+    "difficulty": "medium",
+    "timestamp": "2025-09-18T09:20:16.353Z",
+    "source_question": "波与声音/Waves & Sound"
+  },
+  "system": {
+    "type": "wave_system",
+    "dimensions": 2,
+    "parameters": [
+      {
+        "symbol": "y",
+        "value": {
+          "value": 0.02,
+          "unit": "m"
+        },
+        "role": "given",
+        "description": "等式赋值"
+      },
+      {
+        "symbol": "m",
+        "value": {
+          "value": 0.5,
+          "unit": "kg"
+        },
+        "role": "given",
+        "description": "中文叙述"
+      },
+      {
+        "symbol": "g",
+        "value": {
+          "value": 9.8,
+          "unit": "m/s²"
+        },
+        "role": "constant",
+        "description": "重力加速度，未指定时默认 9.8"
+      }
+    ],
+    "initial_conditions": [
+      {
+        "name": "y",
+        "value": {
+          "value": 0.02,
+          "unit": "sin"
+        },
+        "description": "等式赋值"
+      },
+      {
+        "name": "m",
+        "value": {
+          "value": 0.5,
+          "unit": "kg"
+        },
+        "description": "中文叙述"
+      }
+    ],
+    "constraints": [],
+    "constants": [
+      {
+        "name": "g",
+        "value": {
+          "value": 9.8,
+          "unit": "m/s^2"
+        },
+        "source": "given",
+        "description": "重力加速度，未指定时默认 9.8"
+      }
+    ],
+    "objects": [],
+    "materials": [
+      "default"
+    ],
+    "environment": {
+      "gravity": {
+        "value": 9.8,
+        "unit": "m/s²"
+      },
+      "air_resistance": false,
+      "temperature": {
+        "value": 20,
+        "unit": "°C"
+      }
+    }
+  },
+  "simulation": {
+    "duration": {
+      "value": 10,
+      "unit": "s"
+    },
+    "time_step": {
+      "value": 0.01,
+      "unit": "s"
+    },
+    "solver": "verlet",
+    "precision": "medium",
+    "events": [
+      {
+        "type": "time",
+        "trigger": {
+          "value": 5,
+          "unit": "s"
+        },
+        "action": "checkpoint",
+        "description": "仿真检查点"
+      }
+    ]
+  },
+  "output": {
+    "variables": [
+      "y",
+      "m",
+      "g"
+    ],
+    "export_formats": [
+      "csv",
+      "json",
+      "yaml"
+    ],
+    "plots": [
+      {
+        "type": "trajectory",
+        "title": "波形图",
+        "x_axis": "x",
+        "y_axis": "y"
+      }
+    ],
+    "animations": [
+      {
+        "type": "2d",
+        "camera": "fixed",
+        "speed": 2,
+        "loop": true,
+        "duration": 5,
+        "easing": "linear"
+      }
+    ],
+    "visualization": {
+      "plots": [
+        {
+          "type": "trajectory",
+          "title": "波形图",
+          "x_axis": "x",
+          "y_axis": "y"
+        }
+      ],
+      "animations": [
+        {
+          "type": "2d",
+          "camera": "fixed",
+          "speed": 2,
+          "loop": true,
+          "duration": 5,
+          "easing": "linear"
+        }
+      ]
+    }
+  },
+  "syllabus": [
+    {
+      "grade": "高一",
+      "topic": "kinematics"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "test_name": "IR 验证器测试",
+  "timestamp": "2025-09-18T11:37:24.002Z",
+  "input": {
+    "ir_file": "/Users/gaobingsong/Documents/AI_Ed_SIM/services/testing/TestIR/outputs/ir_physics_1758187216354_g95x0grlx.json",
+    "ir_id": "physics_1758187216354_g95x0grlx",
+    "ir_system_type": "wave_system"
+  },
+  "validation": {
+    "success": true,
+    "duration": 2,
+    "quality_score": 100,
+    "checks": {
+      "structure": true,
+      "logic": true,
+      "dependencies": true,
+      "physics": true,
+      "units": true,
+      "equations": true
+    },
+    "statistics": {
+      "total_checks": 6,
+      "passed_checks": 6,
+      "failed_checks": 0,
+      "warning_count": 0
+    },
+    "errors": [],
+    "warnings": []
+  },
+  "recommendations": [
+    "IR 质量优秀，可以直接用于后续仿真"
+  ]
+}
