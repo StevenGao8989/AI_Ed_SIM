@@ -1,262 +1,390 @@
 // services/simulation/integrators/rk45.ts
-// RK45 自适应步长积分器（Dormand-Prince方法）
+// RK45 自适应积分器 + 事件根定位
 
-import { StateVector, DerivativeFunction } from './rk4';
+import type { RootFinder, AdaptiveResult } from '../../dsl/types';
+
+export interface State {
+  position: Float64Array;
+  velocity: Float64Array;
+  time: number;
+}
+
+export interface DerivativeFunction {
+  (state: State, dt: number): State;
+}
+
+export interface GuardFunction {
+  (state: State): number;
+}
 
 /**
- * 自适应积分结果
+ * 根查找器实现
  */
-export interface AdaptiveResult {
-  t: number;
-  q: number[];
-  v: number[];
-  h: number;      // 使用的步长
-  error: number;  // 误差估计
-  accepted: boolean;
+export class BisectionRootFinder implements RootFinder {
+  /**
+   * 使用二分法在指定区间内查找根
+   */
+  locateZero(
+    g: (t: number) => number, 
+    t0: number, 
+    t1: number, 
+    tol: number, 
+    maxIters: number = 100
+  ): number | null {
+    let a = t0;
+    let b = t1;
+    let fa = g(a);
+    let fb = g(b);
+
+    // 检查区间端点
+    if (Math.abs(fa) < tol) return a;
+    if (Math.abs(fb) < tol) return b;
+
+    // 检查是否有符号变化
+    if (fa * fb > 0) {
+      return null; // 没有根
+    }
+
+    // 二分查找
+    for (let iter = 0; iter < maxIters; iter++) {
+      const c = (a + b) / 2;
+      const fc = g(c);
+
+      if (Math.abs(fc) < tol || (b - a) / 2 < tol) {
+        return c;
+      }
+
+      if (fa * fc < 0) {
+        b = c;
+        fb = fc;
+      } else {
+        a = c;
+        fa = fc;
+      }
+    }
+
+    return (a + b) / 2; // 返回最后一次迭代的结果
+  }
 }
 
 /**
  * RK45 自适应积分器
  */
 export class RK45Integrator {
-  
-  /**
-   * Dormand-Prince 系数
-   */
-  private static readonly DP_A = [
-    [],
-    [1/5],
-    [3/40, 9/40],
-    [44/45, -56/15, 32/9],
-    [19372/6561, -25360/2187, 64448/6561, -212/729],
-    [9017/3168, -355/33, 46732/5247, 49/176, -5103/18656],
-    [35/384, 0, 500/1113, 125/192, -2187/6784, 11/84]
-  ];
-  
-  private static readonly DP_B = [35/384, 0, 500/1113, 125/192, -2187/6784, 11/84, 0];
-  private static readonly DP_B_HAT = [5179/57600, 0, 7571/16695, 393/640, -92097/339200, 187/2100, 1/40];
+  private rootFinder: RootFinder;
+
+  constructor(
+    private hMax: number = 0.01,
+    private relTol: number = 1e-6,
+    private absTol: number = 1e-9
+  ) {
+    this.rootFinder = new BisectionRootFinder();
+  }
 
   /**
-   * RK45 自适应单步
+   * 执行一步自适应积分
    */
-  static adaptiveStep(
-    f: DerivativeFunction,
-    t: number,
-    q: number[],
-    v: number[],
-    h: number,
-    tol: number = 1e-6
+  stepAdaptive(
+    state: State, 
+    f: DerivativeFunction, 
+    guards: Array<{ id: string; guard: GuardFunction }> = []
   ): AdaptiveResult {
-    const n = q.length;
-    
-    // 计算 k 值
-    const k: Array<{ dq: number[]; dv: number[] }> = [];
-    
-    // k1
-    k[0] = f(t, q, v);
-    
-    // k2 到 k7
-    for (let i = 1; i < 7; i++) {
-      const qi = q.map((qj, j) => {
-        let sum = 0;
-        for (let l = 0; l < i; l++) {
-          sum += this.DP_A[i][l] * k[l].dq[j];
-        }
-        return qj + h * sum;
-      });
-      
-      const vi = v.map((vj, j) => {
-        let sum = 0;
-        for (let l = 0; l < i; l++) {
-          sum += this.DP_A[i][l] * k[l].dv[j];
-        }
-        return vj + h * sum;
-      });
-      
-      k[i] = f(t + h * this.DP_A[i].reduce((sum, a) => sum + a, 0), qi, vi);
-    }
-    
-    // 5阶解
-    const q5 = q.map((qi, i) => {
-      let sum = 0;
-      for (let j = 0; j < 7; j++) {
-        sum += this.DP_B[j] * k[j].dq[i];
-      }
-      return qi + h * sum;
-    });
-    
-    const v5 = v.map((vi, i) => {
-      let sum = 0;
-      for (let j = 0; j < 7; j++) {
-        sum += this.DP_B[j] * k[j].dv[i];
-      }
-      return vi + h * sum;
-    });
-    
-    // 4阶解（用于误差估计）
-    const q4 = q.map((qi, i) => {
-      let sum = 0;
-      for (let j = 0; j < 7; j++) {
-        sum += this.DP_B_HAT[j] * k[j].dq[i];
-      }
-      return qi + h * sum;
-    });
-    
-    const v4 = v.map((vi, i) => {
-      let sum = 0;
-      for (let j = 0; j < 7; j++) {
-        sum += this.DP_B_HAT[j] * k[j].dv[i];
-      }
-      return vi + h * sum;
-    });
-    
-    // 误差估计
-    const errorQ = Math.max(...q5.map((qi, i) => Math.abs(qi - q4[i])));
-    const errorV = Math.max(...v5.map((vi, i) => Math.abs(vi - v4[i])));
-    const error = Math.max(errorQ, errorV);
-    
-    // 判断是否接受步长
-    const accepted = error <= tol;
-    
-    return {
-      t: t + h,
-      q: accepted ? q5 : q,
-      v: accepted ? v5 : v,
-      h: h,
-      error: error,
-      accepted: accepted
-    };
-  }
+    let h = this.hMax;
+    let accepted = false;
+    let newState = state;
+    let events: Array<{ t: number; id: string }> = [];
+    let lastError = 0;
 
-  /**
-   * 自适应步长控制
-   */
-  static adaptiveStepControl(
-    error: number,
-    tol: number,
-    h: number,
-    hMin: number,
-    hMax: number,
-    safetyFactor: number = 0.9
-  ): number {
-    if (error <= tol) {
-      // 成功步长，可以增加
-      const factor = Math.min(2.0, safetyFactor * Math.pow(tol / error, 0.2));
-      return Math.min(hMax, h * factor);
-    } else {
-      // 失败步长，需要减少
-      const factor = Math.max(0.1, safetyFactor * Math.pow(tol / error, 0.25));
-      return Math.max(hMin, h * factor);
-    }
-  }
-
-  /**
-   * 自适应积分到指定时间
-   */
-  static integrateAdaptive(
-    f: DerivativeFunction,
-    t0: number,
-    q0: number[],
-    v0: number[],
-    tEnd: number,
-    h0: number,
-    tol: number = 1e-6,
-    hMin: number = 1e-8,
-    hMax: number = 0.1
-  ): {
-    results: Array<{ t: number; q: number[]; v: number[] }>;
-    stats: { steps: number; rejects: number; finalError: number };
-  } {
-    const results = [{ t: t0, q: [...q0], v: [...v0] }];
-    const stats = { steps: 0, rejects: 0, finalError: 0 };
-    
-    let t = t0;
-    let q = [...q0];
-    let v = [...v0];
-    let h = h0;
-    
-    while (t < tEnd) {
-      // 确保不超过终止时间
-      if (t + h > tEnd) {
-        h = tEnd - t;
-      }
+    // 尝试积分步长
+    while (!accepted && h > 1e-12) {
+      const result = this.rk45Step(state, f, h);
+      lastError = result.error;
       
-      const result = this.adaptiveStep(f, t, q, v, h, tol);
-      
-      if (result.accepted) {
-        // 接受步长
-        t = result.t;
-        q = result.q;
-        v = result.v;
+      if (this.isStepAccepted(result, state, h)) {
+        accepted = true;
+        newState = result.newState;
         
-        results.push({ t, q: [...q], v: [...v] });
-        stats.steps++;
-        stats.finalError = result.error;
+        // 检查事件
+        events = this.detectEvents(state, newState, guards);
         
-        // 调整下一步的步长
-        h = this.adaptiveStepControl(result.error, tol, h, hMin, hMax);
+        // 如果有事件，需要细分步长
+        if (events.length > 0) {
+          const eventTime = this.locateEventTime(state, newState, guards[0], h);
+          if (eventTime !== null && eventTime > state.time && eventTime < newState.time) {
+            // 重新积分到事件时间
+            const eventResult = this.rk45Step(state, f, eventTime - state.time);
+            newState = eventResult.newState;
+            events = [{ t: eventTime, id: guards[0].id }];
+          }
+        }
       } else {
-        // 拒绝步长，减小步长重试
-        h = this.adaptiveStepControl(result.error, tol, h, hMin, hMax);
-        stats.rejects++;
-        
-        // 防止无限循环
-        if (h < hMin) {
-          console.warn(`⚠️ 步长达到最小值 ${hMin}，强制继续`);
-          h = hMin;
-        }
+        // 步长太大，减小步长
+        h *= 0.5;
       }
     }
-    
-    return { results, stats };
-  }
 
-  /**
-   * 估算最优初始步长
-   */
-  static estimateInitialStepSize(
-    f: DerivativeFunction,
-    t0: number,
-    q0: number[],
-    v0: number[],
-    tol: number
-  ): number {
-    const f0 = f(t0, q0, v0);
-    
-    // 计算特征尺度
-    const qScale = Math.max(...q0.map(Math.abs), 1e-6);
-    const vScale = Math.max(...v0.map(Math.abs), 1e-6);
-    const fScale = Math.max(...f0.dv.map(Math.abs), 1e-6);
-    
-    // 估算步长
-    const h0 = Math.sqrt(tol) * Math.min(qScale / vScale, vScale / fScale);
-    
-    return Math.max(1e-8, Math.min(0.1, h0));
-  }
+    // 计算下一步建议步长
+    const hNext = this.calculateNextStepSize(h, accepted, lastError);
 
-  /**
-   * 验证积分精度
-   */
-  static validateAccuracy(
-    f: DerivativeFunction,
-    t: number,
-    q: number[],
-    v: number[],
-    h: number,
-    tol: number
-  ): { accurate: boolean; estimatedError: number; recommendedStepSize: number } {
-    const result = this.adaptiveStep(f, t, q, v, h, tol);
-    const recommendedH = this.adaptiveStepControl(result.error, tol, h, h/10, h*10);
-    
     return {
-      accurate: result.accepted,
-      estimatedError: result.error,
-      recommendedStepSize: recommendedH
+      state: newState.position,
+      t: newState.time,
+      h_next: hNext,
+      accepted,
+      events
     };
+  }
+
+  /**
+   * 执行一步 RK45 积分
+   */
+  private rk45Step(state: State, f: DerivativeFunction, h: number): { 
+    newState: State; 
+    error: number 
+  } {
+    // RK4 步骤
+    const k1 = f(state, 0);
+    
+    const state2: State = {
+      position: this.addArrays(state.position, this.scaleArray(k1.position, h/4)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k1.velocity, h/4)),
+      time: state.time + h/4
+    };
+    const k2 = f(state2, h/4);
+    
+    const state3: State = {
+      position: this.addArrays(state.position, this.scaleArray(k2.position, 3*h/8)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k2.velocity, 3*h/8)),
+      time: state.time + 3*h/8
+    };
+    const k3 = f(state3, 3*h/8);
+    
+    const state4: State = {
+      position: this.addArrays(state.position, this.scaleArray(k3.position, 12*h/13)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k3.velocity, 12*h/13)),
+      time: state.time + 12*h/13
+    };
+    const k4 = f(state4, 12*h/13);
+    
+    const state5: State = {
+      position: this.addArrays(state.position, this.scaleArray(k4.position, h)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k4.velocity, h)),
+      time: state.time + h
+    };
+    const k5 = f(state5, h);
+    
+    const state6: State = {
+      position: this.addArrays(state.position, this.scaleArray(k5.position, h/2)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k5.velocity, h/2)),
+      time: state.time + h/2
+    };
+    const k6 = f(state6, h/2);
+
+    // 5阶解
+    const b5 = [16/135, 0, 6656/12825, 28561/56430, -9/50, 2/55];
+    const newState5 = this.weightedSum(state, [k1, k2, k3, k4, k5, k6], b5, h);
+
+    // 4阶解
+    const b4 = [25/216, 0, 1408/2565, 2197/4104, -1/5, 0];
+    const newState4 = this.weightedSum(state, [k1, k2, k3, k4, k5, k6], b4, h);
+
+    // 计算误差估计
+    const error = this.calculateError(newState4, newState5);
+
+    return {
+      newState: newState5,
+      error
+    };
+  }
+
+  /**
+   * 加权求和
+   */
+  private weightedSum(
+    state: State, 
+    k: State[], 
+    weights: number[], 
+    h: number
+  ): State {
+    const weightedPos = new Float64Array(state.position.length);
+    const weightedVel = new Float64Array(state.velocity.length);
+
+    for (let i = 0; i < k.length; i++) {
+      const w = weights[i];
+      for (let j = 0; j < state.position.length; j++) {
+        weightedPos[j] += w * k[i].position[j];
+        weightedVel[j] += w * k[i].velocity[j];
+      }
+    }
+
+    return {
+      position: this.addArrays(state.position, this.scaleArray(weightedPos, h)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(weightedVel, h)),
+      time: state.time + h
+    };
+  }
+
+  /**
+   * 计算误差估计
+   */
+  private calculateError(state4: State, state5: State): number {
+    let error = 0;
+    const n = state4.position.length;
+
+    for (let i = 0; i < n; i++) {
+      const relError = Math.abs(state5.position[i] - state4.position[i]) / 
+                      (this.absTol + this.relTol * Math.abs(state5.position[i]));
+      error = Math.max(error, relError);
+    }
+
+    return error;
+  }
+
+  /**
+   * 检查步长是否被接受
+   */
+  private isStepAccepted(result: { newState: State; error: number }, state: State, h: number): boolean {
+    return result.error <= 1.0;
+  }
+
+  /**
+   * 计算下一步建议步长
+   */
+  private calculateNextStepSize(currentH: number, accepted: boolean, error?: number): number {
+    if (!accepted) {
+      return currentH * 0.5; // 步长被拒绝，减小步长
+    }
+
+    // 基于误差估计调整步长
+    const safety = 0.9;
+    const maxIncrease = 5.0;
+    const minDecrease = 0.1;
+
+    if (error !== undefined && error > 0) {
+      // 基于误差估计的步长调整
+      const factor = safety * Math.pow(1.0 / error, 1/5);
+      return currentH * Math.min(maxIncrease, Math.max(minDecrease, factor));
+    }
+
+    // 默认：适度增加步长
+    return currentH * 1.2;
+  }
+
+  /**
+   * 检测事件
+   */
+  private detectEvents(
+    oldState: State, 
+    newState: State, 
+    guards: Array<{ id: string; guard: GuardFunction }>
+  ): Array<{ t: number; id: string }> {
+    const events: Array<{ t: number; id: string }> = [];
+
+    for (const { id, guard } of guards) {
+      const oldValue = guard(oldState);
+      const newValue = guard(newState);
+
+      // 检查符号变化（穿越零点）
+      if (oldValue * newValue < 0) {
+        // 使用线性插值估计事件时间
+        const t = oldState.time + (newState.time - oldState.time) * 
+                  Math.abs(oldValue) / (Math.abs(oldValue) + Math.abs(newValue));
+        events.push({ t, id });
+      }
+    }
+
+    return events;
+  }
+
+  /**
+   * 定位事件时间
+   */
+  private locateEventTime(
+    oldState: State, 
+    newState: State, 
+    guard: { id: string; guard: GuardFunction }, 
+    h: number
+  ): number | null {
+    const g = (t: number) => {
+      // 创建插值状态
+      const alpha = (t - oldState.time) / (newState.time - oldState.time);
+      const interpState: State = {
+        position: this.interpolateArray(oldState.position, newState.position, alpha),
+        velocity: this.interpolateArray(oldState.velocity, newState.velocity, alpha),
+        time: t
+      };
+      return guard.guard(interpState);
+    };
+
+    return this.rootFinder.locateZero(g, oldState.time, newState.time, 1e-9, 100);
+  }
+
+  /**
+   * 数组插值
+   */
+  private interpolateArray(a: Float64Array, b: Float64Array, alpha: number): Float64Array {
+    const result = new Float64Array(a.length);
+    for (let i = 0; i < a.length; i++) {
+      result[i] = a[i] + alpha * (b[i] - a[i]);
+    }
+    return result;
+  }
+
+  /**
+   * 数组加法
+   */
+  private addArrays(a: Float64Array, b: Float64Array): Float64Array {
+    if (a.length !== b.length) {
+      throw new Error('数组长度不匹配');
+    }
+    const result = new Float64Array(a.length);
+    for (let i = 0; i < a.length; i++) {
+      result[i] = a[i] + b[i];
+    }
+    return result;
+  }
+
+  /**
+   * 数组标量乘法
+   */
+  private scaleArray(a: Float64Array, scale: number): Float64Array {
+    const result = new Float64Array(a.length);
+    for (let i = 0; i < a.length; i++) {
+      result[i] = a[i] * scale;
+    }
+    return result;
+  }
+
+  /**
+   * 设置根查找器
+   */
+  setRootFinder(rootFinder: RootFinder): void {
+    this.rootFinder = rootFinder;
+  }
+
+  /**
+   * 设置容差
+   */
+  setTolerances(relTol: number, absTol: number): void {
+    this.relTol = relTol;
+    this.absTol = absTol;
+  }
+
+  /**
+   * 设置最大步长
+   */
+  setMaxStepSize(hMax: number): void {
+    this.hMax = hMax;
   }
 }
 
 /**
- * 默认RK45积分器实例
+ * 便捷函数：创建 RK45 积分器
  */
-export const rk45 = RK45Integrator;
+export function createRK45Integrator(
+  hMax: number = 0.01,
+  relTol: number = 1e-6,
+  absTol: number = 1e-9
+): RK45Integrator {
+  return new RK45Integrator(hMax, relTol, absTol);
+}

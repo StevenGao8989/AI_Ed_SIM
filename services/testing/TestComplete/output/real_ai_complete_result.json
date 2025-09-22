@@ -25,7 +25,7 @@
     "issues": []
   },
   "performance": {
-    "totalTime": "41.12s",
+    "totalTime": "53.43s",
     "aiCallTime": "< 5s",
     "physicsCalcTime": "< 0.1s",
     "videoGenTime": "< 10s"

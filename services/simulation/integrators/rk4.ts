@@ -1,150 +1,125 @@
 // services/simulation/integrators/rk4.ts
-// RK4 四阶龙格-库塔积分器
+// RK4 常步长积分器
 
-/**
- * 状态向量类型
- */
-export interface StateVector {
-  q: number[];  // 位置
-  v: number[];  // 速度
+export interface State {
+  position: Float64Array;
+  velocity: Float64Array;
+  time: number;
 }
 
-/**
- * 导数函数类型
- */
-export type DerivativeFunction = (
-  t: number,
-  q: number[],
-  v: number[]
-) => { dq: number[]; dv: number[] };
+export interface DerivativeFunction {
+  (state: State, dt: number): State;
+}
+
+export interface RK4Result {
+  newState: State;
+  error?: number;
+}
 
 /**
  * RK4 积分器
  */
 export class RK4Integrator {
-  
+  constructor(private h: number = 0.01) {}
+
   /**
-   * RK4 单步积分
+   * 执行一步 RK4 积分
    */
-  static step(
-    f: DerivativeFunction,
-    t: number,
-    q: number[],
-    v: number[],
-    h: number
-  ): StateVector {
-    const n = q.length;
+  step(state: State, f: DerivativeFunction): RK4Result {
+    const h = this.h;
     
-    // k1 = f(t, q, v)
-    const k1 = f(t, q, v);
+    // k1 = f(t, y)
+    const k1 = f(state, 0);
     
-    // k2 = f(t + h/2, q + h*k1.dq/2, v + h*k1.dv/2)
-    const q1 = q.map((qi, i) => qi + h * k1.dq[i] / 2);
-    const v1 = v.map((vi, i) => vi + h * k1.dv[i] / 2);
-    const k2 = f(t + h/2, q1, v1);
+    // k2 = f(t + h/2, y + h*k1/2)
+    const state2: State = {
+      position: this.addArrays(state.position, this.scaleArray(k1.position, h/2)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k1.velocity, h/2)),
+      time: state.time + h/2
+    };
+    const k2 = f(state2, h/2);
     
-    // k3 = f(t + h/2, q + h*k2.dq/2, v + h*k2.dv/2)
-    const q2 = q.map((qi, i) => qi + h * k2.dq[i] / 2);
-    const v2 = v.map((vi, i) => vi + h * k2.dv[i] / 2);
-    const k3 = f(t + h/2, q2, v2);
+    // k3 = f(t + h/2, y + h*k2/2)
+    const state3: State = {
+      position: this.addArrays(state.position, this.scaleArray(k2.position, h/2)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k2.velocity, h/2)),
+      time: state.time + h/2
+    };
+    const k3 = f(state3, h/2);
     
-    // k4 = f(t + h, q + h*k3.dq, v + h*k3.dv)
-    const q3 = q.map((qi, i) => qi + h * k3.dq[i]);
-    const v3 = v.map((vi, i) => vi + h * k3.dv[i]);
-    const k4 = f(t + h, q3, v3);
+    // k4 = f(t + h, y + h*k3)
+    const state4: State = {
+      position: this.addArrays(state.position, this.scaleArray(k3.position, h)),
+      velocity: this.addArrays(state.velocity, this.scaleArray(k3.velocity, h)),
+      time: state.time + h
+    };
+    const k4 = f(state4, h);
     
-    // 最终结果
-    const qNew = q.map((qi, i) => qi + h * (k1.dq[i] + 2*k2.dq[i] + 2*k3.dq[i] + k4.dq[i]) / 6);
-    const vNew = v.map((vi, i) => vi + h * (k1.dv[i] + 2*k2.dv[i] + 2*k3.dv[i] + k4.dv[i]) / 6);
+    // y_new = y + h*(k1 + 2*k2 + 2*k3 + k4)/6
+    const k1k2 = this.addArrays(k1.position, this.scaleArray(k2.position, 2));
+    const k3k4 = this.addArrays(this.scaleArray(k3.position, 2), k4.position);
+    const weightedK = this.addArrays(k1k2, k3k4);
     
-    return { q: qNew, v: vNew };
+    const newPosition = this.addArrays(state.position, this.scaleArray(weightedK, h/6));
+    
+    const v1v2 = this.addArrays(k1.velocity, this.scaleArray(k2.velocity, 2));
+    const v3v4 = this.addArrays(this.scaleArray(k3.velocity, 2), k4.velocity);
+    const weightedV = this.addArrays(v1v2, v3v4);
+    
+    const newVelocity = this.addArrays(state.velocity, this.scaleArray(weightedV, h/6));
+
+    return {
+      newState: {
+        position: newPosition,
+        velocity: newVelocity,
+        time: state.time + h
+      }
+    };
   }
 
   /**
-   * 多步积分（固定步长）
+   * 设置步长
    */
-  static integrate(
-    f: DerivativeFunction,
-    t0: number,
-    q0: number[],
-    v0: number[],
-    h: number,
-    steps: number
-  ): Array<{ t: number; q: number[]; v: number[] }> {
-    const results = [{ t: t0, q: [...q0], v: [...v0] }];
-    
-    let t = t0;
-    let q = [...q0];
-    let v = [...v0];
-    
-    for (let i = 0; i < steps; i++) {
-      const state = this.step(f, t, q, v, h);
-      t += h;
-      q = state.q;
-      v = state.v;
-      
-      results.push({ t, q: [...q], v: [...v] });
+  setStepSize(h: number): void {
+    this.h = h;
+  }
+
+  /**
+   * 获取当前步长
+   */
+  getStepSize(): number {
+    return this.h;
+  }
+
+  /**
+   * 数组加法
+   */
+  private addArrays(a: Float64Array, b: Float64Array): Float64Array {
+    if (a.length !== b.length) {
+      throw new Error('数组长度不匹配');
     }
-    
-    return results;
-  }
-
-  /**
-   * 积分到指定时间
-   */
-  static integrateTo(
-    f: DerivativeFunction,
-    t0: number,
-    q0: number[],
-    v0: number[],
-    tEnd: number,
-    h: number
-  ): Array<{ t: number; q: number[]; v: number[] }> {
-    const steps = Math.ceil((tEnd - t0) / h);
-    const actualH = (tEnd - t0) / steps;
-    
-    return this.integrate(f, t0, q0, v0, actualH, steps);
-  }
-
-  /**
-   * 验证积分器稳定性
-   */
-  static validateStability(
-    f: DerivativeFunction,
-    t: number,
-    q: number[],
-    v: number[],
-    h: number
-  ): { stable: boolean; maxEigenvalue: number } {
-    // 简化的稳定性检查：计算雅可比矩阵的最大特征值
-    const epsilon = 1e-8;
-    const n = q.length;
-    
-    // 数值雅可比
-    const jacobian: number[][] = [];
-    const f0 = f(t, q, v);
-    
-    for (let i = 0; i < n; i++) {
-      const qPert = [...q];
-      qPert[i] += epsilon;
-      const fPert = f(t, qPert, v);
-      
-      jacobian[i] = fPert.dv.map((dvPert, j) => (dvPert - f0.dv[j]) / epsilon);
+    const result = new Float64Array(a.length);
+    for (let i = 0; i < a.length; i++) {
+      result[i] = a[i] + b[i];
     }
-    
-    // 估算最大特征值（简化：最大行和）
-    const maxEigenvalue = Math.max(...jacobian.map(row => 
-      row.reduce((sum, val) => sum + Math.abs(val), 0)
-    ));
-    
-    // 稳定性判据：h * λ_max < 2
-    const stable = h * maxEigenvalue < 2.0;
-    
-    return { stable, maxEigenvalue };
+    return result;
+  }
+
+  /**
+   * 数组标量乘法
+   */
+  private scaleArray(a: Float64Array, scale: number): Float64Array {
+    const result = new Float64Array(a.length);
+    for (let i = 0; i < a.length; i++) {
+      result[i] = a[i] * scale;
+    }
+    return result;
   }
 }
 
 /**
- * 默认RK4积分器实例
+ * 便捷函数：创建 RK4 积分器
  */
-export const rk4 = RK4Integrator;
+export function createRK4Integrator(stepSize: number = 0.01): RK4Integrator {
+  return new RK4Integrator(stepSize);
+}

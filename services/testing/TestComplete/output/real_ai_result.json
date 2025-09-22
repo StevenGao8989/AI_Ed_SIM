@@ -42,7 +42,7 @@
     {
       "symbol": "μ",
       "value": 0.2,
-      "unit": "",
+      "unit": ".",
       "role": "given",
       "note": "摩擦系数",
       "dslType": "scalar",
@@ -80,7 +80,7 @@
       "value": null,
       "unit": "m",
       "role": "unknown",
-      "note": "滑行距离",
+      "note": "斜面滑行距离",
       "dslType": "scalar",
       "domain": "kinematics",
       "priority": 10,
@@ -119,11 +119,6 @@
     {
       "original": "m/s²",
       "standard": "m/s²",
-      "conversion": 1
-    },
-    {
-      "original": "m/s",
-      "standard": "m/s",
       "conversion": 1
     },
     {
@@ -203,37 +198,49 @@
     "primary": [
       {
         "name": "自由落体速度公式",
-        "expression": "v = sqrt(2 * g * h)",
-        "description": "计算自由落体落地速度",
+        "expression": "v = sqrt(2gh)",
+        "description": "计算自由落体末速度",
         "type": "primary",
         "module": "kinematics_linear",
         "variables": [
-          "v",
           "g",
           "h"
         ]
       },
       {
-        "name": "斜面滑行距离公式",
-        "expression": "s = v² / (2 * a)",
-        "description": "计算沿斜面滑行距离",
+        "name": "斜面加速度公式",
+        "expression": "a = g(sinθ + μcosθ)",
+        "description": "计算沿斜面减速运动的加速度",
         "type": "primary",
         "module": "newton_dynamics",
         "variables": [
-          "s",
+          "g",
+          "θ",
+          "μ"
+        ]
+      },
+      {
+        "name": "滑行距离公式",
+        "expression": "s = v²/(2a)",
+        "description": "计算匀减速运动距离",
+        "type": "primary",
+        "module": "kinematics_linear",
+        "variables": [
           "v",
           "a"
         ]
       },
       {
         "name": "摩擦力做功公式",
-        "expression": "W = F * s",
+        "expression": "W = μmgcosθ * s",
         "description": "计算机械能损失",
         "type": "primary",
         "module": "work_energy",
         "variables": [
-          "W",
-          "F",
+          "μ",
+          "m",
+          "g",
+          "θ",
           "s"
         ]
       }
@@ -251,7 +258,7 @@
     "complexity": "medium",
     "moduleCount": 3,
     "parameterCount": 8,
-    "estimatedSteps": 3,
+    "estimatedSteps": 4,
     "confidence": 1
   }
 }
