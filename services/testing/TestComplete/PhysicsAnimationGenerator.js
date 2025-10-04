@@ -1,4 +1,5 @@
 // 物理动画生成器：符合物理逻辑的动画视频生成
+/** */
 const { createCanvas } = require('canvas');
 const fs = require('fs');
 const path = require('path');

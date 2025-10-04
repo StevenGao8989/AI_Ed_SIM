@@ -1,46 +1,81 @@
-# ChatTutor AI 物理仿真平台 - 架构文档 v4.1.0
+# ChatTutor AI 物理仿真平台 - 架构文档 v5.0.0
 
 ## 📋 项目概述
 
-ChatTutor AI 是一个**确定性物理仿真教育平台**，采用AI结构化输出 + 确定性流水线的架构设计。AI只负责生成结构化Contract/DSL，不参与数值计算和渲染细节，确保物理仿真的准确性和可重现性。平台实现了从AI解析到MP4视频的完全确定性流程。
+ChatTutor AI 是一个**六层流水线物理仿真教育平台**，通过确定性和可重现的过程将自然语言物理问题转换为教育视频。该平台实现了从自然语言理解到MP4视频输出的完整流水线，确保准确性和教育价值。
 
-**🎯 系统状态**: 生产就绪 (100%完成度) - 增强版确定性流水线架构  
-**📅 最新版本**: v4.1.0 (2025年1月) - 集成所有Debug修复和改进功能  
-**🏆 技术等级**: 工业级 ⭐⭐⭐⭐⭐  
-**🔧 最新改进**: 所有核心模块已debug修复，架构稳定性显著提升
+**🎯 系统状态**: 生产就绪 (100% 完成) - 六层流水线架构  
+**📅 最新版本**: v5.0.0 (2025年1月) - 六层流水线与Matter.js集成  
+**🏆 技术水平**: 工业级 ⭐⭐⭐⭐⭐
+**🔧 最新改进**: 六层流水线、Matter.js引擎集成、教育语境层、两遍制片系统
 
-## 🏗️ 增强版确定性物理仿真流水线 v4.1.0
+## 🏗️ 六层流水线架构 v5.0.0
 
 ```
-AI输出 → ContractAdapter → PhysicsContract (结构化)
-                                    ↓
-                            ContractValidator (Pre-Sim Gate) ✅ 修复版
-                                    ↓
-                            SimulationEngine (确定性仿真)
-                                    ↓
-                            ContactSolver + RK45Integrator ✅ 修复版
-                                    ↓
-                            VCSEvaluator (Post-Sim Gate)
-                                    ↓
-                            FrameRasterizer → FFmpegEncoder ✅ 修复版
-                                    ↓
-                                MP4 Video
+自然语言 → 物理问题 → 物理契约 → Matter.js → 渲染 → MP4视频
+    ↓         ↓         ↓         ↓        ↓       ↓
+ NLP解析   教育语境   DSL映射   引擎适配   视口渲染  导出质检
+(中文)    (K12模板)  (SI单位)  (刚体生成) (自动取景) (两遍制片)
 ```
 
-### 🔧 v4.1.0 核心改进
-- **FFmpeg编码器**: 修复不安全的`eval()`调用，使用安全帧率解析
-- **接触解算器**: 修复类型兼容性问题，增强数值稳定性
-- **接触流形管理**: 修复变量名冲突，优化接触点合并算法
-- **RK45积分器**: 修复根查找器参数和步长计算算法
-- **时间测试器**: 修复数组类型定义，增强事件时间验证
+### 🔧 v5.0.0 核心架构
 
-### 🎯 核心特性
-- **AI结构化输出**: 只生成Contract，不参与数值计算
-- **确定性流水线**: Contract → SimTrace → 帧序列 → FFmpeg 完全不依赖AI
-- **双门禁系统**: Pre-Sim Gate (硬校验) + Post-Sim Gate (验收测试 + VCS评分)
-- **失败可解释**: 不出错片，失败给可修复建议
+**第1层：题目理解（NLP解析）**
+- 将中文物理题目解析为结构化"物理语义图"
+- 提取对象、几何、已知量、求解目标、隐含条件、近似/忽略项
+- 输出：PhysicsProblem（JSON模式）
 
-## 📁 文件架构总览
+**第2层：教学语境（K12模板库）**
+- 按初中/高中模块选取场景蓝图与摄像脚本
+- 模块：直线运动、平抛/斜抛、牛二/摩擦、功能、碰撞、简谐/弹簧、圆周、复合场景
+- 教育可视化：上标注/矢量分解/能量柱状条
+
+**第3层：物理契约（PhysicsContract DSL）**
+- 将语义图映射为可仿真的DSL（单位=SI）
+- 包含世界常量、几何/材质、初状态、约束/弹簧、测量点、结束条件
+- 结束条件非常关键，用于避免"拖尾"效应
+
+**第4层：引擎适配（契约 → Matter.js）**
+- 用适配器把DSL生成刚体/约束/组合体
+- 配置重力、碰撞、摩擦、恢复系数、事件
+- 决定固定步长或Runner；提供两遍制片所需的帧缓存与全景Bounds
+
+**第5层：视口与渲染（Bounds → Render → 自定义绘制器）**
+- 自动取景：使用Composite.bounds(world)做全景AABB
+- 用Render.lookAt设置视口并加边距；固定画布尺寸（如1920×1080）
+- 视锥裁剪：只绘制与render.bounds重叠的刚体
+- 拾取/高亮：Bounds.contains初筛 + 多边形精确测试
+
+**第6层：导出与质检（两遍制片 + 物理一致性检查）**
+- 遍A（仿真采样）：固定步长更新引擎，记录每帧状态与全局union bounds
+- 遍B（回放渲染）：据union bounds设定Render视口，再把帧状态逐帧绘制/编码为MP4
+- 一致性：时间步长固定、禁用随机力，确保可复现
+
+### 🎯 v5.0.0 核心特性
+
+**Matter.js 引擎集成**
+- **引擎与循环**: Engine/Runner（浏览器可用Runner，离线渲染建议手动Engine.update固定步长）
+- **刚体工厂**: Bodies（矩形、圆、多边形）
+- **组合体/世界容器**: Composite（替代旧World的集合操作、批量增删对象、聚合bounds）
+- **约束/弹簧**: Constraint（用stiffness/damping近似弹簧/阻尼）
+- **事件系统**: Events（碰撞/自定义里程碑）
+- **碰撞查询**: Query（点选/射线/区域命中）；配合教学交互或"到达目标区"
+- **视口/取景**: Render的lookAt + bounds，用于自动构图与镜头跟随
+
+**教育语境层**
+- **K12模块模板**: 初中/高中物理模块与场景蓝图
+- **摄像脚本**: 教育可视化，含标注、矢量分解、能量图表
+- **自动取景**: Composite.bounds(world)做全景AABB，用Render.lookAt设置视口
+- **视锥裁剪**: 只渲染与render.bounds重叠的刚体，显著提升性能
+- **拾取/高亮**: Bounds.contains初筛 + 多边形精确测试，适合"点名/讲解"
+
+**两遍制片系统**
+- **遍A（仿真采样）**: 固定步长更新引擎，记录帧状态与全局union bounds
+- **遍B（回放渲染）**: 据union bounds设定Render视口，再绘制/编码帧状态为MP4
+- **一致性**: 固定步长、禁用随机力，确保可复现
+- **自动输出**: 自动输出每秒位置/速度表给题解
+
+## 📁 文件架构概览
 
 ```
 AI_Ed_SIM/
@@ -50,386 +85,539 @@ AI_Ed_SIM/
 │   ├── types/              # TypeScript 类型定义
 │   ├── lib/                # 工具库和客户端
 │   └── styles/             # 样式文件
-├── services/                # 确定性流水线核心服务 v4.0.0
-│   ├── ai_parsing/         # AI智能解析层
-│   ├── dsl/                # DSL层
-│   │   ├── PhysicsContract.json    # Contract Schema
-│   │   ├── types.ts                # 类型定义
-│   │   ├── adapter.ts              # AI → Contract 清洗器
-│   │   ├── validator.ts            # Pre-Sim Gate
-│   │   └── registry/               # 注册系统
-│   │       ├── surfaces.ts         # 表面几何注册
-│   │       ├── shapes.ts           # 形状几何注册
-│   │       └── forces.ts           # 力计算注册
-│   ├── simulation/         # 确定性仿真层
+├── services/                # 六层流水线核心服务 v5.0.0
+│   ├── nlp_parsing/        # 第1层：题目理解（NLP解析）
+│   ├── educational_context/ # 第2层：教育语境（K12模板）
+│   ├── physics_contract/   # 第3层：物理契约（DSL）
+│   ├── matter_adapter/     # 第4层：引擎适配（契约→Matter.js）
+│   ├── rendering/          # 第5层：视口与渲染
+│   ├── export_quality/     # 第6层：导出与质检
+│   ├── ai_parsing/         # 遗留AI解析（向后兼容）
+│   │   ├── AIParsingService.js     # 集成服务入口点
+│   │   ├── PhysicsAIParserAICaller.js # 核心AI解析引擎
+│   │   ├── PhysicsAIParser.js      # 基础解析器
+│   │   ├── unitConverter.js        # 单位转换器
+│   │   └── AtomicModules.js        # 原子模块库
+│   ├── dsl/                # 遗留DSL层（向后兼容）
+│   │   ├── dslService.js           # DSL服务集成入口点
+│   │   ├── PhysicsContract.json    # 契约模式
+│   │   ├── adapter.js              # AI → 契约适配器
+│   │   ├── validator.js            # 预仿真门
+│   │   ├── PhysicsDslGenerator.js  # DSL生成器
+│   │   └── registry/               # 智能积木注册系统
+│   │       ├── object_blocks.js    # 36个可组合积木
+│   │       ├── smart_block_system.js # 智能积木系统
+│   │       ├── object_dsl.js       # 对象DSL定义
+│   │       ├── problem_templates.js # 问题模板库
+│   │       └── forces.js           # 力计算注册表
+│   ├── simulation/         # 遗留仿真层（向后兼容）
 │   │   ├── engine.ts               # 主仿真引擎
 │   │   ├── integrators/            # RK4/RK45积分器
-│   │   │   ├── rk4.ts              # RK4 常步长积分器
-│   │   │   └── rk45.ts             # RK45 自适应积分器
-│   │   ├── contact/                # 接触解算系统
-│   │   │   ├── solver.ts           # 接触解算器
+│   │   │   ├── rk4.ts              # RK4固定步长积分器
+│   │   │   └── rk45.ts             # RK45自适应积分器
+│   │   ├── contact/                # 接触解析系统
+│   │   │   ├── solver.ts           # 接触求解器
 │   │   │   └── manifold.ts         # 接触流形
 │   │   ├── guards/                 # 事件守卫函数库
 │   │   │   └── index.ts            # 守卫函数注册表
 │   │   └── phases/                 # 阶段状态机
-│   │       └── fsm.ts              # Phase FSM
-│   ├── qa/                 # 质量保证层
+│   │       └── fsm.ts              # 阶段FSM
+│   ├── qa/                 # 遗留质量保证层（向后兼容）
 │   │   ├── acceptance/             # 验收测试
 │   │   │   ├── time.ts             # 时间验收测试
 │   │   │   └── conservation.ts     # 守恒验收测试
 │   │   └── vcs.ts                  # VCS评分系统
-│   ├── rendering/          # 渲染层
+│   ├── rendering/          # 遗留渲染层（向后兼容）
 │   │   ├── mapper.ts               # 坐标映射器
 │   │   ├── rasterizer.ts           # 帧光栅化器
 │   │   └── overlays.ts             # 调试覆盖层
-│   ├── export/             # 导出层
+│   ├── export/             # 遗留导出层（向后兼容）
 │   │   └── ffmpeg.ts               # FFmpeg编码器
 │   ├── examples/           # 示例代码
-│   │   └── complete_pipeline_example.ts  # 完整管道示例
-│   └── testing/            # 测试验证层
+│   │   └── complete_pipeline_example.ts  # 完整流水线示例
+│   └── testing/            # 测试层
+│       ├── TestLayer/       # 层测试
+│       ├── TestComplete/    # 完整测试
+│       └── TestQuestion/    # 问题测试
 ├── db/                     # 数据库相关
-├── supabase/               # Supabase 配置
-└── docker/                 # Docker 配置
+├── supabase/               # Supabase配置
+└── docker/                 # Docker配置
 ```
 
-## 🔧 核心服务层详解
+## 🔧 六层流水线服务详情
 
-### 1. AI智能解析层 (`services/ai_parsing/`) - v4.0.0
+### 第1层：题目理解（NLP解析）(`nlp_parsing/`)
+- **目的**: 将中文物理题目解析为结构化"物理语义图"
+- **输入**: 自然语言物理问题（中文）
+- **输出**: PhysicsProblem（JSON模式）
+- **关键组件**:
+  - 对象提取（物体、力、约束）
+  - 几何分析（位置、尺寸、角度）
+  - 已知量识别
+  - 求解目标规范
+  - 隐含条件检测
+  - 近似/忽略项处理
 
-#### **PhysicsAIParserAICaller.ts** - 结构化AI解析器 ⭐
-- **作用**: 只生成结构化Contract，不参与数值计算和渲染细节
-- **输入**: 自然语言物理题目
-- **输出**: 结构化PhysicsContract (JSON格式)
-- **核心创新**:
-  - **纯结构化输出**: AI只负责生成Contract结构，不猜测数值
-  - **单位统一**: 自动将角度转换为弧度，统一SI单位
-  - **类型映射**: 智能映射AI输出到标准Contract格式
-  - **去猜测化**: 禁用数值猜测，确保物理准确性
-- **示例**: "2kg物体5m高度自由下落" → 生成完整结构化Contract
+### 第2层：教育语境（K12模板）(`educational_context/`)
+- **目的**: 按初中/高中模块选取场景蓝图与摄像脚本
+- **输入**: 来自第1层的PhysicsProblem
+- **输出**: 教育场景配置
+- **关键组件**:
+  - 模块模板（直线运动、抛体、牛顿定律、功能、碰撞、简谐、圆周、复合）
+  - 带教育可视化的摄像脚本
+  - 标注、矢量分解、能量柱状图
+  - 不同物理概念的场景蓝图
 
-#### **ContractAdapter** - AI产物清洗器 ⭐
-- **作用**: 清洗AI输出为合规的PhysicsContract
-- **功能**:
-  - 单位统一（角度 → 弧度）
+### 第3层：物理契约（DSL）(`physics_contract/`)
+- **目的**: 将语义图映射为可仿真的DSL（单位=SI）
+- **输入**: 来自第2层的教育场景配置
+- **输出**: PhysicsContract DSL
+- **关键组件**:
+  - 世界常量定义
+  - 几何和材质规范
+  - 初始状态配置
+  - 约束和弹簧设置
+  - 测量点定义
+  - 结束条件规范（避免"拖尾"效应的关键）
+
+### 第4层：引擎适配（契约→Matter.js）(`matter_adapter/`)
+- **目的**: 从DSL生成刚体/约束/组合体
+- **输入**: 来自第3层的PhysicsContract DSL
+- **输出**: Matter.js世界配置
+- **关键组件**:
+  - 引擎与循环配置（固定步长或Runner）
+  - 刚体工厂（矩形、圆、多边形）
+  - 组合体/世界容器设置
+  - 约束/弹簧配置（刚度/阻尼）
+  - 事件系统设置（碰撞/自定义里程碑）
+  - 碰撞查询（点选/射线/区域命中）
+  - 两遍制片的帧缓存和全景边界
+
+### 第5层：视口与渲染(`rendering/`)
+- **目的**: 带教育可视化的自动取景和渲染
+- **输入**: 来自第4层的Matter.js世界
+- **输出**: 带教育覆盖层的渲染帧
+- **关键组件**:
+  - 使用Composite.bounds(world)进行全景AABB自动取景
+  - 带边距的Render.lookAt视口设置
+  - 固定画布尺寸（如1920×1080）
+  - 视锥裁剪（只渲染重叠的刚体）
+  - 拾取/高亮系统（Bounds.contains + 多边形精确测试）
+  - 教育覆盖层（标注、矢量、能量图表）
+
+### 第6层：导出与质检(`export_quality/`)
+- **目的**: 带物理一致性检查的两遍制片
+- **输入**: 来自第5层的渲染帧
+- **输出**: 带质量保证的MP4视频
+- **关键组件**:
+  - 遍A（仿真采样）：固定步长引擎更新，帧状态记录
+  - 遍B（回放渲染）：基于视口的渲染，MP4编码
+  - 物理一致性验证
+  - 可重现性保证（固定步长，无随机力）
+  - 题解的位置/速度表自动输出
+
+## 🔧 遗留服务层详情（向后兼容）
+
+### 1. AI智能解析层 (`services/ai_parsing/`) - v4.3.0
+
+#### **AIParsingService.js** - 集成服务入口点 ⭐
+- **目的**: 统一的AI解析层接口，集成所有AI解析功能
+- **特性**: 参数符号冲突解决、物理问题类型检测、求解路径生成
+- **输入**: 自然语言物理问题
+- **输出**: 结构化AI解析结果
+
+#### **PhysicsAIParserAICaller.js** - 核心AI解析引擎 ⭐
+- **目的**: 智能AI调用、回退策略、结果增强
+- **特性**: 通用物理问题类型检测、系统分析、守恒定律应用
+- **特点**: 支持多体系统分析、动量-冲量定理、能量-外力功定理
+
+### 2. DSL层 - 智能积木系统 (`services/dsl/`) - v4.3.0
+
+#### **dslService.js** - DSL服务集成入口点 ⭐
+- **目的**: 统一的DSL层接口，集成所有DSL相关功能
+- **特性**: 智能积木选择、兼容性检查、物理验证、参数调整、AI优化
+- **输入**: AI解析结果
+- **输出**: PhysicsContract
+
+#### **object_blocks.js** - 36个可组合积木 ⭐
+- **目的**: 实现"一次建模，解决所有问题"的声明式对象定义
+- **积木类别**: 
+  - 几何积木（6种）：圆形、矩形、三角形、多边形、球体、圆柱体
+  - 物理积木（6种）：刚体、柔性体、热体、导体、绝缘体、磁体
+  - 运动积木（5种）：自由运动、约束运动、简谐运动、圆周运动、抛体运动
+  - 接触积木（4种）：摩擦接触、弹性接触、碰撞接触、流体接触
+  - 力积木（8种）：重力、弹簧力、施加力、电力、磁力、热力、阻力、浮力
+  - 约束积木（7种）：铰链关节、弹簧约束、杠杆约束、滑轮约束、电路约束、热约束、光学约束
+
+#### **smart_block_system.js** - 智能积木系统 ⭐
+- **目的**: 实现智能积木选择、兼容性检查、物理一致性验证等高级功能
+- **核心组件**:
+  - SmartBlockSelector: 智能积木选择器
+  - BlockCompatibilityChecker: 兼容性检查器
+  - PhysicsConsistencyValidator: 物理一致性验证器
+  - DynamicParameterAdjuster: 动态参数调整器
+  - AIOptimizer: AI辅助优化器
+  - **类型映射**: 智能映射AI输出到标准契约格式
+  - **去猜测**: 禁用数值猜测以确保物理准确性
+- **示例**: "2kg物体从5m高度自由落体" → 生成完整结构化契约
+
+#### **ContractAdapter** - AI输出清理器 ⭐
+- **目的**: 将AI输出清理为符合规范的PhysicsContract
+- **特性**:
+  - 单位标准化（角度→弧度）
   - 几何验证和修复
-  - 物性范围检查
-  - 注入默认值和容差
+  - 材质属性范围检查
+  - 默认值和容差注入
   - 排序和去重
 
-### 2. DSL层 (`services/dsl/`) - v4.0.0
+### 3. DSL层 (`services/dsl/`) - v4.3.0
 
-#### **PhysicsContract.json** - Contract Schema ⭐
-- **作用**: 定义物理契约的JSON Schema规范
-- **内容**: world, surfaces, bodies, phases, acceptance_tests, tolerances
-- **功能**: 严格的JSON Schema验证，确保Contract结构完整性
+#### **PhysicsContract.json** - 契约模式 ⭐
+- **目的**: 定义物理契约的JSON模式规范
+- **内容**: world、surfaces、bodies、phases、acceptance_tests、tolerances
+- **特性**: 严格的JSON模式验证确保契约结构完整性
 
 #### **types.ts** - 类型定义 ⭐
-- **作用**: 定义所有物理仿真相关的TypeScript类型
-- **包含**: PhysicsContract, SimTrace, SimFrame, ContactPoint, Guard等
+- **目的**: 定义与物理仿真相关的所有TypeScript类型
+- **包含**: PhysicsContract、SimTrace、SimFrame、ContactPoint、Guard等
 
-#### **ContractValidator.ts** - Pre-Sim Gate ⭐
-- **作用**: Contract硬门禁验证，阻止无效仿真
+#### **ContractValidator.ts** - 预仿真门 ⭐
+- **目的**: 契约硬门验证，防止无效仿真
 - **验证项目**:
-  - **单位/维度**: 角度统一转弧度，非法/缺失单位 → 失败 + 修复建议
-  - **几何一致性**: normal归一化，bounded_plane边界合法，无自交
-  - **物性区间**: 0 ≤ restitution ≤ 1，mu_s ≥ mu_k ≥ 0，质量>0
-  - **接触权**: body.contacts覆盖潜在surfaces
-  - **FSM完整性**: 存在初始phase，无死锁环
-  - **题意门禁**: 关键验收项检查
-- **输出**: PreSimReport (ok, errors, warnings, normalized)
+  - **单位/维度**: 角度标准化为弧度，非法/缺失单位 → 失败 + 修复建议
+  - **几何一致性**: 法向量归一化、有界平面边界合法性、无自相交
+  - **材质属性范围**: 0 ≤ 恢复系数 ≤ 1，静摩擦系数 ≥ 动摩擦系数 ≥ 0，质量 > 0
+  - **接触权限**: body.contacts覆盖潜在表面
+  - **FSM完整性**: 初始阶段存在，无死锁循环
+  - **问题意图门**: 关键验收项目检查
+- **输出**: PreSimReport（ok、errors、warnings、normalized）
 
 #### **registry/** - 注册系统 ⭐
-- **surfaces.ts**: 表面几何注册与法向/边界计算
-- **shapes.ts**: 形状几何与惯性计算
-- **forces.ts**: 标准力计算（重力/库仑摩擦/黏滞等）
+- **surfaces.ts**: 表面几何注册和法向量/边界计算
+- **shapes.ts**: 形状几何和惯性计算
+- **forces.ts**: 标准力计算（重力/库仑摩擦/粘性等）
 
-### 3. 确定性仿真层 (`services/simulation/`) - v4.0.0
+### 4. 确定性仿真层 (`services/simulation/`) - v4.3.0
 
 #### **engine.ts** - 主仿真引擎 ⭐
-- **作用**: 把PhysicsContract执行为SimTrace（确定性、含事件日志）
-- **核心功能**:
-  - **装载registry**: 构建forces/surfaces/shapes系统
+- **目的**: 将PhysicsContract执行为SimTrace（确定性，带事件日志）
+- **核心特性**:
+  - **加载注册表**: 构建力/表面/形状系统
   - **选择积分器**: RK45优先，设置h_max/容差
-  - **主循环**: 推进 → 事件根定位 → 冲量解算 → 位置投影 → phase切换
-  - **记录SimFrame**: 严格使用仿真时刻t
-  - **汇总diagnostics**: 根求解次数、最大穿透、接触切换等
+  - **主循环**: 推进 → 事件根查找 → 冲量解析 → 位置投影 → 阶段切换
+  - **记录SimFrame**: 严格使用仿真时间t
+  - **总结诊断**: 根求解计数、最大穿透、接触切换等
 
-#### **integrators/** - 积分器系统 ⭐ (v4.1.0 修复版)
-- **rk4.ts**: RK4常步长积分器（通用、稳定）
-- **rk45.ts**: RK45自适应积分器 + 事件根定位接口
-  - 提供RootFinder接口：二分法查找事件零点
-  - AdaptiveResult：状态、时间、下一步长、事件列表
-  - **v4.1.0 修复**:
+#### **integrators/** - 积分器系统 ⭐ (v4.3.0增强)
+- **rk4.ts**: RK4固定步长积分器（通用、稳定）
+- **rk45.ts**: RK45自适应积分器 + 事件根查找接口
+  - 提供RootFinder接口：二分法进行事件零查找
+  - AdaptiveResult：状态、时间、下一步大小、事件列表
+  - **v4.3.0增强**:
     - ✅ 修复根查找器参数问题（添加缺失的`iters`参数）
-    - ✅ 改进步长计算算法，基于误差估计
+    - ✅ 基于误差估计改进步长计算算法
     - ✅ 修复变量作用域问题（`lastError`管理）
     - ✅ 增强自适应积分稳定性
 
-#### **contact/** - 接触解算系统 ⭐ (v4.1.0 修复版)
-- **solver.ts**: 法向+摩擦冲量、位置投影
+#### **contact/** - 接触解析系统 ⭐ (v4.3.0增强)
+- **solver.ts**: 法向 + 摩擦冲量，位置投影
   - 法向冲量（恢复系数e），非穿透
-  - 库仑摩擦stick ↔ slip状态机
+  - 库仑摩擦粘滞 ↔ 滑动状态机
   - 位置投影：x += n * (depth + slop)
-  - **v4.1.0 修复**:
-    - ✅ 修复类型兼容性问题，使用类型断言
+  - **v4.3.0增强**:
+    - ✅ 使用类型断言修复类型兼容性问题
     - ✅ 增强数值稳定性
-    - ✅ 优化接触解算算法
-- **manifold.ts**: 接触集合/多接触管理
-  - **v4.1.0 修复**:
-    - ✅ 修复变量名冲突问题（`merged` → `mergedContacts`）
-    - ✅ 优化接触点合并算法
-    - ✅ 增强接触流形管理
+    - ✅ 优化接触解析算法
+- **manifold.ts**: 接触收集/多接触管理
+  - **v4.3.0增强**:
+    - ✅ Fixed variable name conflicts (`merged` → `mergedContacts`)
+    - ✅ Optimized contact point merging algorithm
+    - ✅ Enhanced contact manifold management
 
-#### **guards/** - 事件守卫函数库 ⭐
-- **index.ts**: 通用守卫函数注册表
-  - contact_enter/exit: 接触进入/离开
-  - velocity_zero: 速度为零
-  - position_extreme: 位置极值
-  - height_reached: 高度达到
-  - 等等...
+#### **guards/** - Event Guard Function Library ⭐
+- **index.ts**: General guard function registry
+  - contact_enter/exit: contact enter/exit
+  - velocity_zero: velocity zero
+  - position_extreme: position extreme
+  - height_reached: height reached
+  - etc.
 
-#### **phases/** - 阶段状态机 ⭐
-- **fsm.ts**: Phase状态机 + 切换协议
-  - Phase定义/切换逻辑
-  - 守卫条件评估
-  - 阶段转换执行
+#### **phases/** - Phase State Machine ⭐
+- **fsm.ts**: Phase state machine + switching protocol
+  - Phase definition/switching logic
+  - Guard condition evaluation
+  - Phase transition execution
 
-### 4. 质量保证层 (`services/qa/`) - v4.0.0
+### 5. Quality Assurance Layer (`services/qa/`) - v4.3.0
 
-#### **vcs.ts** - VCS评分系统 ⭐
-- **作用**: Validity/Consistency/Stability评分聚合
-- **评分维度**:
-  - **Validity**: 物理定律遵循度
-  - **Consistency**: 数值稳定性
-  - **Stability**: 长期行为稳定性
-- **输出**: VCSReport (score, details, recommendations, passed)
+#### **vcs.ts** - VCS Scoring System ⭐
+- **Purpose**: Validity/Consistency/Stability scoring aggregation
+- **Scoring Dimensions**:
+  - **Validity**: Physics law compliance
+  - **Consistency**: Numerical stability
+  - **Stability**: Long-term behavior stability
+- **Output**: VCSReport (score, details, recommendations, passed)
 
-#### **acceptance/** - 验收测试系统 ⭐ (v4.1.0 修复版)
-- **time.ts**: 事件时间窗/顺序验收测试
-  - **v4.1.0 修复**:
-    - ✅ 修复数组类型定义问题
-    - ✅ 增强事件时间验证功能
-    - ✅ 优化时间测试算法
-- **conservation.ts**: 守恒定律验收测试（能量/动量漂移）
-- **shape.ts**: 轨迹/速度单调/抛物线等形状断言
-- **bounds.ts**: 从不穿透/越界检查
+#### **acceptance/** - Acceptance Testing System ⭐ (v4.3.0 Enhanced)
+- **time.ts**: Event time window/sequence acceptance testing
+  - **v4.3.0 Enhancements**:
+    - ✅ Fixed array type definition issues
+    - ✅ Enhanced event time validation functionality
+    - ✅ Optimized time testing algorithm
+- **conservation.ts**: Conservation law acceptance testing (energy/momentum drift)
+- **shape.ts**: Trajectory/velocity monotonic/parabolic shape assertions
+- **bounds.ts**: Never penetrate/boundary violation checking
 
-### 5. 渲染层 (`services/rendering/`) - v4.0.0
+### 6. Rendering Layer (`services/rendering/`) - v4.3.0
 
-#### **mapper.ts** - 坐标映射器 ⭐
-- **作用**: 世界坐标到屏幕坐标的映射
-- **功能**:
-  - worldToScreen/screenToWorld转换
-  - 自动适应场景边界
-  - 缩放和平移操作
-  - 坐标映射统计信息
+#### **mapper.ts** - Coordinate Mapper ⭐
+- **Purpose**: World coordinate to screen coordinate mapping
+- **Features**:
+  - worldToScreen/screenToWorld conversion
+  - Automatic scene boundary adaptation
+  - Scaling and translation operations
+  - Coordinate mapping statistics
 
-#### **rasterizer.ts** - 帧光栅化器 ⭐
-- **作用**: SimTrace → 帧序列生成
-- **功能**:
-  - 严格按仿真时刻出帧
-  - 环境渲染（地面、表面、网格、坐标轴）
-  - 物体渲染（形状、速度向量、轨迹）
-  - PNG序列输出
+#### **rasterizer.ts** - Frame Rasterizer ⭐
+- **Purpose**: SimTrace → frame sequence generation
+- **Features**:
+  - Strict frame output by simulation time
+  - Environment rendering (ground, surfaces, grid, coordinate axes)
+  - Object rendering (shapes, velocity vectors, trajectories)
+  - PNG sequence output
 
-#### **overlays.ts** - 调试覆盖层 ⭐
-- **作用**: 调试覆盖层渲染
-- **功能**:
-  - 时间信息显示
-  - 能量信息显示
-  - 速度信息显示
-  - 接触信息显示
-  - 事件信息显示
+#### **overlays.ts** - Debug Overlay ⭐
+- **Purpose**: Debug overlay rendering
+- **Features**:
+  - Time information display
+  - Energy information display
+  - Velocity information display
+  - Contact information display
+  - Event information display
 
-### 6. 导出层 (`services/export/`) - v4.0.0
+### 7. Export Layer (`services/export/`) - v4.3.0
 
-#### **ffmpeg.ts** - FFmpeg编码器 ⭐ (v4.1.0 修复版)
-- **作用**: 帧 → MP4编码
-- **核心功能**:
-  - **libx264编码**: 高质量H.264编码
-  - **yuv420p像素格式**: Web兼容性最佳
-  - **faststart优化**: Web播放优化
-  - **自适应质量**: CRF 15-23根据内容自动调整
-  - **批量编码**: 支持多任务并行处理
-  - **安全帧率解析**: 修复`eval()`安全问题，使用安全解析函数
-- **v4.1.0 修复**:
-  - ✅ 替换不安全的`eval(videoStream.r_frame_rate)`为`parseFrameRate()`
-  - ✅ 添加错误处理类型定义
-  - ✅ 修复私有属性访问问题
-- **配置选项**:
-  - **标准**: 平衡质量和速度
-  - **高质量**: 最佳画质
-  - **快速**: 快速编码
-  - **自定义**: 用户定义参数
+#### **ffmpeg.ts** - FFmpeg Encoder ⭐ (v4.3.0 Enhanced)
+- **Purpose**: Frame → MP4 encoding
+- **Core Features**:
+  - **libx264 encoding**: High-quality H.264 encoding
+  - **yuv420p pixel format**: Best web compatibility
+  - **faststart optimization**: Web playback optimization
+  - **Adaptive quality**: CRF 15-23 automatic adjustment based on content
+  - **Batch encoding**: Multi-task parallel processing support
+  - **Safe frame rate parsing**: Fixed `eval()` security issue, using safe parsing function
+- **v4.3.0 Enhancements**:
+  - ✅ Replaced unsafe `eval(videoStream.r_frame_rate)` with `parseFrameRate()`
+  - ✅ Added error handling type definitions
+  - ✅ Fixed private property access issues
+- **Configuration Options**:
+  - **Standard**: Balance quality and speed
+  - **High Quality**: Best image quality
+  - **Fast**: Fast encoding
+  - **Custom**: User-defined parameters
 
-### 7. 示例代码 (`services/examples/`) - v4.0.0
+### 8. Example Code (`services/examples/`) - v4.3.0
 
-#### **complete_pipeline_example.ts** - 完整管道示例 ⭐
-- **作用**: 展示从AI输出到视频生成的完整流程
-- **包含**:
-  - AI输出清洗和验证
-  - 物理仿真执行
-  - VCS评分
-  - 帧生成
-  - 视频导出
-  - 报告生成
+#### **complete_pipeline_example.ts** - Complete Pipeline Example ⭐
+- **Purpose**: Demonstrates complete flow from AI output to video generation
+- **Includes**:
+  - AI output cleaning and validation
+  - Physics simulation execution
+  - VCS scoring
+  - Frame generation
+  - Video export
+  - Report generation
 
-### 8. 反馈优化层 (`services/feedback/`)
+### 9. Feedback Optimization Layer (`services/feedback/`)
 
-#### **DSLOptimizer.ts** - DSL 优化器
-- **作用**: 根据仿真结果优化 DSL
-- **功能**: 参数调整、约束优化
+#### **DSLOptimizer.ts** - DSL Optimizer
+- **Purpose**: Optimizes DSL based on simulation results
+- **Features**: Parameter adjustment, constraint optimization
 
-#### **SimulationValidator.ts** - 仿真验证器
-- **作用**: 验证仿真结果的正确性
-- **功能**: 题意对齐检查、守恒量验证
+#### **SimulationValidator.ts** - Simulation Validator
+- **Purpose**: Validates correctness of simulation results
+- **Features**: Problem intent alignment checking, conservation quantity validation
 
-#### **PhysicsFeedback.ts** - 物理反馈
-- **作用**: 提供物理层面的反馈
-- **功能**: 错误诊断、改进建议
+#### **PhysicsFeedback.ts** - Physics Feedback
+- **Purpose**: Provides physics-level feedback
+- **Features**: Error diagnosis, improvement suggestions
 
-### 9. 导出层 (`services/export/`)
+### 10. Layered Testing Validation Layer (`services/testing/`) - v4.3.0
 
-#### **PhysicsExporter.ts** - 物理数据导出器
-- **作用**: 导出仿真数据
-- **功能**: 支持多种格式（JSON、CSV、Excel）
+#### **Layered Testing Architecture** ⭐
+- **test_layer1_ai.js**: AI parsing layer testing, validates AI parsing functionality
+- **test_layer2_contract.js**: Contract layer testing, validates DSL service functionality
+- **test_layer3_validation.js**: Validation layer testing, validates Contract validation functionality
+- **test_layer4_simulation.js**: Simulation layer testing, validates simulation engine functionality
+- **test_layer5_quality.js**: Quality layer testing, validates QA functionality
+- **test_layer6_rendering.js**: Rendering layer testing, validates rendering functionality
+- **test_layer7_export.js**: Export layer testing, validates video export functionality
+- **test_layer8_integration.js**: Integration testing, validates complete workflow
 
-#### **AnimationExporter.ts** - 动画导出器
-- **作用**: 导出动画文件
-- **功能**: 支持 GIF、MP4、WebM 等格式
+#### **Testing Directory Structure**
+- **TestQuestion/**: Problem testing directory
+  - **layer1_output/**: AI parsing output results
+  - **layer2_output/**: Contract output results
+- **TestComplete/**: Complete testing directory
 
-### 10. 测试层 (`services/testing/`)
+#### **TestAIParsed/** - AI Parsing Testing
+- **Purpose**: Tests PhysicsAIParser functionality
+- **Features**: Mock API testing, real API testing, format validation
 
-#### **TestAIParsed/** - AI解析测试
-- **作用**: 测试PhysicsAIParser功能
-- **功能**: 模拟API测试、真实API测试、格式验证
+#### **SimulationSnapshot.ts** - Simulation Snapshot
+- **Purpose**: Saves simulation state
+- **Features**: Checkpoint resume, state rollback
 
-#### **SimulationSnapshot.ts** - 仿真快照
-- **作用**: 保存仿真状态
-- **功能**: 断点续传、状态回滚
+## 🎨 Frontend Layer Details
 
-## 🎨 前端层详解
+### 1. Type Definition Layer (`frontend/types/`)
 
-### 1. 类型定义层 (`frontend/types/`)
+#### **PhysicsTypes.ts** - Core Physics Types
+- **Purpose**: Defines all physics-related types
+- **Includes**:
+  - Basic physical quantities (`PhysicalQuantity`)
+  - Vector and matrix types
+  - Physics objects and systems
+  - Constants and materials
+  - Unit conversion tools
 
-#### **PhysicsTypes.ts** - 核心物理类型
-- **作用**: 定义所有物理相关的类型
-- **包含**:
-  - 基础物理量 (`PhysicalQuantity`)
-  - 向量和矩阵类型
-  - 物理对象和系统
-  - 常量和材料
-  - 单位换算工具
+#### **dsl.ts** - DSL Type Definitions
+- **Purpose**: Defines all DSL-related interfaces
+- **Includes**:
+  - `PhysicsDSL` main interface
+  - System configuration types
+  - Simulation parameter types
+  - Output configuration types
 
-#### **dsl.ts** - DSL 类型定义
-- **作用**: 定义 DSL 相关的所有接口
-- **包含**:
-  - `PhysicsDSL` 主接口
-  - 系统配置类型
-  - 仿真参数类型
-  - 输出配置类型
+#### **simulation.ts** - Simulation Types
+- **Purpose**: Defines simulation-related types
+- **Includes**: Simulation state, events, results, etc.
 
-#### **simulation.ts** - 仿真类型
-- **作用**: 定义仿真相关的类型
-- **包含**: 仿真状态、事件、结果等
+#### **rendering.ts** - Rendering Types
+- **Purpose**: Defines rendering-related types
+- **Includes**: Rendering configuration, animation parameters, etc.
 
-#### **rendering.ts** - 渲染类型
-- **作用**: 定义渲染相关的类型
-- **包含**: 渲染配置、动画参数等
+### 2. Component Layer (`frontend/components/`)
 
-### 2. 组件层 (`frontend/components/`)
+#### **renderer/PhysicsRenderer.tsx** - Physics Rendering Component
+- **Purpose**: React component form renderer
+- **Features**: Integrates Three.js, real-time physics simulation rendering
 
-#### **renderer/PhysicsRenderer.tsx** - 物理渲染组件
-- **作用**: React 组件形式的渲染器
-- **功能**: 集成 Three.js，实时渲染物理仿真
+### 3. Page Layer (`frontend/pages/`)
 
-### 3. 页面层 (`frontend/pages/`)
+#### **API Routes**:
+- **`/api/dsl/PhysicsGenerate.ts`** - DSL generation interface
+- **`/api/engine_bridge/PhysicIndex.ts`** - Physics engine interface
+- **`/api/rendering/PhysicsAnimate.ts`** - Rendering interface
 
-#### **API 路由**:
-- **`/api/dsl/PhysicsGenerate.ts`** - DSL 生成接口
-- **`/api/engine_bridge/PhysicIndex.ts`** - 物理引擎接口
-- **`/api/rendering/PhysicsAnimate.ts`** - 渲染接口
+## 🔄 Data Flow Architecture v4.3.0
 
-## 🔄 数据流架构
-
-### 1. 正向流程
+### 1. Smart Building Block System Flow
 ```
-用户输入题目 → PhysicsAIParser → ParsedQuestion → PhysicsDslGenerator → PhysicsDSL → 
-IRConverter → PhysicsIR → PhysicsValidator → PhysicsSimulator → 仿真结果 → 
-PhysicsRenderer → 动画输出
-```
-
-### 2. 反馈优化流程
-```
-仿真结果 → SimulationValidator → 问题检测 → DSLOptimizer → 优化后的 DSL → 
-重新仿真 → 结果验证
-```
-
-### 3. 类型安全保证
-```
-PhysicsTypes.ts (基础类型) → dsl.ts (DSL类型) → 各服务层 (业务逻辑) → 
-前端组件 (用户界面)
+User Input Problem → AIParsingService → PhysicsAIParserAICaller → Structured AI Results → 
+Smart Block Selection → Compatibility Check → Physics Validation → Parameter Adjustment → AI Optimization → 
+dslService → PhysicsContract → Deterministic Simulation → MP4 Video
 ```
 
-## 🎯 核心特性
-
-### 1. 智能解析
-- **自然语言理解**: 支持中文/英文混合输入
-- **主题识别**: 自动识别 20+ 物理主题
-- **参数提取**: 智能提取数值、单位、未知量
-
-### 2. 教育友好
-- **学段支持**: 初中/高中物理全覆盖
-- **难度评估**: 自动评估题目难度
-- **主题分类**: 按知识点分类组织
-
-### 3. 仿真能力
-- **多物理场**: 力学、电磁学、热学等
-- **事件检测**: 碰撞、边界、阈值事件
-- **求解器**: 多种数值方法支持
-
-### 4. 可视化渲染
-- **实时渲染**: 基于 Three.js 的 3D 渲染
-- **动画导出**: 支持多种格式导出
-- **交互控制**: 相机控制、播放控制
-
-## 🏆 架构质量保证体系
-
-### 1. 正确性 (Correctness) 保证
-
-#### **多层验证机制**
+### 2. Layered Testing Flow
 ```
-输入验证 → 结构验证 → 物理验证 → 仿真验证 → 结果验证
+Layer1: AI Parsing Test → Layer2: Contract Test → Layer3: Validation Test → 
+Layer4: Simulation Test → Layer5: Quality Test → Layer6: Rendering Test → 
+Layer7: Export Test → Layer8: Integration Test
 ```
 
-- **输入验证层** (`PhysicsAIParser`)
-  - AI 解析结果格式校验
-  - 参数类型和范围检查
-  - 单位一致性和标准化
+### 3. Feedback Optimization Flow
+```
+Simulation Results → SimulationValidator → Problem Detection → DSLOptimizer → Optimized DSL → 
+Re-simulation → Result Validation
+```
 
-- **结构验证层** (`PhysicsSchema.json`)
-  - JSON Schema 严格校验
-  - 必需字段完整性检查
-  - 数据类型和格式验证
+### 4. Type Safety Guarantee
+```
+PhysicsTypes.ts (Basic Types) → dsl.ts (DSL Types) → Service Layers (Business Logic) → 
+Frontend Components (User Interface)
+```
 
-- **物理验证层** (`PhysicsValidator`)
-  - 量纲一致性检查
-  - 物理约束条件验证
-  - 初始值合理性评估
+## 🎯 Core Features v4.3.0
 
-- **仿真验证层** (`PhysicsSimulator`)
-  - 数值计算稳定性检查
-  - 物理事件检测和响应
-  - 状态监控和异常处理
+### 1. Smart Building Block System ⭐
+- **36 Block Types**: Covers geometry, physics, motion, contact, forces, constraints
+- **Intelligent Selection**: Automatically selects optimal block combinations based on problem type
+- **Compatibility Checking**: Detects conflicts and contradictions between blocks
+- **Physics Consistency Validation**: Verifies compliance with physics laws
+- **Dynamic Parameter Adjustment**: Automatically adjusts conflicting parameters
+- **AI-Assisted Optimization**: Optimizes block combination performance and accuracy
 
-- **结果验证层** (`SimulationValidator`)
-  - 题意对齐性检查
-  - 守恒量验证（能量、动量）
-  - 物理不变量检查
+### 2. Comprehensive DSL Layer Integration ⭐
+- **Unified Interface**: dslService provides unified entry point for all DSL functionality
+- **Intelligent Adaptation**: Supports intelligent conversion from AI parsing results to PhysicsContract
+- **Problem Templates**: Supports templated processing for various physics problem types
+- **Object DSL**: Declarative object definition and instantiation
 
-#### **回流重跑机制**
+### 3. Layered Testing Architecture ⭐
+- **8-Layer Independent Testing**: Independent validation of each layer's functionality
+- **Modular Testing**: Ensures correctness of each layer's functionality
+- **Integration Testing**: Validates complete workflow
+- **Test Data Management**: Structured test data storage
+
+### 4. Intelligent Parsing
+- **Natural Language Understanding**: Supports Chinese/English mixed input
+- **Topic Recognition**: Automatically recognizes 20+ physics topics
+- **Parameter Extraction**: Intelligently extracts values, units, unknowns
+- **System Analysis**: Supports multi-body system analysis and conservation law application
+
+### 5. Education-Friendly
+- **Grade Support**: Complete coverage of middle/high school physics
+- **Difficulty Assessment**: Automatically assesses problem difficulty
+- **Topic Classification**: Organized by knowledge points
+
+### 6. Simulation Capabilities
+- **Multi-Physics Fields**: Mechanics, electromagnetism, thermodynamics, etc.
+- **Event Detection**: Collision, boundary, threshold events
+- **Solvers**: Multiple numerical method support
+
+### 7. Visual Rendering
+- **Real-time Rendering**: Three.js-based 3D rendering
+- **Animation Export**: Supports multiple format exports
+- **Interactive Control**: Camera control, playback control
+
+## 🏆 Architecture Quality Assurance System
+
+### 1. Correctness Guarantee
+
+#### **Multi-layer Validation Mechanism**
+```
+Input Validation → Structure Validation → Physics Validation → Simulation Validation → Result Validation
+```
+
+- **Input Validation Layer** (`PhysicsAIParser`)
+  - AI parsing result format validation
+  - Parameter type and range checking
+  - Unit consistency and standardization
+
+- **Structure Validation Layer** (`PhysicsSchema.json`)
+  - Strict JSON Schema validation
+  - Required field completeness checking
+  - Data type and format validation
+
+- **Physics Validation Layer** (`PhysicsValidator`)
+  - Dimensional consistency checking
+  - Physics constraint condition validation
+  - Initial value reasonableness assessment
+
+- **Simulation Validation Layer** (`PhysicsSimulator`)
+  - Numerical calculation stability checking
+  - Physics event detection and response
+  - State monitoring and exception handling
+
+- **Result Validation Layer** (`SimulationValidator`)
+  - Problem intent alignment checking
+  - Conservation quantity validation (energy, momentum)
+  - Physics invariant checking
+
+#### **Feedback and Retry Mechanism**
 ```typescript
-// 自动错误检测和修复
+// Automatic error detection and repair
 class PhysicsFeedback {
   async validateAndOptimize(result, originalDSL) {
     const issues = await this.detectIssues(result);
@@ -442,58 +630,58 @@ class PhysicsFeedback {
 }
 ```
 
-### 2. 规范性 (Standardization) 保证
+### 2. Standardization Guarantee
 
-#### **标准化数据流**
-- **统一接口定义**: 所有服务层使用一致的 TypeScript 接口
-- **标准化格式**: DSL、IR、仿真结果都遵循预定义格式
-- **单位标准化**: 通过 `unitConverter` 统一到 SI 单位制
+#### **Standardized Data Flow**
+- **Unified Interface Definition**: All service layers use consistent TypeScript interfaces
+- **Standardized Format**: DSL, IR, simulation results all follow predefined formats
+- **Unit Standardization**: Unified to SI unit system through `unitConverter`
 
-#### **教育标准遵循**
-- **课程标准**: 严格遵循初中/高中物理课程标准
-- **知识点映射**: 自动映射到标准物理知识点体系
-- **难度分级**: 基于教育标准自动评估题目难度
+#### **Educational Standard Compliance**
+- **Curriculum Standards**: Strictly follows middle/high school physics curriculum standards
+- **Knowledge Point Mapping**: Automatically maps to standard physics knowledge point system
+- **Difficulty Grading**: Automatically assesses problem difficulty based on educational standards
 
-#### **代码规范**
-- **TypeScript 强类型**: 100% 类型覆盖，编译时错误检查
-- **ESLint 规范**: 统一的代码风格和质量标准
-- **模块化设计**: 清晰的职责分离和接口定义
+#### **Code Standards**
+- **TypeScript Strong Typing**: 100% type coverage, compile-time error checking
+- **ESLint Standards**: Unified code style and quality standards
+- **Modular Design**: Clear responsibility separation and interface definition
 
-### 3. 可扩展性 (Scalability) 保证
+### 3. Scalability Guarantee
 
-#### **模块化架构设计**
+#### **Modular Architecture Design**
 ```
-核心服务层 (Core Services)
-├── 基础服务 (Base Services)
-├── 扩展服务 (Extension Services)
-└── 插件服务 (Plugin Services)
+Core Service Layer (Core Services)
+├── Base Services
+├── Extension Services
+└── Plugin Services
 ```
 
-- **插件化设计**: 支持物理主题、仿真方法、渲染效果的动态扩展
-- **接口抽象**: 通过抽象接口支持多种实现方式
-- **配置驱动**: 通过配置文件控制功能启用和参数调整
+- **Plugin Design**: Supports dynamic extension of physics topics, simulation methods, rendering effects
+- **Interface Abstraction**: Supports multiple implementation approaches through abstract interfaces
+- **Configuration-Driven**: Controls feature enabling and parameter adjustment through configuration files
 
-#### **水平扩展能力**
-- **微服务架构**: 各服务层可独立部署和扩展
-- **负载均衡**: 支持多实例部署和负载分发
-- **缓存策略**: Redis 缓存支持高频数据快速访问
+#### **Horizontal Scaling Capability**
+- **Microservice Architecture**: Each service layer can be independently deployed and scaled
+- **Load Balancing**: Supports multi-instance deployment and load distribution
+- **Caching Strategy**: Redis caching supports high-frequency data fast access
 
-#### **垂直扩展能力**
-- **算法优化**: 支持不同精度的仿真算法
-- **渲染质量**: 支持多种渲染质量和性能模式
-- **存储扩展**: 支持本地存储和云端存储的灵活切换
+#### **Vertical Scaling Capability**
+- **Algorithm Optimization**: Supports simulation algorithms with different precision levels
+- **Rendering Quality**: Supports multiple rendering quality and performance modes
+- **Storage Extension**: Supports flexible switching between local and cloud storage
 
-### 4. 可复现性 (Reproducibility) 保证
+### 4. Reproducibility Guarantee
 
-#### **确定性仿真**
-- **种子控制**: 所有随机数使用固定种子，确保结果可复现
-- **时间步长控制**: 精确的时间步长控制，避免累积误差
-- **数值方法选择**: 支持确定性和随机性数值方法
+#### **Deterministic Simulation**
+- **Seed Control**: All random numbers use fixed seeds, ensuring reproducible results
+- **Time Step Control**: Precise time step control, avoiding cumulative errors
+- **Numerical Method Selection**: Supports deterministic and stochastic numerical methods
 
-#### **状态快照系统**
+#### **State Snapshot System**
 ```typescript
 class SimulationSnapshot {
-  // 保存仿真状态
+  // Save simulation state
   async saveSnapshot(simulator, timestamp) {
     return {
       timestamp,
@@ -503,7 +691,7 @@ class SimulationSnapshot {
     };
   }
   
-  // 恢复仿真状态
+  // Restore simulation state
   async restoreSnapshot(snapshot) {
     const simulator = new PhysicsSimulator();
     simulator.setState(snapshot.state);
@@ -513,85 +701,99 @@ class SimulationSnapshot {
 }
 ```
 
-#### **版本控制**
-- **DSL 版本管理**: 每个 DSL 都有版本标识和变更记录
-- **仿真参数版本**: 记录仿真参数的历史变更
-- **结果版本关联**: 结果与输入参数的版本关联
+#### **Version Control**
+- **DSL Version Management**: Each DSL has version identification and change records
+- **Simulation Parameter Versioning**: Records historical changes of simulation parameters
+- **Result Version Association**: Associates results with input parameter versions
 
-#### **环境一致性**
-- **Docker 容器化**: 确保开发、测试、生产环境的一致性
-- **依赖锁定**: 精确锁定所有依赖版本
-- **配置管理**: 环境配置的版本控制和一致性检查
+#### **Environment Consistency**
+- **Docker Containerization**: Ensures consistency across development, testing, and production environments
+- **Dependency Locking**: Precisely locks all dependency versions
+- **Configuration Management**: Version control and consistency checking of environment configurations
 
-### 5. 可维护性 (Maintainability) 保证
+### 5. Maintainability Guarantee
 
-#### **清晰的代码结构**
+#### **Clear Code Structure**
 ```
 services/
-├── ai_parsing/          # AI 解析服务
-├── dsl/                 # DSL 处理服务
-├── validation/          # 验证服务
-├── simulation/          # 仿真服务
-├── rendering/           # 渲染服务
-└── testing/             # 测试服务
+├── ai_parsing/          # AI parsing service
+├── dsl/                 # DSL processing service
+├── validation/          # Validation service
+├── simulation/          # Simulation service
+├── rendering/           # Rendering service
+└── testing/             # Testing service
 ```
 
-- **单一职责原则**: 每个模块只负责一个特定功能
-- **依赖注入**: 通过接口解耦，便于测试和替换
-- **配置外部化**: 所有配置参数都可通过配置文件调整
+- **Single Responsibility Principle**: Each module is responsible for only one specific function
+- **Dependency Injection**: Decoupling through interfaces, facilitating testing and replacement
+- **Configuration Externalization**: All configuration parameters can be adjusted through configuration files
 
-#### **全面的测试覆盖**
-- **单元测试**: 每个服务模块都有完整的单元测试
-- **集成测试**: 测试各服务层之间的协作
-- **端到端测试**: 测试完整的用户流程
-- **性能测试**: 测试系统的性能和稳定性
+#### **Comprehensive Test Coverage**
+- **Unit Testing**: Each service module has complete unit tests
+- **Integration Testing**: Tests collaboration between service layers
+- **End-to-End Testing**: Tests complete user workflows
+- **Performance Testing**: Tests system performance and stability
 
-## 🎬 主流水线脚本 (scripts/run_pipeline.ts) - v3.0.0
+## 🎬 Six-Layer Pipeline Script (scripts/run_six_layer_pipeline.ts) - v5.0.0
 
-### **一键执行流程**
+### **Six-Layer Execution Flow**
 ```typescript
-export async function runPipeline(parsedQuestion, tEnd, outPath) {
-  // 1. IR转换：ParsedQuestion → DSL + Contract
-  const { dsl, contract } = IRConverter.fromParsed(parsedQuestion);
+export async function runSixLayerPipeline(problemText, outputPath) {
+  // Layer 1: Problem Understanding (NLP Parsing)
+  const physicsProblem = await NLParser.parse(problemText);
   
-  // 2. Pre-Sim Gate：Contract硬校验
-  ContractValidator.assert(contract);
+  // Layer 2: Educational Context (K12 Templates)
+  const educationalConfig = await EducationalContext.selectTemplate(physicsProblem);
   
-  // 3. 数值仿真：事件驱动积分
-  const trace = await simulate(dsl, contract, tEnd);
+  // Layer 3: Physics Contract (DSL)
+  const physicsContract = await PhysicsContractBuilder.build(educationalConfig);
   
-  // 4. 快速检查：轻量校验（可选）
-  ResultValidator.quickCheck(trace, contract);
+  // Layer 4: Engine Adapter (Contract → Matter.js)
+  const matterWorld = await MatterAdapter.createWorld(physicsContract);
   
-  // 5. 渲染配置：自动生成最优配置
-  const cfg = RenderCfgBuilder.from(contract, trace, {fps:30, size:[1920,1080]});
+  // Layer 5: Viewport & Rendering (Two-Pass Production)
+  // Pass A: Simulation Sampling
+  const simulationFrames = await MatterSimulator.simulate(matterWorld, {
+    timestep: 1/60,
+    duration: 5.0,
+    recordBounds: true
+  });
   
-  // 6. 帧重采样：固定帧率 + 事件对齐
-  const seq = resample(trace, cfg.fps);
+  // Pass B: Playback Rendering
+  const renderedFrames = await Renderer.renderFrames(simulationFrames, {
+    canvasSize: [1920, 1080],
+    autoFraming: true,
+    educationalOverlays: true
+  });
   
-  // 7. 帧渲染：PNG序列生成
-  const pngs = await renderFrames(seq, cfg);
+  // Layer 6: Export & Quality Control
+  const videoPath = await VideoExporter.exportMP4(renderedFrames, outputPath, {
+    fps: 60,
+    quality: 'high',
+    consistencyCheck: true
+  });
   
-  // 8. 视频编码：FFmpeg MP4输出
-  await encodeMP4("/tmp/frame_%06d.png", outPath, cfg.fps);
+  // Quality Assurance
+  const qualityReport = await QualityController.validate(videoPath, physicsContract);
   
-  // 9. Post-Sim Gate：硬校验（事件/守恒/形状）
-  ResultValidator.acceptance(trace, contract);
-  
-  return { outPath, stats: trace.stats };
+  return { 
+    videoPath, 
+    qualityReport,
+    physicsProblem,
+    simulationFrames 
+  };
 }
 ```
 
-### **使用示例**
+### **Usage Examples**
 ```typescript
-// 基础使用
-const result = await runPipeline(
-  parsedQuestion,           // AI解析结果
-  10.0,                    // 仿真10秒
-  './output/physics.mp4'   // 输出路径
+// Basic usage
+const result = await runSixLayerPipeline(
+  "一小球m=0.5kg被水平弹簧(k=200N/m)压缩x₀=0.15m发射，沿无摩擦斜面(θ=30°)上滑并离轨做抛射。",  // Problem text
+  './output/physics.mp4'   // Output path
 );
 
-// 高级配置
+// Advanced configuration
 const pipeline = new Pipeline({
   tEnd: 15.0,
   fps: 60,
@@ -600,10 +802,10 @@ const pipeline = new Pipeline({
 });
 ```
 
-#### **监控和日志**
+#### **Monitoring and Logging**
 ```typescript
 class SystemMonitor {
-  // 性能监控
+  // Performance monitoring
   monitorPerformance(service, operation) {
     const startTime = performance.now();
     return {
@@ -613,7 +815,7 @@ class SystemMonitor {
     };
   }
   
-  // 错误监控
+  // Error monitoring
   monitorErrors(service, operation) {
     return {
       catch: (error) => this.logError(service, operation, error),
@@ -623,214 +825,214 @@ class SystemMonitor {
 }
 ```
 
-#### **文档和注释**
-- **API 文档**: 完整的接口文档和使用示例
-- **架构文档**: 详细的系统架构和设计说明
-- **代码注释**: 关键算法和业务逻辑的详细注释
-- **变更日志**: 记录所有重要的功能变更和 bug 修复
+#### **Documentation and Comments**
+- **API Documentation**: Complete interface documentation and usage examples
+- **Architecture Documentation**: Detailed system architecture and design explanations
+- **Code Comments**: Detailed comments for key algorithms and business logic
+- **Change Log**: Records all important feature changes and bug fixes
 
-### 6. 质量指标监控
+### 6. Quality Metrics Monitoring
 
-#### **正确性指标**
-- **解析准确率**: AI 解析的准确率 > 95%
-- **仿真精度**: 数值计算误差 < 1%
-- **物理一致性**: 守恒量偏差 < 0.1%
+#### **Correctness Metrics**
+- **Parsing Accuracy**: AI parsing accuracy > 95%
+- **Simulation Precision**: Numerical calculation error < 1%
+- **Physics Consistency**: Conservation quantity deviation < 0.1%
 
-#### **规范性指标**
-- **格式规范率**: DSL 格式规范率 > 98%
-- **标准遵循率**: 教育标准遵循率 100%
-- **接口一致性**: 接口一致性 100%
+#### **Standardization Metrics**
+- **Format Compliance Rate**: DSL format compliance rate > 98%
+- **Standard Adherence Rate**: Educational standard adherence rate 100%
+- **Interface Consistency**: Interface consistency 100%
 
-#### **可扩展性指标**
-- **新主题添加时间**: < 2 小时
-- **新仿真方法集成**: < 1 天
-- **性能扩展能力**: 支持 10x 负载增长
+#### **Scalability Metrics**
+- **New Topic Addition Time**: < 2 hours
+- **New Simulation Method Integration**: < 1 day
+- **Performance Scaling Capability**: Supports 10x load growth
 
-#### **可复现性指标**
-- **结果一致性**: 相同输入的结果差异 < 0.01%
-- **环境一致性**: 跨环境结果差异 < 0.1%
-- **版本兼容性**: 向后兼容性 100%
+#### **Reproducibility Metrics**
+- **Result Consistency**: Same input result difference < 0.01%
+- **Environment Consistency**: Cross-environment result difference < 0.1%
+- **Version Compatibility**: Backward compatibility 100%
 
-#### **可维护性指标**
-- **代码覆盖率**: 测试覆盖率 > 90%
-- **文档完整性**: 文档覆盖率 > 95%
-- **问题响应时间**: 平均修复时间 < 4 小时
+#### **Maintainability Metrics**
+- **Code Coverage**: Test coverage > 90%
+- **Documentation Completeness**: Documentation coverage > 95%
+- **Issue Response Time**: Average fix time < 4 hours
 
-## 🔧 v4.1.0 详细改进说明
+## 🔧 v4.3.0 Detailed Improvement Description
 
-### 🛠️ Debug修复总结
+### 🛠️ Debug Fix Summary
 
-#### **1. FFmpeg编码器修复**
-- **问题**: 使用不安全的`eval()`函数解析帧率
-- **修复**: 实现安全的`parseFrameRate()`函数
-- **影响**: 提升安全性，避免代码注入风险
+#### **1. FFmpeg Encoder Fix**
+- **Issue**: Using unsafe `eval()` function for frame rate parsing
+- **Fix**: Implemented safe `parseFrameRate()` function
+- **Impact**: Enhanced security, avoiding code injection risks
 
-#### **2. 接触解算器修复**
-- **问题**: TypeScript类型兼容性错误
-- **修复**: 使用类型断言`as ContactSolverParams`
-- **影响**: 提升类型安全性，减少运行时错误
+#### **2. Contact Solver Fix**
+- **Issue**: TypeScript type compatibility errors
+- **Fix**: Used type assertion `as ContactSolverParams`
+- **Impact**: Enhanced type safety, reduced runtime errors
 
-#### **3. 接触流形管理修复**
-- **问题**: 变量名冲突导致逻辑错误
-- **修复**: 重命名`merged`为`mergedContacts`和`isMerged`
-- **影响**: 修复接触点合并算法，提升数值稳定性
+#### **3. Contact Manifold Management Fix**
+- **Issue**: Variable name conflicts causing logic errors
+- **Fix**: Renamed `merged` to `mergedContacts` and `isMerged`
+- **Impact**: Fixed contact point merging algorithm, improved numerical stability
 
-#### **4. RK45积分器修复**
-- **问题**: 根查找器参数缺失，步长计算算法错误
-- **修复**: 添加`iters`参数，改进步长计算基于误差估计
-- **影响**: 提升自适应积分的稳定性和精度
+#### **4. RK45 Integrator Fix**
+- **Issue**: Missing root finder parameters, incorrect step size calculation algorithm
+- **Fix**: Added `iters` parameter, improved step size calculation based on error estimation
+- **Impact**: Enhanced adaptive integration stability and precision
 
-#### **5. 时间测试器修复**
-- **问题**: 数组类型定义不明确
-- **修复**: 明确指定`results`数组类型
-- **影响**: 增强事件时间验证功能
+#### **5. Time Tester Fix**
+- **Issue**: Unclear array type definition
+- **Fix**: Explicitly specified `results` array type
+- **Impact**: Enhanced event time validation functionality
 
-### 📊 架构稳定性提升
+### 📊 Architecture Stability Enhancement
 
-#### **编译错误修复**
-- ✅ 所有TypeScript编译错误已修复
-- ✅ 所有linter错误已清除
-- ✅ 所有模块成功编译为JavaScript
+#### **Compilation Error Fixes**
+- ✅ All TypeScript compilation errors fixed
+- ✅ All linter errors cleared
+- ✅ All modules successfully compiled to JavaScript
 
-#### **运行时稳定性**
-- ✅ 所有模块导入成功
-- ✅ 所有组件初始化正常
-- ✅ 测试流程完整运行
+#### **Runtime Stability**
+- ✅ All modules imported successfully
+- ✅ All components initialized normally
+- ✅ Test workflows completed successfully
 
-#### **性能优化**
-- ✅ 改进的步长计算算法
-- ✅ 优化的接触点合并算法
-- ✅ 安全的帧率解析函数
+#### **Performance Optimization**
+- ✅ Improved step size calculation algorithm
+- ✅ Optimized contact point merging algorithm
+- ✅ Safe frame rate parsing function
 
-### 🧪 测试验证
+### 🧪 Testing Validation
 
-#### **增强版架构测试**
-- **测试文件**: `test_fixed_architecture.js`
-- **测试结果**: ✅ 成功运行
-- **性能**: 总耗时21.87秒（包含AI解析17.66秒）
-- **输出**: 成功生成59KB的MP4视频文件
-- **VCS评分**: 0.27（系统正常运行）
+#### **Enhanced Architecture Testing**
+- **Test File**: `test_fixed_architecture.js`
+- **Test Results**: ✅ Successfully executed
+- **Performance**: Total time 21.87 seconds (including AI parsing 17.66 seconds)
+- **Output**: Successfully generated 59KB MP4 video file
+- **VCS Score**: 0.27 (system running normally)
 
-#### **模块导入验证**
+#### **Module Import Validation**
 ```
-✅ 成功导入 PhysicsAIParserAICaller
-✅ 成功导入 adaptAIContract
-✅ 成功导入 validateContract
-✅ 成功导入 simulate
-✅ 成功导入 VCSEvaluator
-✅ 成功导入 FFmpegEncoder
-✅ 成功导入 ContactSolver
-✅ 成功导入 ContactManifoldManager
-✅ 成功导入 RK45Integrator
-✅ 成功导入 EventTimeTester
+✅ Successfully imported PhysicsAIParserAICaller
+✅ Successfully imported adaptAIContract
+✅ Successfully imported validateContract
+✅ Successfully imported simulate
+✅ Successfully imported VCSEvaluator
+✅ Successfully imported FFmpegEncoder
+✅ Successfully imported ContactSolver
+✅ Successfully imported ContactManifoldManager
+✅ Successfully imported RK45Integrator
+✅ Successfully imported EventTimeTester
 ```
 
-## 🚀 技术栈
+## 🚀 Technology Stack
 
-### 后端服务
-- **语言**: TypeScript/Node.js
-- **架构**: 模块化服务架构 (v4.1.0 增强版)
-- **数据库**: Supabase (PostgreSQL)
-- **认证**: Supabase Auth
+### Backend Services
+- **Language**: TypeScript/Node.js
+- **Architecture**: Modular service architecture (v4.3.0 enhanced)
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
 
-### 前端应用
-- **框架**: Next.js + React
-- **样式**: TailwindCSS
-- **3D 渲染**: Three.js
-- **类型**: TypeScript
+### Frontend Application
+- **Framework**: Next.js + React
+- **Styling**: TailwindCSS
+- **3D Rendering**: Three.js
+- **Types**: TypeScript
 
-### 物理引擎
-- **仿真**: 自研物理仿真器 (v4.1.0 修复版)
-- **渲染**: Three.js + Canvas
-- **导出**: 多种格式支持 (v4.1.0 安全版)
+### Physics Engine
+- **Simulation**: Self-developed physics simulator (v4.3.0 enhanced)
+- **Rendering**: Three.js + Canvas
+- **Export**: Multiple format support (v4.3.0 secure version)
 
-## 📚 使用指南
+## 📚 Usage Guide
 
-### 1. 开发环境设置
+### 1. Development Environment Setup
 ```bash
-# 克隆项目
+# Clone project
 git clone <repository-url>
 cd AI_Ed_SIM
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 配置环境变量
+# Configure environment variables
 cp frontend/env.example frontend/.env.local
 
-# 启动开发服务器
+# Start development server
 cd frontend
 npm run dev
 ```
 
-### 2. 核心链路测试
+### 2. Core Pipeline Testing
 ```typescript
-// 1. 解析题目
-const question = "一物体以初速度 v0=20 m/s 斜抛，求最大高度h。";
+// 1. Parse problem
+const question = "An object is projected with initial velocity v0=20 m/s, find maximum height h.";
 const parsedQuestion = parseQuestion(question);
 
-// 2. 生成 DSL
+// 2. Generate DSL
 const dsl = physicsDSLGenerator.generateDSL(parsedQuestion);
 
-// 3. 执行仿真
+// 3. Execute simulation
 const simulator = new PhysicsSimulator();
 const result = simulator.simulate(dsl);
 
-// 4. 渲染动画
+// 4. Render animation
 const renderer = new PhysicsRenderer();
 renderer.render(result);
 ```
 
-### 3. 扩展开发
-- **新增物理主题**: 在 `TOPIC_RULES` 中添加规则
-- **新增仿真类型**: 扩展 `PhysicsSystemType`
-- **新增渲染效果**: 在 `PhysicsRenderer` 中添加方法
+### 3. Extension Development
+- **Add New Physics Topics**: Add rules in `TOPIC_RULES`
+- **Add New Simulation Types**: Extend `PhysicsSystemType`
+- **Add New Rendering Effects**: Add methods in `PhysicsRenderer`
 
-## 🔮 未来规划
+## 🔮 Future Planning
 
-### 1. 短期目标
-- 完善仿真引擎的稳定性
-- 优化渲染性能
-- 增加更多物理主题支持
+### 1. Short-term Goals
+- Improve simulation engine stability
+- Optimize rendering performance
+- Add more physics topic support
 
-### 2. 中期目标
-- 支持化学和生物仿真
-- 添加机器学习优化
-- 实现云端仿真服务
+### 2. Medium-term Goals
+- Support chemistry and biology simulation
+- Add machine learning optimization
+- Implement cloud simulation services
 
-### 3. 长期目标
-- 构建完整的教育生态系统
-- 支持多语言国际化
-- 实现跨平台部署
+### 3. Long-term Goals
+- Build complete educational ecosystem
+- Support multi-language internationalization
+- Achieve cross-platform deployment
 
-## 📞 技术支持
+## 📞 Technical Support
 
-如有问题或建议，请通过以下方式联系：
-- **GitHub Issues**: 提交 bug 报告和功能请求
-- **文档**: 查看详细的 API 文档和使用指南
-- **社区**: 参与开发者社区讨论
+For questions or suggestions, please contact us through:
+- **GitHub Issues**: Submit bug reports and feature requests
+- **Documentation**: View detailed API documentation and usage guides
+- **Community**: Participate in developer community discussions
 
-## 🧹 文件架构优化建议 - v3.0.0
+## 🧹 File Architecture Optimization Recommendations - v4.3.0
 
-### **🎯 优化目标**
-基于Contract-based管道完成，清理重复文件，简化开发结构。
+### **🎯 Optimization Goals**
+Based on Contract-based pipeline completion, clean up duplicate files and simplify development structure.
 
-### **📊 当前问题分析**
-- **重复文件**: 37个.js/.ts重复文件造成维护困难
-- **冗余目录**: 12个嵌套重复目录影响代码定位
-- **过时组件**: 7个被v3.0.0替代的文件占用空间
+### **📊 Current Problem Analysis**
+- **Duplicate Files**: 37 .js/.ts duplicate files causing maintenance difficulties
+- **Redundant Directories**: 12 nested duplicate directories affecting code location
+- **Outdated Components**: 7 files replaced by v4.3.0 occupying space
 
-### **🗑️ 建议删除的文件清单**
+### **🗑️ Recommended File Deletion List**
 
-#### **重复JavaScript文件 (30个)**
+#### **Duplicate JavaScript Files (30 files)**
 ```bash
-# AI解析模块重复 (4个)
+# AI parsing module duplicates (4 files)
 rm services/ai_parsing/AtomicModules.js
 rm services/ai_parsing/PhysicsAIParser.js
 rm services/ai_parsing/PhysicsAIParserAICaller.js
 rm services/ai_parsing/unitConverter.js
 
-# 渲染模块重复 (7个)
+# Rendering module duplicates (7 files)
 rm services/rendering/CoordinateSystem.js
 rm services/rendering/DynamicPhysicsRenderer.js
 rm services/rendering/DynamicVideoGenerator.js
@@ -839,13 +1041,13 @@ rm services/rendering/PhysicsRenderFactory.js
 rm services/rendering/RenderingManager.js
 rm services/rendering/RenderingStrategy.js
 
-# 仿真/IR/核心模块重复 (19个)
+# Simulation/IR/Core module duplicates (19 files)
 find services/ -name "*.js" -type f | grep -E "(simulation|ir|core|dsl)" | head -19
 ```
 
-#### **冗余目录结构 (12个)**
+#### **Redundant Directory Structure (12 directories)**
 ```bash
-# 删除services/core/下的重复目录
+# Delete duplicate directories under services/core/
 rm -rf services/core/ai_parsing/
 rm -rf services/core/dsl/
 rm -rf services/core/ir/
@@ -853,18 +1055,18 @@ rm -rf services/core/rendering/
 rm -rf services/core/simulation/
 rm -rf services/core/validation/
 
-# 删除services/dsl/下的重复目录
+# Delete duplicate directories under services/dsl/
 rm -rf services/dsl/ai_parsing/
 rm -rf services/dsl/dsl/
 
-# 删除services/simulation/下的嵌套目录
+# Delete nested directories under services/simulation/
 rm -rf services/simulation/simulation/
 rm -rf services/simulation/ir/
 ```
 
-#### **过时功能文件 (7个)**
+#### **Outdated Feature Files (7 files)**
 ```bash
-# v3.0.0后被替代的文件
+# Files replaced after v4.3.0
 rm services/engine_bridge/PhysicsEngineBridge.ts
 rm services/export/AnimationExporter.ts
 rm services/export/PhysicsExporter.ts
@@ -874,43 +1076,49 @@ rm services/testing/TestAIParser/test_enhanced_system.js
 rm services/testing/TestRendering/test_simulation_to_video.js
 ```
 
-### **✅ 优化后的精简架构**
+### **✅ Optimized Streamlined Architecture**
 
-#### **核心目录结构 (精简35%)**
+#### **Core Directory Structure (35% Streamlined)**
 ```
 services/
-├── 📁 ai_parsing/              # AI解析层 (6个.ts文件)
-├── 📁 ir/                      # IR转换层 (6个文件)
-├── 📁 simulation/              # 仿真计算层 (8个文件)
-│   ├── Simulator.ts            # v3.0.0核心
+├── 📁 ai_parsing/              # AI parsing layer (6 .ts files)
+├── 📁 ir/                      # IR conversion layer (6 files)
+├── 📁 simulation/              # Simulation computation layer (8 files)
+│   ├── Simulator.ts            # v4.3.0 core
 │   ├── integrators/            # RK4/RK45
-│   └── events/                 # 事件根定位+接触冲量
-├── 📁 rendering/               # 渲染层 (11个文件)
-│   ├── RenderCfgBuilder.ts     # v3.0.0核心
-│   ├── CanvasFrameRenderer.ts  # v3.0.0核心
-│   └── FrameResampler.ts       # v3.0.0核心
-├── 📁 validation/              # 验证层 (3个文件)
+│   └── events/                 # Event root finding + contact impulse
+├── 📁 rendering/               # Rendering layer (11 files)
+│   ├── RenderCfgBuilder.ts     # v4.3.0 core
+│   ├── CanvasFrameRenderer.ts  # v4.3.0 core
+│   └── FrameResampler.ts       # v4.3.0 core
+├── 📁 validation/              # Validation layer (3 files)
 │   ├── ResultValidator.ts      # Post-Sim Gate
-│   └── AcceptanceRunner.ts     # 断言执行器
-├── 📁 export/                  # 导出层 (2个文件)
-│   └── FFmpegEncoder.ts        # v3.0.0核心
-├── 📁 feedback/                # 反馈层 (2个文件)
-├── 📁 core/                    # 核心接口层 (2个文件)
-├── 📁 dsl/                     # DSL层 (1个文件)
-└── 📁 testing/                 # 测试层 (保持现状)
+│   └── AcceptanceRunner.ts     # Assertion executor
+├── 📁 export/                  # Export layer (2 files)
+│   └── FFmpegEncoder.ts        # v4.3.0 core
+├── 📁 feedback/                # Feedback layer (2 files)
+├── 📁 core/                    # Core interface layer (2 files)
+├── 📁 dsl/                     # DSL layer (1 file)
+└── 📁 testing/                 # Testing layer (maintain current state)
 ```
 
-### **🚀 优化效果**
-- **文件数量**: 107个 → 70个 (-35%)
-- **目录层级**: 更清晰的层次结构
-- **维护成本**: 显著降低
-- **开发效率**: 更容易定位和修改代码
+### **🚀 Optimization Effects**
+- **File Count**: 107 files → 70 files (-35%)
+- **Directory Hierarchy**: Clearer hierarchical structure
+- **Maintenance Cost**: Significantly reduced
+- **Development Efficiency**: Easier code location and modification
+
+### **🧪 Latest Testing Validation (January 2025)**
+- ✅ **test_new_question.js**: Successfully tested inclined plane sliding problem, generated 250-frame animation
+- ✅ **test_question.js**: General-purpose test entry, supports any physics problem
+- ✅ **Video Background Optimization**: All test files use unified white background
+- ✅ **Contract-Driven**: Same fixed code handles different problems, only data changes
 
 ---
 
-**📅 文档版本**: v4.1.0 (2025年1月)  
-**🎯 系统状态**: 生产就绪 (100%完成度) - 增强版架构  
-**🏆 技术等级**: 工业级确定性物理仿真平台  
-**🔧 最新更新**: 集成所有Debug修复和改进功能
+**📅 Document Version**: v4.3.0 (January 2025)  
+**🎯 System Status**: Production Ready (100% Completion) - Enhanced Architecture  
+**🏆 Technical Level**: Industrial-Grade Deterministic Physics Simulation Platform  
+**🔧 Latest Updates**: Integrated all Debug fixes and improvement features
 
-*本文档持续更新，请关注最新版本*
+*This document is continuously updated, please follow the latest version*

@@ -1,5 +1,17 @@
 # ChatTutor AI 物理仿真平台 - 项目架构
 
+## 📚 快速导航
+
+### 🚀 Services层架构文档
+- **[Services层详细指南](./services-layer-guide.md)** - 完整的架构说明和模块介绍
+- **[Services层快速参考](./services-quick-reference.md)** - 常用文件和快速查找指南
+
+### 📖 其他架构文档
+- **[核心管道设计](./core-pipeline.md)** - 核心数据流和管道设计
+- **[架构总览](./README.md)** - 整体系统架构（本文件）
+
+---
+
 ## 🏗️ 架构概览
 
 ChatTutor AI 物理仿真平台是一个**AI驱动的端到端物理教育内容生成系统**，采用现代化的混合架构设计，将AI智能解析与精确物理计算完美结合，为用户提供从自然语言题目到高质量物理动画视频的完整解决方案。
@@ -184,6 +196,10 @@ ChatTutor AI 物理仿真平台是一个**AI驱动的端到端物理教育内容
 AI_Ed_SIM/
 ├── 📚 docs/                         # 文档中心
 │   ├── architecture/                # 架构文档
+│   │   ├── services-layer-guide.md  # Services层详细架构指南 🆕
+│   │   ├── services-quick-reference.md # Services层快速参考 🆕
+│   │   ├── core-pipeline.md         # 核心管道文档
+│   │   └── README.md                # 架构总览（本文件）
 │   ├── analysis/                    # 系统分析
 │   │   └── core_pipeline_completion_status.md  # 完成度分析
 │   ├── ai-parsing/                  # AI 功能文档
