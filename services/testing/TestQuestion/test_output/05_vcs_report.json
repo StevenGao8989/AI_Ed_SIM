@@ -1,0 +1,87 @@
+{
+  "score": {
+    "validity": 0,
+    "consistency": 0.33333333333332443,
+    "stability": 0.3333333333333333,
+    "overall": 0.19999999999999732
+  },
+  "details": {
+    "validityTests": [
+      {
+        "name": "conservation_undefined",
+        "result": {
+          "ok": false,
+          "score": 0,
+          "reason": "不支持的守恒量: undefined",
+          "hints": [
+            "使用支持的类型: energy, momentum"
+          ]
+        }
+      }
+    ],
+    "consistencyTests": [
+      {
+        "name": "numerical_stability",
+        "result": {
+          "ok": false,
+          "score": null,
+          "reason": "平均速度变化: NaN m/s",
+          "hints": []
+        }
+      },
+      {
+        "name": "time_step_consistency",
+        "result": {
+          "ok": true,
+          "score": 0.9999999999999734,
+          "reason": "时间步长变化: 0.00%",
+          "hints": []
+        }
+      },
+      {
+        "name": "energy_drift",
+        "result": {
+          "ok": true,
+          "score": null,
+          "reason": "能量守恒良好: 最大漂移 NaN%"
+        }
+      }
+    ],
+    "stabilityTests": [
+      {
+        "name": "long_term_stability",
+        "result": {
+          "ok": false,
+          "score": null,
+          "reason": "后期平均能量变化: NaN J",
+          "hints": []
+        }
+      },
+      {
+        "name": "boundary_conditions",
+        "result": {
+          "ok": true,
+          "score": 1,
+          "reason": "边界违反: 0/301 帧",
+          "hints": []
+        }
+      },
+      {
+        "name": "perturbation_response",
+        "result": {
+          "ok": false,
+          "score": null,
+          "reason": "平均加速度: NaN m/s²",
+          "hints": []
+        }
+      }
+    ]
+  },
+  "recommendations": [
+    "提高物理定律遵循度：检查力的计算和守恒定律实现",
+    "改善数值一致性：考虑使用更稳定的积分器或更小的步长",
+    "增强长期稳定性：优化数值算法和边界条件处理",
+    "使用支持的类型: energy, momentum"
+  ],
+  "passed": false
+}

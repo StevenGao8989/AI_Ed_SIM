@@ -1,0 +1,522 @@
+[
+  {
+    "frameIndex": 0,
+    "timestamp": 0,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          2.7233112200000007
+        ],
+        "velocity": [
+          0,
+          2.7227666666666672
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          2.7733112200000005
+        ],
+        "velocity": [
+          0,
+          2.7227666666666672
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 1,
+    "timestamp": 0.01667,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          8.142695101177562
+        ],
+        "velocity": [
+          0,
+          5.418300221133334
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          8.192695101177561
+        ],
+        "velocity": [
+          0,
+          5.418300221133334
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 2,
+    "timestamp": 0.03334,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          16.231185524775587
+        ],
+        "velocity": [
+          0,
+          8.086873048988227
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          16.281185524775587
+        ],
+        "velocity": [
+          0,
+          8.08687304898823
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 3,
+    "timestamp": 0.050010000000000006,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          26.962086087156784
+        ],
+        "velocity": [
+          0,
+          10.728754811418915
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          27.01208608715679
+        ],
+        "velocity": [
+          0,
+          10.728754811418918
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 4,
+    "timestamp": 0.06668,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          40.30896740211305
+        ],
+        "velocity": [
+          0,
+          13.344212472461772
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          40.35896740211305
+        ],
+        "velocity": [
+          0,
+          13.344212472461772
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 5,
+    "timestamp": 0.08335000000000001,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          56.24566443015712
+        ],
+        "velocity": [
+          0,
+          15.933510325978878
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          56.295664430157125
+        ],
+        "velocity": [
+          0,
+          15.933510325978878
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 6,
+    "timestamp": 0.10002000000000001,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          74.7462738345267
+        ],
+        "velocity": [
+          0,
+          18.49691002236511
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          74.7962738345267
+        ],
+        "velocity": [
+          0,
+          18.496910022365103
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 7,
+    "timestamp": 0.11669000000000002,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          95.78515136363379
+        ],
+        "velocity": [
+          0,
+          21.034670594988086
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          95.83515136363377
+        ],
+        "velocity": [
+          0,
+          21.03467059498807
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 8,
+    "timestamp": 0.13336,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          119.33690925969475
+        ],
+        "velocity": [
+          0,
+          23.54704848636369
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          119.3869092596947
+        ],
+        "velocity": [
+          0,
+          23.54704848636366
+        ]
+      }
+    ],
+    "eventCount": 0
+  },
+  {
+    "frameIndex": 9,
+    "timestamp": 0.15003000000000002,
+    "bodyCount": 4,
+    "bodies": [
+      {
+        "id": "ramp",
+        "position": [
+          0.025,
+          0.025
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rough",
+        "position": [
+          0.1,
+          0.05
+        ],
+        "velocity": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "ball1",
+        "position": [
+          0,
+          145.37641369327932
+        ],
+        "velocity": [
+          0,
+          26.034297574069754
+        ]
+      },
+      {
+        "id": "ball2",
+        "position": [
+          0.1,
+          145.42641369327924
+        ],
+        "velocity": [
+          0,
+          26.034297574069726
+        ]
+      }
+    ],
+    "eventCount": 0
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "scenario": "斜面-摩擦-碰撞-弹簧系统",
+  "objects": [
+    {
+      "id": "block1",
+      "mass": 1,
+      "initial_position": "斜面顶端"
+    },
+    {
+      "id": "block2",
+      "mass": 2,
+      "initial_position": "静止等待"
+    }
+  ],
+  "phases": [
+    "smooth_ramp",
+    "rough_surface",
+    "collision",
+    "spring"
+  ],
+  "parameters": {
+    "h": 1.25,
+    "mu": 0.25,
+    "d": 2,
+    "k": 150,
+    "g": 9.8
+  },
+  "targets": [
+    "v0",
+    "v1",
+    "v_combined"
+  ],
+  "note": "基于题目直接提取的参数（AI解析已禁用）"
+}

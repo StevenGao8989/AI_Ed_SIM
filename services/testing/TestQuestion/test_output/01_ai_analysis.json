@@ -1,0 +1,86 @@
+{
+  "subject": "physics",
+  "topic": "牛顿运动定律/Newton's Laws",
+  "question": "质量为 m = 1.0 kg 的小滑块从光滑斜面顶端由静止释放。斜面高度 h= 1.25 m。滑到最低点后进入水平粗糙面，动摩擦因数&=0.25，粗糙段长度d=2.0m。通过粗糙段未端时，小滑块与一静止木块(质量 M=2.0kg)完全非弹性碰撞并粘在一起随后共同压缩前方一轻弹簧(劲度系数k=150N/m)，直到瞬时停下。",
+  "units": [
+    {
+      "original": "m",
+      "standard": "m",
+      "conversion": 1
+    },
+    {
+      "original": "kg",
+      "standard": "kg",
+      "conversion": 1
+    },
+    {
+      "original": "度",
+      "standard": "°",
+      "conversion": 0.017453292519943295
+    },
+    {
+      "original": "M",
+      "standard": "M",
+      "conversion": 1
+    },
+    {
+      "original": "k",
+      "standard": "k",
+      "conversion": 1
+    },
+    {
+      "original": "N",
+      "standard": "N",
+      "conversion": 1
+    }
+  ],
+  "parameters": [
+    {
+      "symbol": "m",
+      "value": 1,
+      "unit": "kg",
+      "raw": "m = 1.0",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "h",
+      "value": 1.25,
+      "unit": "m.",
+      "raw": "h= 1.25",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "d",
+      "value": 2,
+      "unit": "m.",
+      "raw": "d=2.0",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "M",
+      "value": 2,
+      "unit": "kg",
+      "raw": "M=2.0",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "k",
+      "value": 150,
+      "unit": "N/m",
+      "raw": "k=150",
+      "role": "given",
+      "note": "等式赋值"
+    },
+    {
+      "symbol": "g",
+      "value": 9.8,
+      "unit": "m/s^2",
+      "role": "constant",
+      "note": "重力加速度，未指定时默认 9.8"
+    }
+  ]
+}

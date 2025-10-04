@@ -1,0 +1,23 @@
+{
+  "question": "小车自高度 2.5m处由静止下滑进入半径为1m的竖直圆环轨道(轨道光滑)(1)求小车通过圆环顶点不脱离轨道的最小 Hin;(2)求顶点处法向力大小。",
+  "parameters": {
+    "m": 1,
+    "H": 2.5,
+    "R": 1,
+    "dt": 0.01
+  },
+  "results": {
+    "H_min": "2.500",
+    "v_entry": "7.000",
+    "v_top": "3.130",
+    "N_at_top": "39.200",
+    "total_time": "1.66"
+  },
+  "phases": [
+    "sliding_down",
+    "entering_circle",
+    "circular_motion",
+    "at_top"
+  ],
+  "frameCount": 269
+}

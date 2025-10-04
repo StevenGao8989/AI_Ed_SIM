@@ -1,0 +1,38 @@
+{
+  "scenario": "Ramp collision system",
+  "objects": [
+    {
+      "id": "ball1",
+      "mass": 0.1,
+      "initial_position": "Top of ramp"
+    },
+    {
+      "id": "ball2",
+      "mass": 0.1,
+      "initial_position": "5cm from ramp bottom"
+    }
+  ],
+  "phases": [
+    "ramp_slide",
+    "horizontal_motion",
+    "collision",
+    "post_collision",
+    "post_collision_motion"
+  ],
+  "parameters": {
+    "m1": 0.1,
+    "m2": 0.1,
+    "rampLength": 0.05,
+    "angle": 30,
+    "distance": 0.05,
+    "e": 0.8,
+    "mu": 0,
+    "g": 9.8
+  },
+  "targets": [
+    "v1_bottom",
+    "v1_after",
+    "v2_after"
+  ],
+  "note": "Based on problem parameters"
+}

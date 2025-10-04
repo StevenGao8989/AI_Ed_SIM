@@ -1,0 +1,34 @@
+{
+  "scenario": "Matter.js Ramp Collision System",
+  "objects": [
+    {
+      "id": "ball1",
+      "mass": 0.1,
+      "initial_position": "Top of ramp"
+    },
+    {
+      "id": "ball2",
+      "mass": 0.1,
+      "initial_position": "5cm from ramp bottom"
+    }
+  ],
+  "phases": [
+    "ramp_slide",
+    "horizontal_motion",
+    "collision",
+    "post_collision"
+  ],
+  "parameters": {
+    "rampLength": 0.05,
+    "angle": 30,
+    "distance": 0.05,
+    "ballRadius": 0.01,
+    "restitution": 0.8,
+    "friction": 0.1
+  },
+  "targets": [
+    "v1_final",
+    "v2_final"
+  ],
+  "note": "Matter.js physics engine implementation"
+}

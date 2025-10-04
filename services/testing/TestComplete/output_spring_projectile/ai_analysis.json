@@ -1,0 +1,38 @@
+{
+  "scenario": "弹簧发射-斜面滑行-抛射运动-非弹性碰撞系统",
+  "objects": [
+    {
+      "id": "ball",
+      "mass": 0.5,
+      "initial_position": "弹簧压缩位置"
+    },
+    {
+      "id": "target_ball",
+      "mass": 0.3,
+      "initial_position": "相遇点等待"
+    }
+  ],
+  "phases": [
+    "spring_compressed",
+    "ramp_acceleration",
+    "projectile_motion",
+    "collision",
+    "combined_projectile"
+  ],
+  "parameters": {
+    "m": 0.5,
+    "k": 200,
+    "x0": 0.15,
+    "theta": 30,
+    "M": 0.3,
+    "H": 0.4,
+    "g": 9.8
+  },
+  "targets": [
+    "vo",
+    "v_combined",
+    "angle_combined",
+    "x_landing"
+  ],
+  "note": "基于题目直接提取的参数"
+}

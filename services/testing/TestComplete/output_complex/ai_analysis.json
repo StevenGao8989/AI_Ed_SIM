@@ -1,0 +1,56 @@
+{
+  "scenario": "斜面-摩擦-碰撞-弹簧系统",
+  "objects": [
+    {
+      "id": "block1",
+      "mass": 1,
+      "initial_position": "斜面顶端"
+    },
+    {
+      "id": "block2",
+      "mass": 2,
+      "initial_position": "静止等待"
+    }
+  ],
+  "phases": [
+    "smooth_ramp",
+    "rough_surface",
+    "collision",
+    "spring"
+  ],
+  "parameters": {
+    "h": 1.25,
+    "mu": 0.25,
+    "d": 2,
+    "k": 150,
+    "g": 9.8
+  },
+  "targets": [
+    "v0",
+    "v1",
+    "v_combined"
+  ],
+  "solutions": {
+    "v0": {
+      "method": "机械能守恒",
+      "equation": "mgh = 0.5mv₀²",
+      "calculation": "v₀ = √(2gh) = √(2×9.8×1.25)",
+      "result": 4.95,
+      "unit": "m/s"
+    },
+    "v1": {
+      "method": "动能定理",
+      "equation": "-μmgd = 0.5mv₁² - 0.5mv₀²",
+      "calculation": "v₁ = √(v₀² - 2μgd) = √(24.5 - 2×0.25×9.8×2.0)",
+      "result": 3.83,
+      "unit": "m/s"
+    },
+    "v_combined": {
+      "method": "动量守恒",
+      "equation": "mv₁ = (m+M)v'",
+      "calculation": "v' = mv₁/(m+M) = 1.0×3.83/3.0",
+      "result": 1.28,
+      "unit": "m/s"
+    }
+  }
+}

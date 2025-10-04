@@ -1,0 +1,163 @@
+{
+  "timestamp": "2025-10-02T15:24:17.351Z",
+  "question": "在斜坡上方顶端放一个质量m = 0.5kg球，坡度为30度，长5厘米，另一个质量为M = 1kg的小球离斜坡5厘米。水平面为粗糙水平面，动摩擦因数μ=0.25，计算碰撞后第二个球的速度。",
+  "result": {
+    "rawJson": "{\n  \"world\": {\n    \"coord\": \"xy_y_down\",\n    \"units\": { \"length\": \"m\", \"time\": \"s\", \"mass\": \"kg\", \"angle\": \"rad\" },\n    \"gravity\": [0, 9.8],\n    \"bounds\": { \"min\": [-2, -2], \"max\": [10, 6] }\n  },\n  \"engine\": {\n    \"dt\": 0.0166667,\n    \"substeps\": 2,\n    \"positionIterations\": 6,\n    \"velocityIterations\": 4\n  },\n  \"bodies\": [\n    {\n      \"id\": \"ramp\",\n      \"shape\": \"box\",\n      \"isStatic\": true,\n      \"position\": [0.025, 0.025],\n      \"angle\": 0.5235987756,\n      \"size\": { \"w\": 0.05, \"h\": 0.05 },\n      \"friction\": 0,\n      \"frictionStatic\": 0,\n      \"restitution\": 0,\n      \"collisionFilter\": { \"category\": 1, \"mask\": 65535, \"group\": 0 }\n    },\n    {\n      \"id\": \"rough\",\n      \"shape\": \"box\",\n      \"isStatic\": true,\n      \"position\": [0.1, 0.05],\n      \"angle\": 0,\n      \"size\": { \"w\": 10, \"h\": 0.1 },\n      \"friction\": 0.25,\n      \"frictionStatic\": 0.25,\n      \"restitution\": 0,\n      \"collisionFilter\": { \"category\": 1, \"mask\": 65535, \"group\": 0 }\n    },\n    {\n      \"id\": \"ball1\",\n      \"shape\": \"circle\",\n      \"isStatic\": false,\n      \"position\": [0, 0],\n      \"angle\": 0,\n      \"r\": 0.05,\n      \"mass\": 0.5,\n      \"friction\": 0,\n      \"frictionStatic\": 0,\n      \"restitution\": 0,\n      \"collisionFilter\": { \"category\": 1, \"mask\": 65535, \"group\": 0 }\n    },\n    {\n      \"id\": \"ball2\",\n      \"shape\": \"circle\",\n      \"isStatic\": false,\n      \"position\": [0.1, 0.05],\n      \"angle\": 0,\n      \"r\": 0.05,\n      \"mass\": 1,\n      \"friction\": 0.25,\n      \"frictionStatic\": 0.25,\n      \"restitution\": 0,\n      \"collisionFilter\": { \"category\": 1, \"mask\": 65535, \"group\": 0 }\n    }\n  ],\n  \"constraints\": [],\n  \"event_rules\": [\n    {\n      \"when\": { \"on\": \"collisionStart\", \"a\": \"ball1\", \"b\": \"ball2\" },\n      \"do\": [\n        { \"action\": \"merge_bodies\", \"ids\": [\"ball1\", \"ball2\"], \"newId\": \"combo\" },\n        { \"action\": \"set_property\", \"id\": \"combo\", \"prop\": \"restitution\", \"value\": 0.0 }\n      ],\n      \"once\": true\n    }\n  ],\n  \"end_conditions\": {\n    \"maxTime\": 12.0,\n    \"stopWhen\": [ { \"type\": \"speedBelow\", \"id\": \"combo\", \"v\": 0.02, \"hold\": 0.2 } ]\n  }\n}",
+    "parsed": {
+      "world": {
+        "coord": "xy_y_down",
+        "units": {
+          "length": "m",
+          "time": "s",
+          "mass": "kg",
+          "angle": "rad"
+        },
+        "gravity": [
+          0,
+          9.8
+        ],
+        "bounds": {
+          "min": [
+            -2,
+            -2
+          ],
+          "max": [
+            10,
+            6
+          ]
+        }
+      },
+      "engine": {
+        "dt": 0.0166667,
+        "substeps": 2,
+        "positionIterations": 6,
+        "velocityIterations": 4
+      },
+      "bodies": [
+        {
+          "id": "ramp",
+          "shape": "box",
+          "isStatic": true,
+          "position": [
+            0.025,
+            0.025
+          ],
+          "angle": 0.5235987756,
+          "size": {
+            "w": 0.05,
+            "h": 0.05
+          },
+          "friction": 0,
+          "frictionStatic": 0,
+          "restitution": 0,
+          "collisionFilter": {
+            "category": 1,
+            "mask": 65535,
+            "group": 0
+          }
+        },
+        {
+          "id": "rough",
+          "shape": "box",
+          "isStatic": true,
+          "position": [
+            0.1,
+            0.05
+          ],
+          "angle": 0,
+          "size": {
+            "w": 10,
+            "h": 0.1
+          },
+          "friction": 0.25,
+          "frictionStatic": 0.25,
+          "restitution": 0,
+          "collisionFilter": {
+            "category": 1,
+            "mask": 65535,
+            "group": 0
+          }
+        },
+        {
+          "id": "ball1",
+          "shape": "circle",
+          "isStatic": false,
+          "position": [
+            0,
+            0
+          ],
+          "angle": 0,
+          "r": 0.05,
+          "mass": 0.5,
+          "friction": 0,
+          "frictionStatic": 0,
+          "restitution": 0,
+          "collisionFilter": {
+            "category": 1,
+            "mask": 65535,
+            "group": 0
+          }
+        },
+        {
+          "id": "ball2",
+          "shape": "circle",
+          "isStatic": false,
+          "position": [
+            0.1,
+            0.05
+          ],
+          "angle": 0,
+          "r": 0.05,
+          "mass": 1,
+          "friction": 0.25,
+          "frictionStatic": 0.25,
+          "restitution": 0,
+          "collisionFilter": {
+            "category": 1,
+            "mask": 65535,
+            "group": 0
+          }
+        }
+      ],
+      "constraints": [],
+      "event_rules": [
+        {
+          "when": {
+            "on": "collisionStart",
+            "a": "ball1",
+            "b": "ball2"
+          },
+          "do": [
+            {
+              "action": "merge_bodies",
+              "ids": [
+                "ball1",
+                "ball2"
+              ],
+              "newId": "combo"
+            },
+            {
+              "action": "set_property",
+              "id": "combo",
+              "prop": "restitution",
+              "value": 0
+            }
+          ],
+          "once": true
+        }
+      ],
+      "end_conditions": {
+        "maxTime": 12,
+        "stopWhen": [
+          {
+            "type": "speedBelow",
+            "id": "combo",
+            "v": 0.02,
+            "hold": 0.2
+          }
+        ]
+      }
+    }
+  },
+  "duration": 18284
+}

@@ -1,0 +1,155 @@
+{
+  "world": {
+    "coord": "xy_y_down",
+    "units": {
+      "length": "m",
+      "time": "s",
+      "mass": "kg",
+      "angle": "rad"
+    },
+    "gravity": [
+      0,
+      9.8
+    ],
+    "bounds": {
+      "min": [
+        -2,
+        -2
+      ],
+      "max": [
+        10,
+        6
+      ]
+    }
+  },
+  "engine": {
+    "dt": 0.0166667,
+    "substeps": 2,
+    "positionIterations": 6,
+    "velocityIterations": 4
+  },
+  "bodies": [
+    {
+      "id": "ramp",
+      "shape": "box",
+      "isStatic": true,
+      "position": [
+        0.025,
+        0.025
+      ],
+      "angle": 0.5235987756,
+      "size": {
+        "w": 0.05,
+        "h": 0.05
+      },
+      "friction": 0,
+      "frictionStatic": 0,
+      "restitution": 0,
+      "collisionFilter": {
+        "category": 1,
+        "mask": 65535,
+        "group": 0
+      }
+    },
+    {
+      "id": "rough",
+      "shape": "box",
+      "isStatic": true,
+      "position": [
+        0.1,
+        0.05
+      ],
+      "angle": 0,
+      "size": {
+        "w": 10,
+        "h": 0.1
+      },
+      "friction": 0.25,
+      "frictionStatic": 0.25,
+      "restitution": 0,
+      "collisionFilter": {
+        "category": 1,
+        "mask": 65535,
+        "group": 0
+      }
+    },
+    {
+      "id": "ball1",
+      "shape": "circle",
+      "isStatic": false,
+      "position": [
+        0,
+        0
+      ],
+      "angle": 0,
+      "r": 0.05,
+      "mass": 0.5,
+      "friction": 0,
+      "frictionStatic": 0,
+      "restitution": 0,
+      "collisionFilter": {
+        "category": 1,
+        "mask": 65535,
+        "group": 0
+      }
+    },
+    {
+      "id": "ball2",
+      "shape": "circle",
+      "isStatic": false,
+      "position": [
+        0.1,
+        0.05
+      ],
+      "angle": 0,
+      "r": 0.05,
+      "mass": 1,
+      "friction": 0.25,
+      "frictionStatic": 0.25,
+      "restitution": 0,
+      "collisionFilter": {
+        "category": 1,
+        "mask": 65535,
+        "group": 0
+      }
+    }
+  ],
+  "constraints": [],
+  "event_rules": [
+    {
+      "when": {
+        "on": "collisionStart",
+        "a": "ball1",
+        "b": "ball2"
+      },
+      "do": [
+        {
+          "action": "merge_bodies",
+          "ids": [
+            "ball1",
+            "ball2"
+          ],
+          "newId": "combo"
+        },
+        {
+          "action": "set_property",
+          "id": "combo",
+          "prop": "restitution",
+          "value": 0
+        }
+      ],
+      "once": true
+    }
+  ],
+  "end_conditions": {
+    "maxTime": 12,
+    "stopWhen": [
+      {
+        "type": "speedBelow",
+        "id": "combo",
+        "v": 0.02,
+        "hold": 0.2
+      }
+    ]
+  }
+}

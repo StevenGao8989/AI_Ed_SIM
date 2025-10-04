@@ -1,0 +1,916 @@
+{
+  "timestamp": "2025-09-29T11:34:47.931Z",
+  "question": "质量为 m = 1.0 kg 的小滑块从光滑斜面顶端由静止释放，斜面与地面角度为30度。斜面高度 h= 1.25 m。滑到最低点后进入水平粗糙面，动摩擦因数μ=0.25，粗糙段长度d=2.0m。通过粗糙段未端时，小滑块与一静止木块(质量 M=2.0kg)完全非弹性碰撞并粘在一起随后共同压缩前方一轻弹簧(劲度系数k=150N/m)，直到瞬时停下。1.求小滑块到达斜面底端的速度 v0。2.求小滑块穿过粗糙段末端的速度 v1。3.求粘在一起后组合体的速度 v2。求弹簧最大压缩量 max。",
+  "result": {
+    "rawJson": "{\n  \"meta\": {\n    \"schema_version\": \"parse-doc/2.0.0\",\n    \"language\": \"zh-CN\",\n    \"topics\": [\"energy\", \"kinematics\", \"dynamics\", \"momentum\"],\n    \"render_mode_hint\": \"simulation\",\n    \"strict_mode\": true\n  },\n  \"narrative\": {\n    \"beats\": [\n      {\n        \"id\": \"B1\",\n        \"title\": \"滑块下滑\",\n        \"text\": \"质量为1.0kg的小滑块从光滑斜面顶端由静止释放，斜面与地面角度为30度，高度1.25m。\",\n        \"stage_ref\": \"S1\",\n        \"visual_cues\": [\"斜面角度标注\", \"滑块受力分析\"]\n      },\n      {\n        \"id\": \"B2\",\n        \"title\": \"粗糙段减速\",\n        \"text\": \"滑块滑到最低点后进入水平粗糙面，动摩擦因数0.25，粗糙段长度2.0m。\",\n        \"stage_ref\": \"S2\",\n        \"visual_cues\": [\"摩擦力的方向\", \"动能损耗\"]\n      },\n      {\n        \"id\": \"B3\",\n        \"title\": \"碰撞与压缩\",\n        \"text\": \"滑块通过粗糙段末端时与静止木块(质量2.0kg)完全非弹性碰撞并粘在一起，随后共同压缩前方劲度系数150N/m的轻弹簧。\",\n        \"stage_ref\": \"S3\",\n        \"visual_cues\": [\"碰撞瞬间动量守恒\", \"弹簧压缩过程\"]\n      },\n      {\n        \"id\": \"B4\",\n        \"title\": \"停止瞬间\",\n        \"text\": \"组合体压缩弹簧直到瞬时停下。\",\n        \"stage_ref\": \"S3\",\n        \"visual_cues\": [\"最大压缩量标记\", \"能量完全转化为弹性势能\"]\n      }\n    ]\n  },\n  \"actors\": [\n    {\n      \"id\": \"A1\",\n      \"label\": \"小滑块\",\n      \"class\": \"block\",\n      \"movable\": true,\n      \"attributes\": {\n        \"mass\": { \"symbol\": \"m\", \"value\": 1.0, \"unit\": \"kg\" }\n      }\n    },\n    {\n      \"id\": \"A2\",\n      \"label\": \"斜面\",\n      \"class\": \"board\",\n      \"movable\": false,\n      \"attributes\": {\n        \"angle\": { \"symbol\": \"θ\", \"value\": 0.5236, \"unit\": \"rad\" }\n      }\n    },\n    {\n      \"id\": \"A3\",\n      \"label\": \"粗糙水平面\",\n      \"class\": \"ground\",\n      \"movable\": false,\n      \"attributes\": {\n        \"friction\": { \"symbol\": \"μ\", \"value\": 0.25 }\n      }\n    },\n    {\n      \"id\": \"A4\",\n      \"label\": \"木块\",\n      \"class\": \"block\",\n      \"movable\": true,\n      \"attributes\": {\n        \"mass\": { \"symbol\": \"M\", \"value\": 2.0, \"unit\": \"kg\" }\n      }\n    },\n    {\n      \"id\": \"A5\",\n      \"label\": \"弹簧\",\n      \"class\": \"spring\",\n      \"movable\": false,\n      \"attributes\": {\n        \"stiffness\": { \"symbol\": \"k\", \"value\": 150, \"unit\": \"N/m\" }\n      }\n    }\n  ],\n  \"quantities\": [\n    {\n      \"symbol\": \"m\",\n      \"name\": \"滑块质量\",\n      \"value\": 1.0,\n      \"unit\": \"kg\",\n      \"si\": { \"value\": 1.0, \"unit\": \"kg\" },\n      \"role\": \"given\",\n      \"dimension\": \"M\",\n      \"source\": { \"raw\": \"质量为 m = 1.0 kg\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"θ\",\n      \"name\": \"斜面角度\",\n      \"value\": 0.5236,\n      \"unit\": \"rad\",\n      \"si\": { \"value\": 0.5236, \"unit\": \"rad\" },\n      \"role\": \"given\",\n      \"dimension\": \"dimensionless\",\n      \"source\": { \"raw\": \"斜面与地面角度为30度\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"h\",\n      \"name\": \"斜面高度\",\n      \"value\": 1.25,\n      \"unit\": \"m\",\n      \"si\": { \"value\": 1.25, \"unit\": \"m\" },\n      \"role\": \"given\",\n      \"dimension\": \"L\",\n      \"source\": { \"raw\": \"斜面高度 h= 1.25 m\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"μ\",\n      \"name\": \"动摩擦因数\",\n      \"value\": 0.25,\n      \"unit\": \"\",\n      \"si\": { \"value\": 0.25, \"unit\": \"\" },\n      \"role\": \"given\",\n      \"dimension\": \"dimensionless\",\n      \"source\": { \"raw\": \"动摩擦因数μ=0.25\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"d\",\n      \"name\": \"粗糙段长度\",\n      \"value\": 2.0,\n      \"unit\": \"m\",\n      \"si\": { \"value\": 2.0, \"unit\": \"m\" },\n      \"role\": \"given\",\n      \"dimension\": \"L\",\n      \"source\": { \"raw\": \"粗糙段长度d=2.0m\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"M\",\n      \"name\": \"木块质量\",\n      \"value\": 2.0,\n      \"unit\": \"kg\",\n      \"si\": { \"value\": 2.0, \"unit\": \"kg\" },\n      \"role\": \"given\",\n      \"dimension\": \"M\",\n      \"source\": { \"raw\": \"质量 M=2.0kg\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"k\",\n      \"name\": \"弹簧劲度系数\",\n      \"value\": 150,\n      \"unit\": \"N/m\",\n      \"si\": { \"value\": 150, \"unit\": \"N/m\" },\n      \"role\": \"given\",\n      \"dimension\": \"MT^-2\",\n      \"source\": { \"raw\": \"劲度系数k=150N/m\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"g\",\n      \"name\": \"重力加速度\",\n      \"value\": 9.8,\n      \"unit\": \"m/s^2\",\n      \"si\": { \"value\": 9.8, \"unit\": \"m/s^2\" },\n      \"role\": \"constant\",\n      \"dimension\": \"LT^-2\",\n      \"source\": { \"raw\": \"\", \"span\": [0, 0], \"rule\": \"default\", \"confidence\": 0.95 }\n    },\n    {\n      \"symbol\": \"v0\",\n      \"name\": \"斜面底端速度\",\n      \"value\": null,\n      \"unit\": \"m/s\",\n      \"si\": { \"value\": null, \"unit\": \"m/s\" },\n      \"role\": \"unknown\",\n      \"dimension\": \"LT^-1\",\n      \"source\": { \"raw\": \"求小滑块到达斜面底端的速度 v0\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"v1\",\n      \"name\": \"粗糙段末端速度\",\n      \"value\": null,\n      \"unit\": \"m/s\",\n      \"si\": { \"value\": null, \"unit\": \"m/s\" },\n      \"role\": \"unknown\",\n      \"dimension\": \"LT^-1\",\n      \"source\": { \"raw\": \"求小滑块穿过粗糙段末端的速度 v1\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"v2\",\n      \"name\": \"碰撞后组合体速度\",\n      \"value\": null,\n      \"unit\": \"m/s\",\n      \"si\": { \"value\": null, \"unit\": \"m/s\" },\n      \"role\": \"unknown\",\n      \"dimension\": \"LT^-1\",\n      \"source\": { \"raw\": \"求粘在一起后组合体的速度 v2\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    },\n    {\n      \"symbol\": \"x_max\",\n      \"name\": \"弹簧最大压缩量\",\n      \"value\": null,\n      \"unit\": \"m\",\n      \"si\": { \"value\": null, \"unit\": \"m\" },\n      \"role\": \"unknown\",\n      \"dimension\": \"L\",\n      \"source\": { \"raw\": \"求弹簧最大压缩量 max\", \"span\": [0, 0], \"rule\": \"pattern\", \"confidence\": 1.0 }\n    }\n  ],\n  \"stages\": [\n    {\n      \"id\": \"S1\",\n      \"label\": \"斜面下滑\",\n      \"intent\": \"滑块沿光滑斜面加速下滑\",\n      \"policy\": { \"friction\": \"no\", \"collision\": \"none\", \"spring\": \"none\" },\n      \"interactions\": [\n        {\n          \"type\": \"contact\",\n          \"between\": [\"A1\", \"A2\"],\n          \"model\": \"static_no_friction\",\n          \"params\": [],\n          \"interaction_uid\": \"contact:A1-A2:static_no_friction\",\n          \"notes\": \"\"\n        },\n        {\n          \"type\": \"field\",\n          \"between\": [\"A1\", \"environment\"],\n          \"model\": \"gravity\",\n          \"params\": [\"g\"],\n          \"interaction_uid\": \"field:A1-environment:gravity\",\n          \"notes\": \"\"\n        }\n      ],\n      \"entry\": { \"state\": \"v=0\" },\n      \"exit\": { \"state\": \"到达斜面底端\" }\n    },\n    {\n      \"id\": \"S2\",\n      \"label\": \"粗糙段减速\",\n      \"intent\": \"滑块在粗糙水平面减速运动\",\n      \"policy\": { \"friction\": \"yes\", \"collision\": \"none\", \"spring\": \"none\" },\n      \"interactions\": [\n        {\n          \"type\": \"contact\",\n          \"between\": [\"A1\", \"A3\"],\n          \"model\": \"kinetic_coulomb\",\n          \"params\": [\"μ\"],\n          \"interaction_uid\": \"contact:A1-A3:kinetic_coulomb\",\n          \"notes\": \"\"\n        }\n      ],\n      \"entry\": { \"state\": \"v=v0\" },\n      \"exit\": { \"state\": \"通过粗糙段末端\" }\n    },\n    {\n      \"id\": \"S3\",\n      \"label\": \"碰撞与压缩\",\n      \"intent\": \"滑块与木块碰撞后压缩弹簧\",\n      \"policy\": { \"friction\": \"no\", \"collision\": \"perfect_inelastic\", \"spring\": \"hooke\" },\n      \"interactions\": [\n        {\n          \"type\": \"collision\",\n          \"between\": [\"A1\", \"A4\"],\n          \"model\": \"impulse_inelastic\",\n          \"params\": [],\n          \"interaction_uid\": \"collision:A1-A4:impulse_inelastic\",\n          \"notes\": \"完全非弹性碰撞\"\n        },\n        {\n          \"type\": \"spring\",\n          \"between\": [\"A1_A4\", \"A5\"],\n          \"model\": \"spring_hooke\",\n          \"params\": [\"k\"],\n          \"interaction_uid\": \"spring:A1_A4-A5:spring_hooke\",\n          \"notes\": \"\"\n        }\n      ],\n      \"entry\": { \"state\": \"v=v1\" },\n      \"exit\": { \"state\": \"组合体瞬时停止\" }\n    }\n  ],\n  \"constraints\": {\n    \"hard\": [\n      { \"expr\": \"h = 1.25 m\", \"tol\": 1e-6 },\n      { \"expr\": \"θ = 30° = 0.5236 rad\", \"tol\": 1e-6 },\n      { \"expr\": \"d = 2.0 m\", \"tol\": 1e-6 }\n    ],\n    \"soft\": [\n      { \"expr\": \"忽略空气阻力\", \"weight\": 0.9, \"note\": \"\" },\n      { \"expr\": \"弹簧质量忽略不计\", \"weight\": 0.9, \"note\": \"\" }\n    ],\n    \"stage_logic\": [\n      { \"expr\": \"S1 -> S2 -> S3\", \"note\": \"严格顺序\" }\n    ]\n  },\n  \"asks\": [\n    {\n      \"id\": \"v0\",\n      \"meaning\": \"斜面底端速度\",\n      \"kind\": \"scalar\",\n      \"stage_refs\": [\"S1\"],\n      \"report_style\": \"value_with_unit\"\n    },\n    {\n      \"id\": \"v1\",\n      \"meaning\": \"粗糙段末端速度\",\n      \"kind\": \"scalar\",\n      \"stage_refs\": [\"S2\"],\n      \"report_style\": \"value_with_unit\"\n    },\n    {\n      \"id\": \"v2\",\n      \"meaning\": \"碰撞后组合体速度\",\n      \"kind\": \"scalar\",\n      \"stage_refs\": [\"S3\"],\n      \"report_style\": \"value_with_unit\"\n    },\n    {\n      \"id\": \"x_max\",\n      \"meaning\": \"弹簧最大压缩量\",\n      \"kind\": \"scalar\",\n      \"stage_refs\": [\"S3\"],\n      \"report_style\": \"value_with_unit\"\n    }\n  ],\n  \"compute_plan\": [\n    {\n      \"id\": \"v0\",\n      \"stage\": \"S1\",\n      \"method\": \"energy_conservation\",\n      \"formula\": \"0.5*m*v0^2 = m*g*h\",\n      \"depends_on\": [\"m\", \"g\", \"h\"],\n      \"solve_for\": \"v0\",\n      \"policy\": \"allow_value\",\n      \"calc\": {\n        \"inputs_si\": { \"m\": 1.0, \"g\": 9.8, \"h\": 1.25 },\n        \"substitution\": \"0.5*1.0*v0^2 = 1.0*9.8*1.25\",\n        \"result\": {\n          \"exact\": \"sqrt(2*9.8*1.25)\",\n          \"numeric\": 4.949747468305833,\n          \"unit\": \"m/s\"\n        },\n        \"unit_check\": \"pass\",\n        \"residual_check\": { \"lhs_minus_rhs\": 0.0, \"tolerance\": 1e-6, \"pass\": true },\n        \"sanity_checks\": [\"v0 ≥ 0\"]\n      },\n      \"preview\": { \"value\": 4.9497, \"unit\": \"m/s\", \"status\": \"derived_hint\" },\n      \"provenance\": { \"assumptions\": [\"无摩擦能量守恒\"], \"confidence\": 0.99 }\n    },\n    {\n      \"id\": \"v1\",\n      \"stage\": \"S2\",\n      \"method\": \"work_energy_with_dissipation\",\n      \"formula\": \"0.5*m*v1^2 = 0.5*m*v0^2 - μ*m*g*d\",\n      \"depends_on\": [\"m\", \"v0\", \"μ\", \"g\", \"d\"],\n      \"solve_for\": \"v1\",\n      \"policy\": \"allow_value\",\n      \"calc\": {\n        \"inputs_si\": { \"m\": 1.0, \"v0\": 4.9497, \"μ\": 0.25, \"g\": 9.8, \"d\": 2.0 },\n        \"substitution\": \"0.5*1.0*v1^2 = 0.5*1.0*4.9497^2 - 0.25*1.0*9.8*2.0\",\n        \"result\": {\n          \"exact\": \"sqrt(4.9497^2 - 2*0.25*9.8*2.0)\",\n          \"numeric\": 3.8340579025361627,\n          \"unit\": \"m/s\"\n        },\n        \"unit_check\": \"pass\",\n        \"residual_check\": { \"lhs_minus_rhs\": 0.0, \"tolerance\": 1e-6, \"pass\": true },\n        \"sanity_checks\": [\"v1 ≥ 0\", \"v1 < v0\"]\n      },\n      \"preview\": { \"value\": 3.8341, \"unit\": \"m/s\", \"status\": \"derived_hint\" },\n      \"provenance\": { \"assumptions\": [\"动能定理含摩擦功\"], \"confidence\": 0.99 }\n    },\n    {\n      \"id\": \"v2\",\n      \"stage\": \"S3\",\n      \"method\": \"momentum_impulse\",\n      \"formula\": \"m*v1 = (m+M)*v2\",\n      \"depends_on\": [\"m\", \"v1\", \"M\"],\n      \"solve_for\": \"v2\",\n      \"policy\": \"allow_value\",\n      \"calc\": {\n        \"inputs_si\": { \"m\": 1.0, \"v1\": 3.8341, \"M\": 2.0 },\n        \"substitution\": \"1.0*3.8341 = (1.0+2.0)*v2\",\n        \"result\": {\n          \"exact\": \"3.8341/3.0\",\n          \"numeric\": 1.2780333333333334,\n          \"unit\": \"m/s\"\n        },\n        \"unit_check\": \"pass\",\n        \"residual_check\": { \"lhs_minus_rhs\": 0.0, \"tolerance\": 1e-6, \"pass\": true },\n        \"sanity_checks\": [\"v2 ≥ 0\", \"v2 < v1\"]\n      },\n      \"preview\": { \"value\": 1.2780, \"unit\": \"m/s\", \"status\": \"derived_hint\" },\n      \"provenance\": { \"assumptions\": [\"完全非弹性碰撞动量守恒\"], \"confidence\": 0.99 }\n    },\n    {\n      \"id\": \"x_max\",\n      \"stage\": \"S3\",\n      \"method\": \"energy_conservation\",\n      \"formula\": \"0.5*(m+M)*v2^2 = 0.5*k*x_max^2\",\n      \"depends_on\": [\"m\", \"M\", \"v2\", \"k\"],\n      \"solve_for\": \"x_max\",\n      \"policy\": \"allow_value\",\n      \"calc\": {\n        \"inputs_si\": { \"m\": 1.0, \"M\": 2.0, \"v2\": 1.2780, \"k\": 150 },\n        \"substitution\": \"0.5*(1.0+2.0)*1.2780^2 = 0.5*150*x_max^2\",\n        \"result\": {\n          \"exact\": \"sqrt(3.0*1.2780^2/150)\",\n          \"numeric\": 0.1808329877799091,\n          \"unit\": \"m\"\n        },\n        \"unit_check\": \"pass\",\n        \"residual_check\": { \"lhs_minus_rhs\": 0.0, \"tolerance\": 1e-6, \"pass\": true },\n        \"sanity_checks\": [\"x_max ≥ 0\"]\n      },\n      \"preview\": { \"value\": 0.1808, \"unit\": \"m\", \"status\": \"derived_hint\" },\n      \"provenance\": { \"assumptions\": [\"机械能守恒\"], \"confidence\": 0.99 }\n    }\n  ],\n  \"contacts\": [\n    {\n      \"stage_ref\": \"S1\",\n      \"type\": \"contact\",\n      \"between\": [\"A1\", \"A2\"],\n      \"model\": \"static_no_friction\",\n      \"params\": [],\n      \"interaction_uid\": \"contact:A1-A2:static_no_friction\",\n      \"notes\": \"\"\n    },\n    {\n      \"stage_ref\": \"S1\",\n      \"type\": \"field\",\n      \"between\": [\"A1\", \"environment\"],\n      \"model\": \"gravity\",\n      \"params\": [\"g\"],\n      \"interaction_uid\": \"field:A1-environment:gravity\",\n      \"notes\": \"\"\n    },\n    {\n      \"stage_ref\": \"S2\",\n      \"type\": \"contact\",\n      \"between\": [\"A1\", \"A3\"],\n      \"model\": \"kinetic_coulomb\",\n      \"params\": [\"μ\"],\n      \"interaction_uid\": \"contact:A1-A3:kinetic_coulomb\",\n      \"notes\": \"\"\n    },\n    {\n      \"stage_ref\": \"S3\",\n      \"type\": \"collision\",\n      \"between\": [\"A1\", \"A4\"],\n      \"model\": \"impulse_inelastic\",\n      \"params\": [],\n      \"interaction_uid\": \"collision:A1-A4:impulse_inelastic\",\n      \"notes\": \"\"\n    },\n    {\n      \"stage_ref\": \"S3\",\n      \"type\": \"spring\",\n      \"between\": [\"A1_A4\", \"A5\"],\n      \"model\": \"spring_hooke\",\n      \"params\": [\"k\"],\n      \"interaction_uid\": \"spring:A1_A4-A5:spring_hooke\",\n      \"notes\": \"\"\n    }\n  ],\n  \"events\": [\n    {\n      \"id\": \"E1\",\n      \"stage_ref\": \"S3\",\n      \"trigger\": {\n        \"when\": \"v==0\",\n        \"velocity_of\": \"A1_A4\",\n        \"threshold\": 0\n      },\n      \"effects\": [\n        {\n          \"type\": \"measure\",\n          \"what\": \"x_max\",\n          \"as\": \"弹簧最大压缩量\"\n        }\n      ],\n      \"captions\": [\"组合体瞬时停止，弹簧达到最大压缩量\"]\n    }\n  ],\n  \"render_hints\": {\n    \"camera\": { \"fit\": \"both\", \"margin\": 0.5, \"show_grid\": true, \"background\": \"#ffffff\" },\n    \"overlays\": {\n      \"vectors\": [\"v\", \"a\", \"F\"],\n      \"labels\": true,\n      \"tracks\": [\"COM\"],\n      \"graphs\": [\"v-t\"]\n    },\n    \"captions\": [\n      { \"at_stage\": \"S1\", \"text\": \"能量守恒: mgh = 0.5mv0²\" },\n      { \"at_stage\": \"S2\", \"text\": \"动能定理: Wf = ΔK\" },\n      { \"at_stage\": \"S3\", \"text\": \"动量守恒: mv1 = (m+M)v2\" }\n    ],\n    \"slow_mo\": [\n      { \"around_event\": \"E1\", \"window\": 0.2 }\n    ]\n  },\n  \"param_aliases\": {\n    \"μ[A1,A3]\": \"滑块A1与粗糙面A3间的动摩擦因数\",\n    \"k[A1_A4,A5]\": \"组合体A1_A4与弹簧A5间的劲度系数\"\n  },\n  \"units_used\": [\n    { \"original\": \"度\", \"standard\": \"rad\", \"conversion\": 0.0174533 }\n  ],\n  \"lints\": {\n    \"warnings\": [],\n    \"blockers\": [],\n    \"ok\": true\n  }\n}",
+    "parsed": {
+      "meta": {
+        "schema_version": "parse-doc/2.0.0",
+        "language": "zh-CN",
+        "topics": [
+          "energy",
+          "kinematics",
+          "dynamics",
+          "momentum"
+        ],
+        "render_mode_hint": "simulation",
+        "strict_mode": true
+      },
+      "narrative": {
+        "beats": [
+          {
+            "id": "B1",
+            "title": "滑块下滑",
+            "text": "质量为1.0kg的小滑块从光滑斜面顶端由静止释放，斜面与地面角度为30度，高度1.25m。",
+            "stage_ref": "S1",
+            "visual_cues": [
+              "斜面角度标注",
+              "滑块受力分析"
+            ]
+          },
+          {
+            "id": "B2",
+            "title": "粗糙段减速",
+            "text": "滑块滑到最低点后进入水平粗糙面，动摩擦因数0.25，粗糙段长度2.0m。",
+            "stage_ref": "S2",
+            "visual_cues": [
+              "摩擦力的方向",
+              "动能损耗"
+            ]
+          },
+          {
+            "id": "B3",
+            "title": "碰撞与压缩",
+            "text": "滑块通过粗糙段末端时与静止木块(质量2.0kg)完全非弹性碰撞并粘在一起，随后共同压缩前方劲度系数150N/m的轻弹簧。",
+            "stage_ref": "S3",
+            "visual_cues": [
+              "碰撞瞬间动量守恒",
+              "弹簧压缩过程"
+            ]
+          },
+          {
+            "id": "B4",
+            "title": "停止瞬间",
+            "text": "组合体压缩弹簧直到瞬时停下。",
+            "stage_ref": "S3",
+            "visual_cues": [
+              "最大压缩量标记",
+              "能量完全转化为弹性势能"
+            ]
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "A1",
+          "label": "小滑块",
+          "class": "block",
+          "movable": true,
+          "attributes": {
+            "mass": {
+              "symbol": "m",
+              "value": 1,
+              "unit": "kg"
+            }
+          }
+        },
+        {
+          "id": "A2",
+          "label": "斜面",
+          "class": "board",
+          "movable": false,
+          "attributes": {
+            "angle": {
+              "symbol": "θ",
+              "value": 0.5236,
+              "unit": "rad"
+            }
+          }
+        },
+        {
+          "id": "A3",
+          "label": "粗糙水平面",
+          "class": "ground",
+          "movable": false,
+          "attributes": {
+            "friction": {
+              "symbol": "μ",
+              "value": 0.25
+            }
+          }
+        },
+        {
+          "id": "A4",
+          "label": "木块",
+          "class": "block",
+          "movable": true,
+          "attributes": {
+            "mass": {
+              "symbol": "M",
+              "value": 2,
+              "unit": "kg"
+            }
+          }
+        },
+        {
+          "id": "A5",
+          "label": "弹簧",
+          "class": "spring",
+          "movable": false,
+          "attributes": {
+            "stiffness": {
+              "symbol": "k",
+              "value": 150,
+              "unit": "N/m"
+            }
+          }
+        }
+      ],
+      "quantities": [
+        {
+          "symbol": "m",
+          "name": "滑块质量",
+          "value": 1,
+          "unit": "kg",
+          "si": {
+            "value": 1,
+            "unit": "kg"
+          },
+          "role": "given",
+          "dimension": "M",
+          "source": {
+            "raw": "质量为 m = 1.0 kg",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "θ",
+          "name": "斜面角度",
+          "value": 0.5236,
+          "unit": "rad",
+          "si": {
+            "value": 0.5236,
+            "unit": "rad"
+          },
+          "role": "given",
+          "dimension": "dimensionless",
+          "source": {
+            "raw": "斜面与地面角度为30度",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "h",
+          "name": "斜面高度",
+          "value": 1.25,
+          "unit": "m",
+          "si": {
+            "value": 1.25,
+            "unit": "m"
+          },
+          "role": "given",
+          "dimension": "L",
+          "source": {
+            "raw": "斜面高度 h= 1.25 m",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "μ",
+          "name": "动摩擦因数",
+          "value": 0.25,
+          "unit": "",
+          "si": {
+            "value": 0.25,
+            "unit": ""
+          },
+          "role": "given",
+          "dimension": "dimensionless",
+          "source": {
+            "raw": "动摩擦因数μ=0.25",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "d",
+          "name": "粗糙段长度",
+          "value": 2,
+          "unit": "m",
+          "si": {
+            "value": 2,
+            "unit": "m"
+          },
+          "role": "given",
+          "dimension": "L",
+          "source": {
+            "raw": "粗糙段长度d=2.0m",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "M",
+          "name": "木块质量",
+          "value": 2,
+          "unit": "kg",
+          "si": {
+            "value": 2,
+            "unit": "kg"
+          },
+          "role": "given",
+          "dimension": "M",
+          "source": {
+            "raw": "质量 M=2.0kg",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "k",
+          "name": "弹簧劲度系数",
+          "value": 150,
+          "unit": "N/m",
+          "si": {
+            "value": 150,
+            "unit": "N/m"
+          },
+          "role": "given",
+          "dimension": "MT^-2",
+          "source": {
+            "raw": "劲度系数k=150N/m",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "g",
+          "name": "重力加速度",
+          "value": 9.8,
+          "unit": "m/s^2",
+          "si": {
+            "value": 9.8,
+            "unit": "m/s^2"
+          },
+          "role": "constant",
+          "dimension": "LT^-2",
+          "source": {
+            "raw": "",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "default",
+            "confidence": 0.95
+          }
+        },
+        {
+          "symbol": "v0",
+          "name": "斜面底端速度",
+          "value": null,
+          "unit": "m/s",
+          "si": {
+            "value": null,
+            "unit": "m/s"
+          },
+          "role": "unknown",
+          "dimension": "LT^-1",
+          "source": {
+            "raw": "求小滑块到达斜面底端的速度 v0",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "v1",
+          "name": "粗糙段末端速度",
+          "value": null,
+          "unit": "m/s",
+          "si": {
+            "value": null,
+            "unit": "m/s"
+          },
+          "role": "unknown",
+          "dimension": "LT^-1",
+          "source": {
+            "raw": "求小滑块穿过粗糙段末端的速度 v1",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "v2",
+          "name": "碰撞后组合体速度",
+          "value": null,
+          "unit": "m/s",
+          "si": {
+            "value": null,
+            "unit": "m/s"
+          },
+          "role": "unknown",
+          "dimension": "LT^-1",
+          "source": {
+            "raw": "求粘在一起后组合体的速度 v2",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        },
+        {
+          "symbol": "x_max",
+          "name": "弹簧最大压缩量",
+          "value": null,
+          "unit": "m",
+          "si": {
+            "value": null,
+            "unit": "m"
+          },
+          "role": "unknown",
+          "dimension": "L",
+          "source": {
+            "raw": "求弹簧最大压缩量 max",
+            "span": [
+              0,
+              0
+            ],
+            "rule": "pattern",
+            "confidence": 1
+          }
+        }
+      ],
+      "stages": [
+        {
+          "id": "S1",
+          "label": "斜面下滑",
+          "intent": "滑块沿光滑斜面加速下滑",
+          "policy": {
+            "friction": "no",
+            "collision": "none",
+            "spring": "none"
+          },
+          "interactions": [
+            {
+              "type": "contact",
+              "between": [
+                "A1",
+                "A2"
+              ],
+              "model": "static_no_friction",
+              "params": [],
+              "interaction_uid": "contact:A1-A2:static_no_friction",
+              "notes": ""
+            },
+            {
+              "type": "field",
+              "between": [
+                "A1",
+                "environment"
+              ],
+              "model": "gravity",
+              "params": [
+                "g"
+              ],
+              "interaction_uid": "field:A1-environment:gravity",
+              "notes": ""
+            }
+          ],
+          "entry": {
+            "state": "v=0"
+          },
+          "exit": {
+            "state": "到达斜面底端"
+          }
+        },
+        {
+          "id": "S2",
+          "label": "粗糙段减速",
+          "intent": "滑块在粗糙水平面减速运动",
+          "policy": {
+            "friction": "yes",
+            "collision": "none",
+            "spring": "none"
+          },
+          "interactions": [
+            {
+              "type": "contact",
+              "between": [
+                "A1",
+                "A3"
+              ],
+              "model": "kinetic_coulomb",
+              "params": [
+                "μ"
+              ],
+              "interaction_uid": "contact:A1-A3:kinetic_coulomb",
+              "notes": ""
+            }
+          ],
+          "entry": {
+            "state": "v=v0"
+          },
+          "exit": {
+            "state": "通过粗糙段末端"
+          }
+        },
+        {
+          "id": "S3",
+          "label": "碰撞与压缩",
+          "intent": "滑块与木块碰撞后压缩弹簧",
+          "policy": {
+            "friction": "no",
+            "collision": "perfect_inelastic",
+            "spring": "hooke"
+          },
+          "interactions": [
+            {
+              "type": "collision",
+              "between": [
+                "A1",
+                "A4"
+              ],
+              "model": "impulse_inelastic",
+              "params": [],
+              "interaction_uid": "collision:A1-A4:impulse_inelastic",
+              "notes": "完全非弹性碰撞"
+            },
+            {
+              "type": "spring",
+              "between": [
+                "A1_A4",
+                "A5"
+              ],
+              "model": "spring_hooke",
+              "params": [
+                "k"
+              ],
+              "interaction_uid": "spring:A1_A4-A5:spring_hooke",
+              "notes": ""
+            }
+          ],
+          "entry": {
+            "state": "v=v1"
+          },
+          "exit": {
+            "state": "组合体瞬时停止"
+          }
+        }
+      ],
+      "constraints": {
+        "hard": [
+          {
+            "expr": "h = 1.25 m",
+            "tol": 0.000001
+          },
+          {
+            "expr": "θ = 30° = 0.5236 rad",
+            "tol": 0.000001
+          },
+          {
+            "expr": "d = 2.0 m",
+            "tol": 0.000001
+          }
+        ],
+        "soft": [
+          {
+            "expr": "忽略空气阻力",
+            "weight": 0.9,
+            "note": ""
+          },
+          {
+            "expr": "弹簧质量忽略不计",
+            "weight": 0.9,
+            "note": ""
+          }
+        ],
+        "stage_logic": [
+          {
+            "expr": "S1 -> S2 -> S3",
+            "note": "严格顺序"
+          }
+        ]
+      },
+      "asks": [
+        {
+          "id": "v0",
+          "meaning": "斜面底端速度",
+          "kind": "scalar",
+          "stage_refs": [
+            "S1"
+          ],
+          "report_style": "value_with_unit"
+        },
+        {
+          "id": "v1",
+          "meaning": "粗糙段末端速度",
+          "kind": "scalar",
+          "stage_refs": [
+            "S2"
+          ],
+          "report_style": "value_with_unit"
+        },
+        {
+          "id": "v2",
+          "meaning": "碰撞后组合体速度",
+          "kind": "scalar",
+          "stage_refs": [
+            "S3"
+          ],
+          "report_style": "value_with_unit"
+        },
+        {
+          "id": "x_max",
+          "meaning": "弹簧最大压缩量",
+          "kind": "scalar",
+          "stage_refs": [
+            "S3"
+          ],
+          "report_style": "value_with_unit"
+        }
+      ],
+      "compute_plan": [
+        {
+          "id": "v0",
+          "stage": "S1",
+          "method": "energy_conservation",
+          "formula": "0.5*m*v0^2 = m*g*h",
+          "depends_on": [
+            "m",
+            "g",
+            "h"
+          ],
+          "solve_for": "v0",
+          "policy": "allow_value",
+          "calc": {
+            "inputs_si": {
+              "m": 1,
+              "g": 9.8,
+              "h": 1.25
+            },
+            "substitution": "0.5*1.0*v0^2 = 1.0*9.8*1.25",
+            "result": {
+              "exact": "sqrt(2*9.8*1.25)",
+              "numeric": 4.949747468305833,
+              "unit": "m/s"
+            },
+            "unit_check": "pass",
+            "residual_check": {
+              "lhs_minus_rhs": 0,
+              "tolerance": 0.000001,
+              "pass": true
+            },
+            "sanity_checks": [
+              "v0 ≥ 0"
+            ]
+          },
+          "preview": {
+            "value": 4.9497,
+            "unit": "m/s",
+            "status": "derived_hint"
+          },
+          "provenance": {
+            "assumptions": [
+              "无摩擦能量守恒"
+            ],
+            "confidence": 0.99
+          }
+        },
+        {
+          "id": "v1",
+          "stage": "S2",
+          "method": "work_energy_with_dissipation",
+          "formula": "0.5*m*v1^2 = 0.5*m*v0^2 - μ*m*g*d",
+          "depends_on": [
+            "m",
+            "v0",
+            "μ",
+            "g",
+            "d"
+          ],
+          "solve_for": "v1",
+          "policy": "allow_value",
+          "calc": {
+            "inputs_si": {
+              "m": 1,
+              "v0": 4.9497,
+              "μ": 0.25,
+              "g": 9.8,
+              "d": 2
+            },
+            "substitution": "0.5*1.0*v1^2 = 0.5*1.0*4.9497^2 - 0.25*1.0*9.8*2.0",
+            "result": {
+              "exact": "sqrt(4.9497^2 - 2*0.25*9.8*2.0)",
+              "numeric": 3.8340579025361627,
+              "unit": "m/s"
+            },
+            "unit_check": "pass",
+            "residual_check": {
+              "lhs_minus_rhs": 0,
+              "tolerance": 0.000001,
+              "pass": true
+            },
+            "sanity_checks": [
+              "v1 ≥ 0",
+              "v1 < v0"
+            ]
+          },
+          "preview": {
+            "value": 3.8341,
+            "unit": "m/s",
+            "status": "derived_hint"
+          },
+          "provenance": {
+            "assumptions": [
+              "动能定理含摩擦功"
+            ],
+            "confidence": 0.99
+          }
+        },
+        {
+          "id": "v2",
+          "stage": "S3",
+          "method": "momentum_impulse",
+          "formula": "m*v1 = (m+M)*v2",
+          "depends_on": [
+            "m",
+            "v1",
+            "M"
+          ],
+          "solve_for": "v2",
+          "policy": "allow_value",
+          "calc": {
+            "inputs_si": {
+              "m": 1,
+              "v1": 3.8341,
+              "M": 2
+            },
+            "substitution": "1.0*3.8341 = (1.0+2.0)*v2",
+            "result": {
+              "exact": "3.8341/3.0",
+              "numeric": 1.2780333333333334,
+              "unit": "m/s"
+            },
+            "unit_check": "pass",
+            "residual_check": {
+              "lhs_minus_rhs": 0,
+              "tolerance": 0.000001,
+              "pass": true
+            },
+            "sanity_checks": [
+              "v2 ≥ 0",
+              "v2 < v1"
+            ]
+          },
+          "preview": {
+            "value": 1.278,
+            "unit": "m/s",
+            "status": "derived_hint"
+          },
+          "provenance": {
+            "assumptions": [
+              "完全非弹性碰撞动量守恒"
+            ],
+            "confidence": 0.99
+          }
+        },
+        {
+          "id": "x_max",
+          "stage": "S3",
+          "method": "energy_conservation",
+          "formula": "0.5*(m+M)*v2^2 = 0.5*k*x_max^2",
+          "depends_on": [
+            "m",
+            "M",
+            "v2",
+            "k"
+          ],
+          "solve_for": "x_max",
+          "policy": "allow_value",
+          "calc": {
+            "inputs_si": {
+              "m": 1,
+              "M": 2,
+              "v2": 1.278,
+              "k": 150
+            },
+            "substitution": "0.5*(1.0+2.0)*1.2780^2 = 0.5*150*x_max^2",
+            "result": {
+              "exact": "sqrt(3.0*1.2780^2/150)",
+              "numeric": 0.1808329877799091,
+              "unit": "m"
+            },
+            "unit_check": "pass",
+            "residual_check": {
+              "lhs_minus_rhs": 0,
+              "tolerance": 0.000001,
+              "pass": true
+            },
+            "sanity_checks": [
+              "x_max ≥ 0"
+            ]
+          },
+          "preview": {
+            "value": 0.1808,
+            "unit": "m",
+            "status": "derived_hint"
+          },
+          "provenance": {
+            "assumptions": [
+              "机械能守恒"
+            ],
+            "confidence": 0.99
+          }
+        }
+      ],
+      "contacts": [
+        {
+          "stage_ref": "S1",
+          "type": "contact",
+          "between": [
+            "A1",
+            "A2"
+          ],
+          "model": "static_no_friction",
+          "params": [],
+          "interaction_uid": "contact:A1-A2:static_no_friction",
+          "notes": ""
+        },
+        {
+          "stage_ref": "S1",
+          "type": "field",
+          "between": [
+            "A1",
+            "environment"
+          ],
+          "model": "gravity",
+          "params": [
+            "g"
+          ],
+          "interaction_uid": "field:A1-environment:gravity",
+          "notes": ""
+        },
+        {
+          "stage_ref": "S2",
+          "type": "contact",
+          "between": [
+            "A1",
+            "A3"
+          ],
+          "model": "kinetic_coulomb",
+          "params": [
+            "μ"
+          ],
+          "interaction_uid": "contact:A1-A3:kinetic_coulomb",
+          "notes": ""
+        },
+        {
+          "stage_ref": "S3",
+          "type": "collision",
+          "between": [
+            "A1",
+            "A4"
+          ],
+          "model": "impulse_inelastic",
+          "params": [],
+          "interaction_uid": "collision:A1-A4:impulse_inelastic",
+          "notes": ""
+        },
+        {
+          "stage_ref": "S3",
+          "type": "spring",
+          "between": [
+            "A1_A4",
+            "A5"
+          ],
+          "model": "spring_hooke",
+          "params": [
+            "k"
+          ],
+          "interaction_uid": "spring:A1_A4-A5:spring_hooke",
+          "notes": ""
+        }
+      ],
+      "events": [
+        {
+          "id": "E1",
+          "stage_ref": "S3",
+          "trigger": {
+            "when": "v==0",
+            "velocity_of": "A1_A4",
+            "threshold": 0
+          },
+          "effects": [
+            {
+              "type": "measure",
+              "what": "x_max",
+              "as": "弹簧最大压缩量"
+            }
+          ],
+          "captions": [
+            "组合体瞬时停止，弹簧达到最大压缩量"
+          ]
+        }
+      ],
+      "render_hints": {
+        "camera": {
+          "fit": "both",
+          "margin": 0.5,
+          "show_grid": true,
+          "background": "#ffffff"
+        },
+        "overlays": {
+          "vectors": [
+            "v",
+            "a",
+            "F"
+          ],
+          "labels": true,
+          "tracks": [
+            "COM"
+          ],
+          "graphs": [
+            "v-t"
+          ]
+        },
+        "captions": [
+          {
+            "at_stage": "S1",
+            "text": "能量守恒: mgh = 0.5mv0²"
+          },
+          {
+            "at_stage": "S2",
+            "text": "动能定理: Wf = ΔK"
+          },
+          {
+            "at_stage": "S3",
+            "text": "动量守恒: mv1 = (m+M)v2"
+          }
+        ],
+        "slow_mo": [
+          {
+            "around_event": "E1",
+            "window": 0.2
+          }
+        ]
+      },
+      "param_aliases": {
+        "μ[A1,A3]": "滑块A1与粗糙面A3间的动摩擦因数",
+        "k[A1_A4,A5]": "组合体A1_A4与弹簧A5间的劲度系数"
+      },
+      "units_used": [
+        {
+          "original": "度",
+          "standard": "rad",
+          "conversion": 0.0174533
+        }
+      ],
+      "lints": {
+        "warnings": [],
+        "blockers": [],
+        "ok": true
+      }
+    }
+  },
+  "duration": 131950
+}

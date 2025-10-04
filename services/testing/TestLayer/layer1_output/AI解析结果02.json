@@ -1,0 +1,169 @@
+{
+  "timestamp": "2025-10-02T14:27:40.507Z",
+  "question": "质量为 m = 1.0 kg 的小滑块从光滑斜面顶端由静止释放，斜面与地面角度为30度。斜面高度 h= 1.25 m。滑到最低点后进入水平粗糙面，动摩擦因数μ=0.25，粗糙段长度d=2.0m。通过粗糙段未端时，小滑块与一静止木块(质量 M=2.0kg)完全非弹性碰撞并粘在一起随后共同压缩前方一轻弹簧(劲度系数k=150N/m)，直到瞬时停下。1.求小滑块到达斜面底端的速度 v0。2.求小滑块穿过粗糙段末端的速度 v1。3.求粘在一起后组合体的速度 v2。求弹簧最大压缩量 max。",
+  "result": {
+    "rawJson": "{\n  \"world\": {\n    \"coord\": \"xy_y_down\",\n    \"units\": {\n      \"length\": \"m\",\n      \"time\": \"s\",\n      \"mass\": \"kg\"\n    },\n    \"gravity\": [0, 9.8]\n  },\n  \"render_hints\": {\n    \"scale\": 80,\n    \"margin\": 0.5,\n    \"camera\": \"auto\"\n  },\n  \"sim_params\": {\n    \"hz\": 60,\n    \"substeps\": 2,\n    \"iterations\": 8\n  },\n  \"entities\": [\n    {\n      \"id\": \"slider\",\n      \"kind\": \"box\",\n      \"pos\": [0, 1.25],\n      \"size\": [0.2, 0.2],\n      \"mass\": 1.0,\n      \"material\": {\n        \"mu_s\": 0.0,\n        \"mu_k\": 0.0,\n        \"restitution\": 0.0\n      },\n      \"initVel\": [0, 0],\n      \"isStatic\": false\n    },\n    {\n      \"id\": \"block\",\n      \"kind\": \"box\",\n      \"pos\": [4.165, 1.25],\n      \"size\": [0.4, 0.25],\n      \"mass\": 2.0,\n      \"material\": {\n        \"mu_s\": 0.25,\n        \"mu_k\": 0.25,\n        \"restitution\": 0.0\n      },\n      \"initVel\": [0, 0],\n      \"isStatic\": false\n    },\n    {\n      \"id\": \"wall\",\n      \"kind\": \"box\",\n      \"pos\": [5.0, 1.25],\n      \"size\": [0.1, 1.0],\n      \"mass\": 1000.0,\n      \"material\": {\n        \"mu_s\": 0.2,\n        \"mu_k\": 0.1,\n        \"restitution\": 0.0\n      },\n      \"isStatic\": true\n    }\n  ],\n  \"surfaces\": [\n    {\n      \"id\": \"ramp\",\n      \"kind\": \"segment\",\n      \"geometry\": {\n        \"start\": [0, 0],\n        \"end\": [2.165, 1.25]\n      },\n      \"contact\": {\n        \"mu_s\": 0.0,\n        \"mu_k\": 0.0,\n        \"restitution\": 0.0\n      }\n    },\n    {\n      \"id\": \"rough\",\n      \"kind\": \"segment\",\n      \"geometry\": {\n        \"start\": [2.165, 1.25],\n        \"end\": [4.165, 1.25]\n      },\n      \"contact\": {\n        \"mu_s\": 0.25,\n        \"mu_k\": 0.25,\n        \"restitution\": 0.0\n      }\n    }\n  ],\n  \"joints\": [\n    {\n      \"id\": \"spring1\",\n      \"type\": \"spring\",\n      \"a\": \"block\",\n      \"b\": \"wall\",\n      \"k\": 150,\n      \"c\": 0,\n      \"length\": 0\n    }\n  ],\n  \"forces\": [],\n  \"end_conditions\": [\n    {\n      \"collision_once\": {\n        \"a\": \"slider\",\n        \"b\": \"block\"\n      }\n    },\n    {\n      \"speed_below\": {\n        \"id\": \"block\",\n        \"v\": 0.02,\n        \"hold\": 0.2\n      }\n    },\n    {\n      \"time_limit\": 12\n    }\n  ]\n}",
+    "parsed": {
+      "world": {
+        "coord": "xy_y_down",
+        "units": {
+          "length": "m",
+          "time": "s",
+          "mass": "kg"
+        },
+        "gravity": [
+          0,
+          9.8
+        ]
+      },
+      "render_hints": {
+        "scale": 80,
+        "margin": 0.5,
+        "camera": "auto"
+      },
+      "sim_params": {
+        "hz": 60,
+        "substeps": 2,
+        "iterations": 8
+      },
+      "entities": [
+        {
+          "id": "slider",
+          "kind": "box",
+          "pos": [
+            0,
+            1.25
+          ],
+          "size": [
+            0.2,
+            0.2
+          ],
+          "mass": 1,
+          "material": {
+            "mu_s": 0,
+            "mu_k": 0,
+            "restitution": 0
+          },
+          "initVel": [
+            0,
+            0
+          ],
+          "isStatic": false
+        },
+        {
+          "id": "block",
+          "kind": "box",
+          "pos": [
+            4.165,
+            1.25
+          ],
+          "size": [
+            0.4,
+            0.25
+          ],
+          "mass": 2,
+          "material": {
+            "mu_s": 0.25,
+            "mu_k": 0.25,
+            "restitution": 0
+          },
+          "initVel": [
+            0,
+            0
+          ],
+          "isStatic": false
+        },
+        {
+          "id": "wall",
+          "kind": "box",
+          "pos": [
+            5,
+            1.25
+          ],
+          "size": [
+            0.1,
+            1
+          ],
+          "mass": 1000,
+          "material": {
+            "mu_s": 0.2,
+            "mu_k": 0.1,
+            "restitution": 0
+          },
+          "isStatic": true
+        }
+      ],
+      "surfaces": [
+        {
+          "id": "ramp",
+          "kind": "segment",
+          "geometry": {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              2.165,
+              1.25
+            ]
+          },
+          "contact": {
+            "mu_s": 0,
+            "mu_k": 0,
+            "restitution": 0
+          }
+        },
+        {
+          "id": "rough",
+          "kind": "segment",
+          "geometry": {
+            "start": [
+              2.165,
+              1.25
+            ],
+            "end": [
+              4.165,
+              1.25
+            ]
+          },
+          "contact": {
+            "mu_s": 0.25,
+            "mu_k": 0.25,
+            "restitution": 0
+          }
+        }
+      ],
+      "joints": [
+        {
+          "id": "spring1",
+          "type": "spring",
+          "a": "block",
+          "b": "wall",
+          "k": 150,
+          "c": 0,
+          "length": 0
+        }
+      ],
+      "forces": [],
+      "end_conditions": [
+        {
+          "collision_once": {
+            "a": "slider",
+            "b": "block"
+          }
+        },
+        {
+          "speed_below": {
+            "id": "block",
+            "v": 0.02,
+            "hold": 0.2
+          }
+        },
+        {
+          "time_limit": 12
+        }
+      ]
+    }
+  },
+  "duration": 19286
+}

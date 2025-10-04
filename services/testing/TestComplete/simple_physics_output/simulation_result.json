@@ -1,0 +1,3778 @@
+{
+  "frames": [
+    {
+      "time": 0,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0,
+            1.25
+          ],
+          "velocity": [
+            10,
+            0
+          ],
+          "energy": {
+            "kinetic": 10,
+            "potential": 2.45,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.01,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.1,
+            1.24951
+          ],
+          "velocity": [
+            10,
+            -0.098
+          ],
+          "energy": {
+            "kinetic": 10.0009604,
+            "potential": 2.4490396,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.02,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.2,
+            1.24804
+          ],
+          "velocity": [
+            10,
+            -0.196
+          ],
+          "energy": {
+            "kinetic": 10.003841600000001,
+            "potential": 2.4461584000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.03,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.3,
+            1.24559
+          ],
+          "velocity": [
+            10,
+            -0.294
+          ],
+          "energy": {
+            "kinetic": 10.008643600000001,
+            "potential": 2.4413564,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.04,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.4,
+            1.24216
+          ],
+          "velocity": [
+            10,
+            -0.392
+          ],
+          "energy": {
+            "kinetic": 10.015366400000001,
+            "potential": 2.4346336,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.05,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.5,
+            1.23775
+          ],
+          "velocity": [
+            10,
+            -0.49000000000000005
+          ],
+          "energy": {
+            "kinetic": 10.02401,
+            "potential": 2.42599,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.06,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.6,
+            1.23236
+          ],
+          "velocity": [
+            10,
+            -0.588
+          ],
+          "energy": {
+            "kinetic": 10.0345744,
+            "potential": 2.4154256,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.07,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.7000000000000001,
+            1.22599
+          ],
+          "velocity": [
+            10,
+            -0.6860000000000002
+          ],
+          "energy": {
+            "kinetic": 10.0470596,
+            "potential": 2.4029404,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.08,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.8,
+            1.21864
+          ],
+          "velocity": [
+            10,
+            -0.784
+          ],
+          "energy": {
+            "kinetic": 10.0614656,
+            "potential": 2.3885344,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.09,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            0.8999999999999999,
+            1.21031
+          ],
+          "velocity": [
+            10,
+            -0.882
+          ],
+          "energy": {
+            "kinetic": 10.0777924,
+            "potential": 2.3722076000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.1,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1,
+            1.201
+          ],
+          "velocity": [
+            10,
+            -0.9800000000000001
+          ],
+          "energy": {
+            "kinetic": 10.096040000000002,
+            "potential": 2.3539600000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.11,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.1,
+            1.19071
+          ],
+          "velocity": [
+            10,
+            -1.078
+          ],
+          "energy": {
+            "kinetic": 10.1162084,
+            "potential": 2.3337916,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.12,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.2,
+            1.17944
+          ],
+          "velocity": [
+            10,
+            -1.176
+          ],
+          "energy": {
+            "kinetic": 10.138297600000001,
+            "potential": 2.3117024,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.13,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.3,
+            1.16719
+          ],
+          "velocity": [
+            10,
+            -1.2740000000000002
+          ],
+          "energy": {
+            "kinetic": 10.1623076,
+            "potential": 2.2876924,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.14,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.4000000000000001,
+            1.1539599999999999
+          ],
+          "velocity": [
+            10,
+            -1.3720000000000003
+          ],
+          "energy": {
+            "kinetic": 10.188238400000001,
+            "potential": 2.2617616,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.15,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.5,
+            1.13975
+          ],
+          "velocity": [
+            10,
+            -1.47
+          ],
+          "energy": {
+            "kinetic": 10.216090000000001,
+            "potential": 2.2339100000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.16,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.6,
+            1.12456
+          ],
+          "velocity": [
+            10,
+            -1.568
+          ],
+          "energy": {
+            "kinetic": 10.2458624,
+            "potential": 2.2041376,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.17,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.7000000000000002,
+            1.10839
+          ],
+          "velocity": [
+            10,
+            -1.6660000000000001
+          ],
+          "energy": {
+            "kinetic": 10.2775556,
+            "potential": 2.1724444000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.18,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.7999999999999998,
+            1.09124
+          ],
+          "velocity": [
+            10,
+            -1.764
+          ],
+          "energy": {
+            "kinetic": 10.3111696,
+            "potential": 2.1388304000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.19,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.9,
+            1.07311
+          ],
+          "velocity": [
+            10,
+            -1.862
+          ],
+          "energy": {
+            "kinetic": 10.3467044,
+            "potential": 2.1032956,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.2,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2,
+            1.054
+          ],
+          "velocity": [
+            10,
+            -1.9600000000000002
+          ],
+          "energy": {
+            "kinetic": 10.384160000000001,
+            "potential": 2.06584,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.21,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.1,
+            1.0339099999999999
+          ],
+          "velocity": [
+            10,
+            -2.0580000000000003
+          ],
+          "energy": {
+            "kinetic": 10.423536400000001,
+            "potential": 2.0264636,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.22,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.2,
+            1.01284
+          ],
+          "velocity": [
+            10,
+            -2.156
+          ],
+          "energy": {
+            "kinetic": 10.4648336,
+            "potential": 1.9851664000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.23,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.3000000000000003,
+            0.99079
+          ],
+          "velocity": [
+            10,
+            -2.2540000000000004
+          ],
+          "energy": {
+            "kinetic": 10.508051600000002,
+            "potential": 1.9419484,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.24,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.4,
+            0.96776
+          ],
+          "velocity": [
+            10,
+            -2.352
+          ],
+          "energy": {
+            "kinetic": 10.5531904,
+            "potential": 1.8968096,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.25,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.5,
+            0.94375
+          ],
+          "velocity": [
+            10,
+            -2.45
+          ],
+          "energy": {
+            "kinetic": 10.60025,
+            "potential": 1.8497500000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.26,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.6,
+            0.9187599999999999
+          ],
+          "velocity": [
+            10,
+            -2.5480000000000005
+          ],
+          "energy": {
+            "kinetic": 10.6492304,
+            "potential": 1.8007696,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.27,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.7,
+            0.89279
+          ],
+          "velocity": [
+            10,
+            -2.6460000000000004
+          ],
+          "energy": {
+            "kinetic": 10.7001316,
+            "potential": 1.7498684000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.28,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.8000000000000003,
+            0.8658399999999999
+          ],
+          "velocity": [
+            10,
+            -2.7440000000000007
+          ],
+          "energy": {
+            "kinetic": 10.752953600000001,
+            "potential": 1.6970464,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.29,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.9,
+            0.83791
+          ],
+          "velocity": [
+            10,
+            -2.842
+          ],
+          "energy": {
+            "kinetic": 10.807696400000001,
+            "potential": 1.6423036000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.3,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3,
+            0.8089999999999999
+          ],
+          "velocity": [
+            10,
+            -2.94
+          ],
+          "energy": {
+            "kinetic": 10.86436,
+            "potential": 1.58564,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.31,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.1,
+            0.77911
+          ],
+          "velocity": [
+            10,
+            -3.0380000000000003
+          ],
+          "energy": {
+            "kinetic": 10.9229444,
+            "potential": 1.5270556000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.32,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.2,
+            0.74824
+          ],
+          "velocity": [
+            10,
+            -3.136
+          ],
+          "energy": {
+            "kinetic": 10.9834496,
+            "potential": 1.4665504000000003,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.33,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.3000000000000003,
+            0.7163899999999999
+          ],
+          "velocity": [
+            10,
+            -3.2340000000000004
+          ],
+          "energy": {
+            "kinetic": 11.045875600000002,
+            "potential": 1.4041244,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.34,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.4000000000000004,
+            0.68356
+          ],
+          "velocity": [
+            10,
+            -3.3320000000000003
+          ],
+          "energy": {
+            "kinetic": 11.110222400000001,
+            "potential": 1.3397776000000001,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.35000000000000003,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.5000000000000004,
+            0.6497499999999998
+          ],
+          "velocity": [
+            10,
+            -3.4300000000000006
+          ],
+          "energy": {
+            "kinetic": 11.176490000000001,
+            "potential": 1.2735099999999997,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.36,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.5999999999999996,
+            0.6149600000000001
+          ],
+          "velocity": [
+            10,
+            -3.528
+          ],
+          "energy": {
+            "kinetic": 11.244678400000002,
+            "potential": 1.2053216000000002,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.37,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.7,
+            0.57919
+          ],
+          "velocity": [
+            10,
+            -3.6260000000000003
+          ],
+          "energy": {
+            "kinetic": 11.3147876,
+            "potential": 1.1352124000000001,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.38,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.8,
+            0.5424399999999999
+          ],
+          "velocity": [
+            10,
+            -3.724
+          ],
+          "energy": {
+            "kinetic": 11.3868176,
+            "potential": 1.0631823999999999,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.39,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.9000000000000004,
+            0.5047099999999999
+          ],
+          "velocity": [
+            10,
+            -3.8220000000000005
+          ],
+          "energy": {
+            "kinetic": 11.460768400000001,
+            "potential": 0.9892315999999999,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.4,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4,
+            0.46599999999999986
+          ],
+          "velocity": [
+            10,
+            -3.9200000000000004
+          ],
+          "energy": {
+            "kinetic": 11.53664,
+            "potential": 0.9133599999999998,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.41000000000000003,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.1000000000000005,
+            0.42630999999999974
+          ],
+          "velocity": [
+            10,
+            -4.018000000000001
+          ],
+          "energy": {
+            "kinetic": 11.614432400000002,
+            "potential": 0.8355675999999996,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.42,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.2,
+            0.38563999999999987
+          ],
+          "velocity": [
+            10,
+            -4.1160000000000005
+          ],
+          "energy": {
+            "kinetic": 11.6941456,
+            "potential": 0.7558543999999998,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.43,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.3,
+            0.3439899999999999
+          ],
+          "velocity": [
+            10,
+            -4.214
+          ],
+          "energy": {
+            "kinetic": 11.7757796,
+            "potential": 0.6742203999999998,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.44,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.4,
+            0.30135999999999996
+          ],
+          "velocity": [
+            10,
+            -4.312
+          ],
+          "energy": {
+            "kinetic": 11.859334400000002,
+            "potential": 0.5906656,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.45,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.5,
+            0.2577499999999999
+          ],
+          "velocity": [
+            10,
+            -4.41
+          ],
+          "energy": {
+            "kinetic": 11.94481,
+            "potential": 0.5051899999999999,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.46,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.6000000000000005,
+            0.2131599999999998
+          ],
+          "velocity": [
+            10,
+            -4.508000000000001
+          ],
+          "energy": {
+            "kinetic": 12.032206400000002,
+            "potential": 0.41779359999999965,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.47000000000000003,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.7,
+            0.16758999999999968
+          ],
+          "velocity": [
+            10,
+            -4.606000000000001
+          ],
+          "energy": {
+            "kinetic": 12.121523600000002,
+            "potential": 0.3284763999999994,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.48,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.8,
+            0.12104000000000004
+          ],
+          "velocity": [
+            10,
+            -4.704
+          ],
+          "energy": {
+            "kinetic": 12.2127616,
+            "potential": 0.2372384000000001,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.49,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.9,
+            0.07350999999999996
+          ],
+          "velocity": [
+            10,
+            -4.8020000000000005
+          ],
+          "energy": {
+            "kinetic": 12.305920400000002,
+            "potential": 0.14407959999999995,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5,
+      "phase": "projectile_motion",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            5,
+            0.02499999999999991
+          ],
+          "velocity": [
+            10,
+            -4.9
+          ],
+          "energy": {
+            "kinetic": 12.401000000000002,
+            "potential": 0.04899999999999983,
+            "total": 2.45
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5050762722761054,
+      "phase": "elastic_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            5,
+            0
+          ],
+          "velocity": [
+            10,
+            0
+          ],
+          "energy": {
+            "kinetic": 10,
+            "potential": 0,
+            "landing_speed": 11.157956802210698
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.150762722761054,
+            0
+          ],
+          "velocity": [
+            0,
+            0
+          ],
+          "energy": {
+            "kinetic": 0,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5050762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.94,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.190762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5150762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.880000000000001,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.230762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5250762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.820000000000001,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.270762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5350762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.760000000000002,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.310762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5450762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.700000000000002,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.350762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5550762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.640000000000002,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.390762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5650762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.580000000000003,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.430762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5750762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.520000000000003,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.470762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5850762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.4600000000000035,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.510762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.5950762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.400000000000004,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.550762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6050762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.340000000000004,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.590762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6150762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.280000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.630762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6250762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.220000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.670762722761054,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6350762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.1600000000000055,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.7107627227610545,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6450762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.100000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.7507627227610545,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6550762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            4.040000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.7907627227610545,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6650762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.980000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.830762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6750762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.920000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.870762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6850762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.860000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.910762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.6950762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.800000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.950762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7050762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.740000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            5.990762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7150762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.680000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.030762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7250762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.620000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.070762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7350762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.560000000000006,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.110762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7450762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.5000000000000058,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.150762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7550762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.4400000000000057,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.190762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7650762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.3800000000000057,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.230762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7750762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.3200000000000056,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.270762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7850762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.2600000000000056,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.310762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.7950762722761053,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.2000000000000055,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.350762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8050762722761053,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.1400000000000055,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.390762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8150762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.0800000000000054,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.430762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8250762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            3.0200000000000053,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.470762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8350762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.9600000000000053,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.510762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8450762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.9000000000000052,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.550762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8550762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.840000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.590762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8650762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.780000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.630762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8750762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.720000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.670762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8850762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.660000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.710762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8950762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.600000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.750762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9050762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.540000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.790762722761055,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9150762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.480000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.8307627227610554,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9250762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.420000000000005,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.8707627227610555,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9350762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.3600000000000048,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.9107627227610555,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9450762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.3000000000000047,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.950762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9550762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.2400000000000047,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            6.990762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9650762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.1800000000000046,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            7.030762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9750762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.1200000000000045,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            7.070762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9850762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.0600000000000045,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            7.110762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.9950762722761054,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            2.0000000000000044,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            7.150762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 1.0050762722761055,
+      "phase": "post_collision",
+      "bodies": [
+        {
+          "id": "ball",
+          "position": [
+            1.9400000000000044,
+            0
+          ],
+          "velocity": [
+            -6.000000000000001,
+            0
+          ],
+          "energy": {
+            "kinetic": 3.600000000000001,
+            "potential": 0
+          }
+        },
+        {
+          "id": "cart",
+          "position": [
+            7.190762722761056,
+            0
+          ],
+          "velocity": [
+            4,
+            0
+          ],
+          "energy": {
+            "kinetic": 6.4,
+            "potential": 0
+          }
+        }
+      ]
+    }
+  ],
+  "results": {
+    "v": "11.158",
+    "V": "4.000",
+    "v1_after": "-6.000",
+    "total_time": "1.01"
+  },
+  "phases": [
+    "projectile_motion",
+    "elastic_collision",
+    "post_collision"
+  ],
+  "validation": {
+    "ok": true
+  }
+}

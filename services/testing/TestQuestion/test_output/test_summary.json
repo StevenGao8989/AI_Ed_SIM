@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-09-24T07:51:00.129Z",
+  "architecture": "v4.1.0",
+  "question": "质量为 m = 1.0 kg 的小滑块从光滑斜面顶端由静止释放。斜面高度 h= 1.25 m。滑到最低点后进入水平粗糙面，动摩擦因数&=0.25，粗糙段长度d=2.0m。通过粗糙段未端时，小滑块与一静止木块(质量 M=2.0kg)完全非弹性碰撞并粘在一起随后共同压缩前方一轻弹簧(劲度系数k=150N/m)，直到瞬时停下。",
+  "results": {
+    "aiParsing": {
+      "success": true,
+      "physicsType": "unknown"
+    },
+    "contractAdaptation": {
+      "success": true,
+      "bodyCount": 2,
+      "surfaceCount": 2
+    },
+    "preSimGate": {
+      "passed": false,
+      "errorCount": 0
+    },
+    "simulation": {
+      "success": true,
+      "frameCount": 301,
+      "totalTime": 0
+    },
+    "postSimGate": {
+      "vcsScore": 0,
+      "passed": false
+    },
+    "rendering": {
+      "success": true,
+      "frameCount": 301
+    },
+    "export": {
+      "success": true,
+      "videoPath": "test_output/physics_animation.mp4"
+    }
+  },
+  "performance": {
+    "totalTime": 0,
+    "architecture": "v4.1.0"
+  }
+}

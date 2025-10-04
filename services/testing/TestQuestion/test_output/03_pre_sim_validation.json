@@ -1,0 +1,263 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "normalized": {
+    "world": {
+      "coord": "xy_y_up",
+      "units": {
+        "angle": "rad",
+        "length": "m",
+        "time": "s",
+        "mass": "kg"
+      },
+      "constants": {},
+      "render_hints": {
+        "camera_fit": "both",
+        "margin": 0.5,
+        "show_grid": true,
+        "background": "#ffffff"
+      },
+      "gravity": [
+        0,
+        -9.8
+      ]
+    },
+    "entities": [],
+    "surfaces": [
+      {
+        "id": "ground",
+        "kind": "plane",
+        "point": [
+          0,
+          0
+        ],
+        "normal": [
+          0,
+          1
+        ],
+        "contact": {
+          "restitution": 0,
+          "mu_s": 0,
+          "mu_k": 0,
+          "model": "impulse"
+        },
+        "tangent_hint": [
+          1,
+          0
+        ],
+        "geometry": {
+          "point": [
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ramp",
+        "kind": "segment",
+        "points": [
+          [
+            0,
+            1.25
+          ],
+          [
+            2.165063509461097,
+            0
+          ]
+        ],
+        "p0": [
+          0,
+          1.25
+        ],
+        "p1": [
+          2.165063509461097,
+          0
+        ],
+        "contact": {
+          "restitution": 0,
+          "mu_s": 0,
+          "mu_k": 0,
+          "model": "impulse"
+        },
+        "tangent_hint": [
+          0.8660254037844387,
+          -0.49999999999999994
+        ],
+        "meta": {
+          "visual_only": true
+        }
+      }
+    ],
+    "bodies": [
+      {
+        "id": "block",
+        "shape": {
+          "kind": "circle",
+          "size": 0.1
+        },
+        "mass": 1,
+        "init": {
+          "x": 0,
+          "y": 0.1,
+          "vx": 0,
+          "vy": 0,
+          "theta": 0,
+          "omega": 0
+        },
+        "kind": "dynamic",
+        "contacts": [
+          "ramp",
+          "ground"
+        ]
+      },
+      {
+        "id": "main_object",
+        "shape": {
+          "kind": "circle",
+          "size": 0.1
+        },
+        "mass": 1,
+        "init": {
+          "x": 0,
+          "y": 0.1,
+          "vx": 0,
+          "vy": 0,
+          "theta": 0,
+          "omega": 0
+        },
+        "kind": "dynamic",
+        "contacts": [
+          "ramp",
+          "ground"
+        ]
+      }
+    ],
+    "simulation": {
+      "t_end": 10,
+      "max_steps": 20000,
+      "root_finder": "bisection",
+      "event_tol": 0.000001,
+      "output_fps": 30
+    },
+    "constraints": [
+      {
+        "type": "spring",
+        "between": [
+          "main_object",
+          "block"
+        ],
+        "k": 150,
+        "rest": 0,
+        "damping": 0.1
+      }
+    ],
+    "phases": [
+      {
+        "id": "compress_spring",
+        "integrator": {
+          "type": "rk45",
+          "h_max": 0.01,
+          "rel_tol": 0.0001,
+          "abs_tol": 0.000001
+        },
+        "forces": [
+          "gravity",
+          "spring",
+          "friction"
+        ],
+        "guards": [
+          {
+            "type": "velocity",
+            "condition": "velocity_zero",
+            "emit": "max_compression"
+          }
+        ]
+      },
+      {
+        "id": "inelastic_hit",
+        "integrator": {
+          "type": "rk45",
+          "h_max": 0.01,
+          "rel_tol": 0.0001,
+          "abs_tol": 0.000001
+        },
+        "forces": [
+          "gravity",
+          "contact"
+        ],
+        "guards": [
+          {
+            "type": "contact",
+            "condition": "contact_enter",
+            "emit": "collision"
+          }
+        ]
+      },
+      {
+        "id": "slide_on_ramp",
+        "initial": true,
+        "integrator": {
+          "type": "rk45",
+          "h_max": 0.01,
+          "rel_tol": 0.0001,
+          "abs_tol": 0.000001
+        },
+        "forces": [
+          "gravity",
+          "contact"
+        ],
+        "guards": [
+          {
+            "type": "position",
+            "condition": "reach_segment_end",
+            "emit": "end_of_ramp"
+          }
+        ]
+      }
+    ],
+    "acceptance_tests": [
+      {
+        "kind": "conservation",
+        "of": "energy",
+        "rel_err": 0.02
+      },
+      {
+        "kind": "bounds",
+        "never_penetrate": true
+      },
+      {
+        "kind": "formula",
+        "name": "velocity_at_ramp_bottom",
+        "value_of": "main_object.speed_at_event(end_of_ramp)",
+        "expect": 4.949747468305833,
+        "rel_err": 0.05
+      },
+      {
+        "kind": "formula",
+        "name": "velocity_after_collision",
+        "value_of": "main_object.speed_at_event(collision)",
+        "expect": 1.6499158227686108,
+        "rel_err": 0.05
+      },
+      {
+        "kind": "formula",
+        "name": "max_spring_compression",
+        "value_of": "main_object.position_at_event(max_compression)",
+        "expect": 0.23333333333333334,
+        "rel_err": 0.05
+      }
+    ],
+    "tolerances": {
+      "r2_min": 0.95,
+      "rel_err": 0.05,
+      "event_time_sec": 0.1,
+      "energy_drift_rel": 0.02,
+      "v_eps": 0.001
+    }
+  }
+}

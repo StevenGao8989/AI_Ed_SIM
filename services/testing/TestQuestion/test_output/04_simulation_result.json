@@ -1,0 +1,8144 @@
+{
+  "meta": {
+    "dt_avg": 0.03333333333333325,
+    "frames": 301,
+    "events": 0
+  },
+  "frames": [
+    {
+      "t": 0,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.03333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.06666666666666667,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.1,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.13333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.16666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.19999999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.2333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.26666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.3,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.3333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.36666666666666664,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.39999999999999997,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.4333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.4666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.49999999999999994,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.5333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.5666666666666667,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.6,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.6333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.6666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.7,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.7333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.7666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.7999999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.8333333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.8666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.8999999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.9333333333333332,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.9666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 0.9999999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.0333333333333332,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.0666666666666667,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.1,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.1333333333333335,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.166666666666667,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.2000000000000004,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.2333333333333338,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.2666666666666673,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.3000000000000007,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.3333333333333341,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.3666666666666676,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.400000000000001,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.4333333333333345,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.466666666666668,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.5000000000000013,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.5333333333333348,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.5666666666666682,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.6000000000000016,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.633333333333335,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.6666666666666685,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.700000000000002,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.7333333333333354,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.7666666666666688,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.8000000000000023,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.8333333333333357,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.8666666666666691,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.9000000000000026,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.933333333333336,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 1.9666666666666694,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.0000000000000027,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.033333333333336,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.066666666666669,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.1000000000000023,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.1333333333333355,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.1666666666666687,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.200000000000002,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.233333333333335,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.2666666666666684,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.3000000000000016,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.333333333333335,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.366666666666668,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.4000000000000012,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.4333333333333345,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.4666666666666677,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.500000000000001,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.533333333333334,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.5666666666666673,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.6000000000000005,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.6333333333333337,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.666666666666667,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.7,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.7333333333333334,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.7666666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.8,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.833333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.8666666666666663,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.8999999999999995,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.9333333333333327,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.966666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 2.999999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.0333333333333323,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.0666666666666655,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.0999999999999988,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.133333333333332,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.166666666666665,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.1999999999999984,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.2333333333333316,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.266666666666665,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.299999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.3333333333333313,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.3666666666666645,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.3999999999999977,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.433333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.466666666666664,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.4999999999999973,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.5333333333333306,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.5666666666666638,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.599999999999997,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.63333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.6666666666666634,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.6999999999999966,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.73333333333333,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.766666666666663,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.7999999999999963,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.8333333333333295,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.8666666666666627,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.899999999999996,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.933333333333329,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.9666666666666623,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 3.9999999999999956,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.033333333333329,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.066666666666662,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.099999999999995,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.133333333333328,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.166666666666662,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.199999999999995,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.233333333333328,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.266666666666661,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.2999999999999945,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.333333333333328,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.366666666666661,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.399999999999994,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.433333333333327,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.466666666666661,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.499999999999994,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.533333333333327,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.56666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.599999999999993,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.633333333333327,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.66666666666666,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.699999999999993,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.733333333333326,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.7666666666666595,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.799999999999993,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.833333333333326,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.866666666666659,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.899999999999992,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.933333333333326,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.966666666666659,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 4.999999999999992,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.033333333333325,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.066666666666658,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.099999999999992,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.133333333333325,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.166666666666658,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.199999999999991,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.2333333333333245,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.266666666666658,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.299999999999991,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.333333333333324,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.366666666666657,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.399999999999991,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.433333333333324,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.466666666666657,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.49999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.5333333333333234,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.566666666666657,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.59999999999999,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.633333333333323,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.666666666666656,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.6999999999999895,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.733333333333323,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.766666666666656,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.799999999999989,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.833333333333322,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.866666666666656,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.899999999999989,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.933333333333322,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.966666666666655,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 5.9999999999999885,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.033333333333322,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.066666666666655,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.099999999999988,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.133333333333321,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.1666666666666545,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.199999999999988,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.233333333333321,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.266666666666654,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.299999999999987,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.333333333333321,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.366666666666654,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.399999999999987,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.43333333333332,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.4666666666666535,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.499999999999987,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.53333333333332,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.566666666666653,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.599999999999986,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.6333333333333195,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.666666666666653,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.699999999999986,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.733333333333319,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.766666666666652,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.799999999999986,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.833333333333319,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.866666666666652,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.899999999999985,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.9333333333333185,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.966666666666652,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 6.999999999999985,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.033333333333318,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.066666666666651,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.0999999999999845,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.133333333333318,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.166666666666651,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.199999999999984,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.233333333333317,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.266666666666651,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.299999999999984,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.333333333333317,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.36666666666665,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.3999999999999835,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.433333333333317,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.46666666666665,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.499999999999983,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.533333333333316,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.5666666666666496,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.599999999999983,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.633333333333316,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.666666666666649,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.699999999999982,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.733333333333316,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.766666666666649,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.799999999999982,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.833333333333315,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.8666666666666485,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.899999999999982,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.933333333333315,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.966666666666648,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 7.999999999999981,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.033333333333315,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.066666666666649,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.099999999999982,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.133333333333315,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.166666666666648,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.199999999999982,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.233333333333315,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.266666666666648,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.299999999999981,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.333333333333314,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.366666666666648,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.39999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.433333333333314,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.466666666666647,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.49999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.533333333333314,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.566666666666647,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.59999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.633333333333313,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.666666666666647,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.69999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.733333333333313,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.766666666666646,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.79999999999998,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.833333333333313,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.866666666666646,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.899999999999979,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.933333333333312,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.966666666666645,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 8.999999999999979,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.033333333333312,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.066666666666645,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.099999999999978,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.133333333333312,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.166666666666645,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.199999999999978,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.233333333333311,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.266666666666644,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.299999999999978,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.33333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.366666666666644,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.399999999999977,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.43333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.466666666666644,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.499999999999977,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.53333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.566666666666643,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.599999999999977,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.63333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.666666666666643,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.699999999999976,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.73333333333331,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.766666666666643,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.799999999999976,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.833333333333309,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.866666666666642,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.899999999999975,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.933333333333309,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.966666666666642,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    },
+    {
+      "t": 9.999999999999975,
+      "bodies": [
+        {
+          "id": "main_object",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        },
+        {
+          "id": "block",
+          "x": null,
+          "y": null,
+          "vx": null,
+          "vy": null
+        }
+      ],
+      "events": [],
+      "energy": {
+        "K": null,
+        "U_g": null,
+        "U_elastic": 0,
+        "W_fric": 0,
+        "E_total": null
+      }
+    }
+  ],
+  "diagnostics": {
+    "root_solves": 0,
+    "max_penetration": 0.2,
+    "contact_switches": 5,
+    "phase_transitions": 0,
+    "integration_steps": 301,
+    "average_dt": 0.033333333333333326
+  }
+}
